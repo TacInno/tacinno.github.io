@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TacInno</title>
+<meta name="description" content="TacInno teaches vision-language-action models the contact dynamics that vision and executed actions cannot explain, the tactile innovation, and uses it only as a training target.">
+<meta property="og:title" content="TacInno: Teaching Vision-Language-Action Models the Contact Dynamics Beyond Vision and Action">
+<meta property="og:description" content="Tactile innovation as a training target for visuo-tactile VLA policies. 87.5% on six UniVTAC tasks, 70.5% on four real-world tasks.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tacinno.github.io/">
+<meta property="og:image" content="https://tacinno.github.io/static/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://tacinno.github.io/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap">
+<style>
+:root {
+  --bg: #f6f5f1; --surface: #ffffff; --ink: #18202b; --muted: #5a6472; --line: #dcdcd6; --chip: #ebe9e3;
+  --blue: #2f6fd6; --orange: #b8720a; --orange-fill: #d98c0a; --fig-bg: #ffffff; --row: #fbf3e4;
+  --serif: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11151b; --surface: #171c24; --ink: #e7eaee; --muted: #a3acb8; --line: #2a313c; --chip: #1f2631;
+  --blue: #7aa7f2; --orange: #f0a93a; --orange-fill: #f0a93a; --fig-bg: #f7f7f5; --row: #2a2416; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11151b; --surface: #171c24; --ink: #e7eaee; --muted: #a3acb8; --line: #2a313c; --chip: #1f2631;
+  --blue: #7aa7f2; --orange: #f0a93a; --orange-fill: #f0a93a; --fig-bg: #f7f7f5; --row: #2a2416; color-scheme: dark }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(4rem + env(safe-area-inset-top, 0px)); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.65 var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: var(--blue); text-underline-offset: .18em; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 68rem; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.prose { max-width: 44rem; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 10; }
+nav.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+nav.top .wrap { display: flex; align-items: center; gap: 1.4rem; padding-block: .7rem; overflow-x: auto; }
+nav.top .brand { font: 700 1.05rem/1 var(--serif); color: var(--ink); text-decoration: none; margin-right: auto; white-space: nowrap; }
+nav.top .brand span, h1 .inno { color: var(--orange-fill); }
+nav.top a.l { font-size: .88rem; color: var(--muted); text-decoration: none; white-space: nowrap; }
+nav.top a.l:hover { color: var(--ink); }
+header.hero { padding-block: 4.2rem 2.2rem; text-align: center; }
+h1 { font: 700 clamp(3rem, 8vw, 5.2rem)/1 var(--serif); letter-spacing: -.01em; margin: 0; }
+.subtitle { font: 500 clamp(1.2rem, 2.6vw, 1.65rem)/1.35 var(--serif); margin: 1rem auto 0; max-width: 36rem; text-wrap: balance; }
+.marker-field { display: block; width: min(100%, 46rem); height: auto; margin: 2rem auto 1.6rem; }
+.mf-dot { fill: var(--muted); opacity: .55; } .mf-hot { fill: var(--orange-fill); } .mf-tail { stroke: var(--orange-fill); stroke-width: 1.4; stroke-linecap: round; opacity: .55; }
+ul.authors, ul.affil { list-style: none; padding: 0; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: .25rem 1.3rem; }
+ul.authors { font-size: 1.08rem; font-weight: 500; max-width: 46rem; }
+ul.affil { font-size: .9rem; color: var(--muted); margin-top: .7rem; gap: .2rem 1.1rem; max-width: 50rem; }
+sup { font-size: .62em; margin-left: .08em; }
+.cal { font-family: var(--serif); font-style: italic; font-weight: 600; }
+.buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 1.8rem; }
+.btn { display: inline-flex; align-items: center; gap: .45rem; font: 500 .95rem/1 var(--sans); padding: .72rem 1.15rem; border-radius: 999px; background: var(--ink); color: var(--bg); text-decoration: none; border: 1px solid var(--ink); }
+.btn.soon { background: transparent; color: var(--muted); border-color: var(--line); cursor: default; }
+.btn.soon small { font-size: .74rem; }
+.btn svg { width: 1em; height: 1em; }
+section { padding-block: 2.6rem; border-top: 1px solid var(--line); }
+section.first { border-top: 0; padding-top: 0; }
+h2 { font: 700 clamp(1.6rem, 3.4vw, 2.1rem)/1.2 var(--serif); margin: 0 0 1rem; text-wrap: balance; }
+h3 { font: 600 1.15rem/1.3 var(--sans); margin: 2rem 0 .6rem; }
+.kicker { font: 600 .78rem/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--orange); margin: 0 0 .7rem; }
+p { margin: 0 0 1rem; }
+.lead { font-size: 1.12rem; }
+figure { margin: 1.6rem 0; }
+.figcard { background: var(--fig-bg); border: 1px solid var(--line); border-radius: 12px; padding: clamp(8px, 1.6vw, 18px); }
+.figcard img { display: block; width: 100%; height: auto; }
+figcaption { font-size: .9rem; color: var(--muted); margin-top: .65rem; line-height: 1.55; }
+figcaption b { color: var(--ink); }
+.decomp { display: grid; grid-template-columns: auto 1fr auto 1fr; align-items: stretch; gap: .8rem; margin: 1.6rem 0; }
+.decomp .t { align-self: center; font: 600 1.3rem/1 var(--serif); white-space: nowrap; }
+.decomp .box { border-radius: 12px; padding: 1rem 1.1rem; border: 1.5px solid; min-width: 0; }
+.decomp .box b { display: block; font-size: 1.02rem; margin-bottom: .25rem; }
+.decomp .box span { font-size: .9rem; color: var(--muted); }
+.decomp .b1 { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, var(--surface)); }
+.decomp .b1 b { color: var(--blue); }
+.decomp .b2 { border-color: var(--orange-fill); background: color-mix(in srgb, var(--orange-fill) 10%, var(--surface)); }
+.decomp .b2 b { color: var(--orange); }
+@media (max-width: 720px) { .decomp { grid-template-columns: 1fr; } .decomp .t { justify-self: center; } }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.4rem; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.1rem 1.2rem; min-width: 0; }
+.card .n { font: 700 .8rem/1 var(--mono); color: var(--orange); }
+.card h4 { font: 600 1.02rem/1.3 var(--sans); margin: .5rem 0 .4rem; }
+.card p { font-size: .93rem; color: var(--muted); margin: 0; }
+@media (max-width: 860px) { .cards { grid-template-columns: 1fr; } }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 1.4rem 0 .4rem; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.1rem 1.2rem; min-width: 0; }
+.stat .v { font: 700 2.3rem/1.05 var(--serif); font-variant-numeric: tabular-nums; }
+.stat .k { font-size: .92rem; margin-top: .35rem; }
+.stat .d { font-size: .84rem; color: var(--muted); margin-top: .2rem; }
+@media (max-width: 760px) { .stats { grid-template-columns: 1fr; } }
+.tbl { overflow-x: auto; margin: 1rem 0 .4rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; font-variant-numeric: tabular-nums; }
+th, td { padding: .55rem .7rem; text-align: center; white-space: nowrap; border-bottom: 1px solid var(--line); }
+thead th { font-weight: 600; color: var(--muted); font-size: .82rem; }
+tbody th { text-align: left; font-weight: 500; }
+thead th:first-child { text-align: left; }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+tr.ours th, tr.ours td { background: var(--row); }
+tr.ours th { font-weight: 700; }
+td u { text-decoration-thickness: 1.5px; text-underline-offset: .2em; }
+.tnote { font-size: .84rem; color: var(--muted); margin: .3rem 0 0; }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+@media (max-width: 900px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+.clip { margin: 0; background: #0d1015; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+.clip img { display: block; width: 100%; height: auto; }
+.clip figcaption { margin: 0; padding: .5rem .75rem; font-size: .85rem; color: #c9d0da; background: #0d1015; }
+.split { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 2rem; align-items: center; }
+.split.top { align-items: start; }
+@media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+.bib { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.bib pre { margin: 0; padding: 1.1rem 1.2rem; overflow-x: auto; font: 400 .84rem/1.6 var(--mono); }
+.bib button { position: absolute; top: .6rem; right: .6rem; font: 500 .8rem/1 var(--sans); padding: .45rem .7rem; border-radius: 8px; border: 1px solid var(--line); background: var(--chip); color: var(--ink); cursor: pointer; }
+footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size: .85rem; color: var(--muted); padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px)); }
+</style>
+</head>
+<body>
+<nav class="top" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">Tac<span>Inno</span></a>
+    <a class="l" href="#idea">Idea</a>
+    <a class="l" href="#method">Method</a>
+    <a class="l" href="#simulation">Simulation</a>
+    <a class="l" href="#tactile-off">Tactile-off test</a>
+    <a class="l" href="#real-world">Real world</a>
+    <a class="l" href="#bibtex">BibTeX</a>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <h1>Tac<span class="inno">Inno</span></h1>
+  <p class="subtitle">Teaching Vision-Language-Action Models the Contact Dynamics Beyond Vision and Action</p>
+  <svg class="marker-field" viewBox="0 0 748 88" role="img" aria-label="Marker field of a vision-based tactile sensor, with the markers displaced by an unexpected contact shown in orange" preserveAspectRatio="xMidYMid meet"><line x1="341.0" y1="11.0" x2="342.7" y2="10.4" class="mf-tail"/><line x1="363.0" y1="11.0" x2="365.9" y2="10.0" class="mf-tail"/><line x1="385.0" y1="11.0" x2="389.3" y2="9.6" class="mf-tail"/><line x1="407.0" y1="11.0" x2="412.8" y2="9.1" class="mf-tail"/><line x1="429.0" y1="11.0" x2="436.1" y2="8.6" class="mf-tail"/><line x1="451.0" y1="11.0" x2="458.9" y2="8.4" class="mf-tail"/><line x1="473.0" y1="11.0" x2="481.0" y2="8.3" class="mf-tail"/><line x1="495.0" y1="11.0" x2="502.3" y2="8.6" class="mf-tail"/><line x1="517.0" y1="11.0" x2="523.0" y2="9.0" class="mf-tail"/><line x1="539.0" y1="11.0" x2="543.5" y2="9.5" class="mf-tail"/><line x1="561.0" y1="11.0" x2="564.1" y2="10.0" class="mf-tail"/><line x1="583.0" y1="11.0" x2="584.9" y2="10.4" class="mf-tail"/><line x1="341.0" y1="33.0" x2="342.9" y2="32.4" class="mf-tail"/><line x1="363.0" y1="33.0" x2="366.2" y2="31.9" class="mf-tail"/><line x1="385.0" y1="33.0" x2="389.7" y2="31.4" class="mf-tail"/><line x1="407.0" y1="33.0" x2="413.4" y2="30.9" class="mf-tail"/><line x1="429.0" y1="33.0" x2="436.9" y2="30.4" class="mf-tail"/><line x1="451.0" y1="33.0" x2="459.7" y2="30.1" class="mf-tail"/><line x1="473.0" y1="33.0" x2="481.8" y2="30.1" class="mf-tail"/><line x1="495.0" y1="33.0" x2="503.0" y2="30.3" class="mf-tail"/><line x1="517.0" y1="33.0" x2="523.7" y2="30.8" class="mf-tail"/><line x1="539.0" y1="33.0" x2="544.0" y2="31.3" class="mf-tail"/><line x1="561.0" y1="33.0" x2="564.4" y2="31.9" class="mf-tail"/><line x1="583.0" y1="33.0" x2="585.1" y2="32.3" class="mf-tail"/><line x1="341.0" y1="55.0" x2="342.9" y2="55.6" class="mf-tail"/><line x1="363.0" y1="55.0" x2="366.2" y2="56.1" class="mf-tail"/><line x1="385.0" y1="55.0" x2="389.7" y2="56.6" class="mf-tail"/><line x1="407.0" y1="55.0" x2="413.4" y2="57.1" class="mf-tail"/><line x1="429.0" y1="55.0" x2="436.9" y2="57.6" class="mf-tail"/><line x1="451.0" y1="55.0" x2="459.7" y2="57.9" class="mf-tail"/><line x1="473.0" y1="55.0" x2="481.8" y2="57.9" class="mf-tail"/><line x1="495.0" y1="55.0" x2="503.0" y2="57.7" class="mf-tail"/><line x1="517.0" y1="55.0" x2="523.7" y2="57.2" class="mf-tail"/><line x1="539.0" y1="55.0" x2="544.0" y2="56.7" class="mf-tail"/><line x1="561.0" y1="55.0" x2="564.4" y2="56.1" class="mf-tail"/><line x1="583.0" y1="55.0" x2="585.1" y2="55.7" class="mf-tail"/><line x1="341.0" y1="77.0" x2="342.7" y2="77.6" class="mf-tail"/><line x1="363.0" y1="77.0" x2="365.9" y2="78.0" class="mf-tail"/><line x1="385.0" y1="77.0" x2="389.3" y2="78.4" class="mf-tail"/><line x1="407.0" y1="77.0" x2="412.8" y2="78.9" class="mf-tail"/><line x1="429.0" y1="77.0" x2="436.1" y2="79.4" class="mf-tail"/><line x1="451.0" y1="77.0" x2="458.9" y2="79.6" class="mf-tail"/><line x1="473.0" y1="77.0" x2="481.0" y2="79.7" class="mf-tail"/><line x1="495.0" y1="77.0" x2="502.3" y2="79.4" class="mf-tail"/><line x1="517.0" y1="77.0" x2="523.0" y2="79.0" class="mf-tail"/><line x1="539.0" y1="77.0" x2="543.5" y2="78.5" class="mf-tail"/><line x1="561.0" y1="77.0" x2="564.1" y2="78.0" class="mf-tail"/><line x1="583.0" y1="77.0" x2="584.9" y2="77.6" class="mf-tail"/><circle cx="10.9" cy="11.0" r="2.4" class="mf-dot"/><circle cx="32.8" cy="11.0" r="2.4" class="mf-dot"/><circle cx="55.1" cy="11.0" r="2.4" class="mf-dot"/><circle cx="76.7" cy="11.0" r="2.4" class="mf-dot"/><circle cx="99.0" cy="11.0" r="2.4" class="mf-dot"/><circle cx="120.9" cy="11.0" r="2.4" class="mf-dot"/><circle cx="142.7" cy="11.0" r="2.4" class="mf-dot"/><circle cx="165.0" cy="11.0" r="2.4" class="mf-dot"/><circle cx="186.7" cy="11.0" r="2.4" class="mf-dot"/><circle cx="209.0" cy="11.0" r="2.4" class="mf-dot"/><circle cx="230.7" cy="11.0" r="2.4" class="mf-dot"/><circle cx="252.8" cy="11.0" r="2.4" class="mf-dot"/><circle cx="275.0" cy="11.0" r="2.4" class="mf-dot"/><circle cx="297.2" cy="11.0" r="2.4" class="mf-dot"/><circle cx="318.8" cy="11.0" r="2.4" class="mf-dot"/><circle cx="342.7" cy="10.4" r="2.4" class="mf-hot"/><circle cx="365.9" cy="10.0" r="2.4" class="mf-hot"/><circle cx="389.3" cy="9.6" r="2.4" class="mf-hot"/><circle cx="412.8" cy="9.1" r="2.4" class="mf-hot"/><circle cx="436.1" cy="8.6" r="2.4" class="mf-hot"/><circle cx="458.9" cy="8.4" r="2.4" class="mf-hot"/><circle cx="481.0" cy="8.3" r="2.4" class="mf-hot"/><circle cx="502.3" cy="8.6" r="2.4" class="mf-hot"/><circle cx="523.0" cy="9.0" r="2.4" class="mf-hot"/><circle cx="543.5" cy="9.5" r="2.4" class="mf-hot"/><circle cx="564.1" cy="10.0" r="2.4" class="mf-hot"/><circle cx="584.9" cy="10.4" r="2.4" class="mf-hot"/><circle cx="604.8" cy="11.0" r="2.4" class="mf-dot"/><circle cx="627.1" cy="11.0" r="2.4" class="mf-dot"/><circle cx="649.3" cy="11.0" r="2.4" class="mf-dot"/><circle cx="671.0" cy="11.0" r="2.4" class="mf-dot"/><circle cx="692.9" cy="11.0" r="2.4" class="mf-dot"/><circle cx="715.3" cy="11.0" r="2.4" class="mf-dot"/><circle cx="736.7" cy="11.0" r="2.4" class="mf-dot"/><circle cx="11.2" cy="33.0" r="2.4" class="mf-dot"/><circle cx="32.9" cy="33.0" r="2.4" class="mf-dot"/><circle cx="54.8" cy="33.0" r="2.4" class="mf-dot"/><circle cx="76.8" cy="33.0" r="2.4" class="mf-dot"/><circle cx="98.9" cy="33.0" r="2.4" class="mf-dot"/><circle cx="121.2" cy="33.0" r="2.4" class="mf-dot"/><circle cx="142.8" cy="33.0" r="2.4" class="mf-dot"/><circle cx="165.0" cy="33.0" r="2.4" class="mf-dot"/><circle cx="187.1" cy="33.0" r="2.4" class="mf-dot"/><circle cx="208.9" cy="33.0" r="2.4" class="mf-dot"/><circle cx="231.0" cy="33.0" r="2.4" class="mf-dot"/><circle cx="252.7" cy="33.0" r="2.4" class="mf-dot"/><circle cx="274.7" cy="33.0" r="2.4" class="mf-dot"/><circle cx="296.8" cy="33.0" r="2.4" class="mf-dot"/><circle cx="319.1" cy="33.0" r="2.4" class="mf-dot"/><circle cx="342.9" cy="32.4" r="2.4" class="mf-hot"/><circle cx="366.2" cy="31.9" r="2.4" class="mf-hot"/><circle cx="389.7" cy="31.4" r="2.4" class="mf-hot"/><circle cx="413.4" cy="30.9" r="2.4" class="mf-hot"/><circle cx="436.9" cy="30.4" r="2.4" class="mf-hot"/><circle cx="459.7" cy="30.1" r="2.4" class="mf-hot"/><circle cx="481.8" cy="30.1" r="2.4" class="mf-hot"/><circle cx="503.0" cy="30.3" r="2.4" class="mf-hot"/><circle cx="523.7" cy="30.8" r="2.4" class="mf-hot"/><circle cx="544.0" cy="31.3" r="2.4" class="mf-hot"/><circle cx="564.4" cy="31.9" r="2.4" class="mf-hot"/><circle cx="585.1" cy="32.3" r="2.4" class="mf-hot"/><circle cx="605.0" cy="33.0" r="2.4" class="mf-dot"/><circle cx="626.9" cy="33.0" r="2.4" class="mf-dot"/><circle cx="649.1" cy="33.0" r="2.4" class="mf-dot"/><circle cx="671.0" cy="33.0" r="2.4" class="mf-dot"/><circle cx="692.9" cy="33.0" r="2.4" class="mf-dot"/><circle cx="715.2" cy="33.0" r="2.4" class="mf-dot"/><circle cx="737.1" cy="33.0" r="2.4" class="mf-dot"/><circle cx="10.8" cy="55.0" r="2.4" class="mf-dot"/><circle cx="33.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="55.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="77.2" cy="55.0" r="2.4" class="mf-dot"/><circle cx="99.1" cy="55.0" r="2.4" class="mf-dot"/><circle cx="120.9" cy="55.0" r="2.4" class="mf-dot"/><circle cx="143.3" cy="55.0" r="2.4" class="mf-dot"/><circle cx="164.8" cy="55.0" r="2.4" class="mf-dot"/><circle cx="187.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="209.2" cy="55.0" r="2.4" class="mf-dot"/><circle cx="230.8" cy="55.0" r="2.4" class="mf-dot"/><circle cx="253.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="274.7" cy="55.0" r="2.4" class="mf-dot"/><circle cx="297.1" cy="55.0" r="2.4" class="mf-dot"/><circle cx="319.2" cy="55.0" r="2.4" class="mf-dot"/><circle cx="342.9" cy="55.6" r="2.4" class="mf-hot"/><circle cx="366.2" cy="56.1" r="2.4" class="mf-hot"/><circle cx="389.7" cy="56.6" r="2.4" class="mf-hot"/><circle cx="413.4" cy="57.1" r="2.4" class="mf-hot"/><circle cx="436.9" cy="57.6" r="2.4" class="mf-hot"/><circle cx="459.7" cy="57.9" r="2.4" class="mf-hot"/><circle cx="481.8" cy="57.9" r="2.4" class="mf-hot"/><circle cx="503.0" cy="57.7" r="2.4" class="mf-hot"/><circle cx="523.7" cy="57.2" r="2.4" class="mf-hot"/><circle cx="544.0" cy="56.7" r="2.4" class="mf-hot"/><circle cx="564.4" cy="56.1" r="2.4" class="mf-hot"/><circle cx="585.1" cy="55.7" r="2.4" class="mf-hot"/><circle cx="605.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="627.2" cy="55.0" r="2.4" class="mf-dot"/><circle cx="648.9" cy="55.0" r="2.4" class="mf-dot"/><circle cx="671.1" cy="55.0" r="2.4" class="mf-dot"/><circle cx="693.1" cy="55.0" r="2.4" class="mf-dot"/><circle cx="715.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="737.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="11.2" cy="77.0" r="2.4" class="mf-dot"/><circle cx="33.3" cy="77.0" r="2.4" class="mf-dot"/><circle cx="55.0" cy="77.0" r="2.4" class="mf-dot"/><circle cx="77.1" cy="77.0" r="2.4" class="mf-dot"/><circle cx="98.7" cy="77.0" r="2.4" class="mf-dot"/><circle cx="121.1" cy="77.0" r="2.4" class="mf-dot"/><circle cx="143.1" cy="77.0" r="2.4" class="mf-dot"/><circle cx="165.3" cy="77.0" r="2.4" class="mf-dot"/><circle cx="187.2" cy="77.0" r="2.4" class="mf-dot"/><circle cx="208.9" cy="77.0" r="2.4" class="mf-dot"/><circle cx="230.9" cy="77.0" r="2.4" class="mf-dot"/><circle cx="253.1" cy="77.0" r="2.4" class="mf-dot"/><circle cx="274.7" cy="77.0" r="2.4" class="mf-dot"/><circle cx="297.0" cy="77.0" r="2.4" class="mf-dot"/><circle cx="318.8" cy="77.0" r="2.4" class="mf-dot"/><circle cx="342.7" cy="77.6" r="2.4" class="mf-hot"/><circle cx="365.9" cy="78.0" r="2.4" class="mf-hot"/><circle cx="389.3" cy="78.4" r="2.4" class="mf-hot"/><circle cx="412.8" cy="78.9" r="2.4" class="mf-hot"/><circle cx="436.1" cy="79.4" r="2.4" class="mf-hot"/><circle cx="458.9" cy="79.6" r="2.4" class="mf-hot"/><circle cx="481.0" cy="79.7" r="2.4" class="mf-hot"/><circle cx="502.3" cy="79.4" r="2.4" class="mf-hot"/><circle cx="523.0" cy="79.0" r="2.4" class="mf-hot"/><circle cx="543.5" cy="78.5" r="2.4" class="mf-hot"/><circle cx="564.1" cy="78.0" r="2.4" class="mf-hot"/><circle cx="584.9" cy="77.6" r="2.4" class="mf-hot"/><circle cx="604.8" cy="77.0" r="2.4" class="mf-dot"/><circle cx="626.7" cy="77.0" r="2.4" class="mf-dot"/><circle cx="649.2" cy="77.0" r="2.4" class="mf-dot"/><circle cx="670.8" cy="77.0" r="2.4" class="mf-dot"/><circle cx="692.8" cy="77.0" r="2.4" class="mf-dot"/><circle cx="714.9" cy="77.0" r="2.4" class="mf-dot"/><circle cx="737.2" cy="77.0" r="2.4" class="mf-dot"/></svg>
+  <ul class="authors"><li>Weile Li<sup>1,2</sup></li><li>Yunfan Lou<sup>3</sup></li><li>Muqing Shi<sup>4</sup></li><li>Zihao Zhang<sup>2</sup></li><li>Zhenbiao Huang<sup>5</sup></li><li>Boxian Yao<sup>6</sup></li><li>Xiyu Zhu<sup>6</sup></li><li>Zhibo Pang<sup>6</sup></li></ul>
+  <ul class="affil"><li><sup>1</sup>ShanghaiTech University</li><li><sup>2</sup>Institute of AI for Industries</li><li><sup>3</sup>National University of Singapore</li><li><sup>4</sup>Washington University in St. Louis</li><li><sup>5</sup>Beijing FiveAges Technology</li><li><sup>6</sup>Peking University</li></ul>
+  <div class="buttons">
+    <span class="btn soon" aria-disabled="true"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 1.5h5l3 3v10H4z"/><path d="M9 1.5v3h3M6 8h4M6 10.5h4"/></svg> Paper <small>coming soon</small></span>
+    <span class="btn soon" aria-disabled="true"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg> Code <small>coming soon</small></span>
+    <a class="btn" href="#bibtex">BibTeX</a>
+  </div>
+</header>
+
+<main class="wrap">
+<section class="first">
+  <figure>
+    <div class="figcard"><img src="static/img/teaser.webp" width="2063" height="886" alt="Overview of TacInno. The tactile change mixes a component explained by images and actions with a contact response that only tactile input reveals. The TacInno tokenizer encodes the contact response into a code used only as a training target."></div>
+    <figcaption><b>Overview.</b> (a) The tactile change mixes a component explained by vision and executed actions with a contact response that only tactile input reveals. (b) The TacInno tokenizer encodes the contact response into the tactile innovation code. (c) Existing visuo-tactile VLA models versus TacInno, which uses the code solely as a training target. (d) Average and lowest per-task success rates on six UniVTAC tasks. (e) Success rates on four real-world tasks.</figcaption>
+  </figure>
+  <div class="prose">
+    <p class="kicker">Abstract</p>
+    <p>Vision-Language-Action (VLA) models have recently been equipped with tactile sensing to perceive visually subtle contact events in contact-rich manipulation. However, adding tactile input yields inconsistent gains, and some visuo-tactile VLA models rely little on tactile input, because much of the tactile change, such as the gel deformation during gripper closure, is predictable from visual observations and executed actions. To address this problem, we introduce TacInno, which isolates the contact dynamics that vision and executed actions cannot explain, termed <em>tactile innovation</em>, and uses tactile innovation only as a training target. Specifically, the TacInno tokenizer, conditioned on visual observations and executed actions, compresses the future tactile change into a discrete code, and the policy, TacInno-VLA, learns to predict the code, adding no module for the code at deployment. TacInno-VLA achieves average success rates of 87.5% across six simulation tasks and 70.5% across four real-world tasks, outperforming the strongest visuo-tactile baseline by 10.7 and 9.0 percentage points, respectively. Ablation studies validate the contributions of visual and action conditioning, multi-frame encoding, and auxiliary code prediction. Together, these results demonstrate the effectiveness of tactile innovation as a supervision signal for contact-rich manipulation.</p>
+  </div>
+</section>
+
+<section id="idea">
+  <div class="prose">
+    <p class="kicker">The idea</p>
+    <h2>What can tactile sensing still tell a policy that already sees the scene and knows its own actions?</h2>
+    <p class="lead">A tactile sensor measures how the contact responds to the robot's own actions. When the gripper closes, the gel deforms in a way the cameras and the executed actions already predict. What they cannot predict is how the contact responds, such as an object that starts to slip or a plug that jams.</p>
+  </div>
+  <div class="decomp" role="group" aria-label="Decomposition of the future tactile change">
+    <div class="t">ΔX&nbsp;=</div>
+    <div class="box b1"><b>Predictable from vision and actions</b><span>the gel deformation that the images and the executed actions already explain</span></div>
+    <div class="t">+</div>
+    <div class="box b2"><b>Tactile innovation</b><span>the contact response that only tactile input reveals, such as incipient slip</span></div>
+  </div>
+  <div class="prose">
+    <p>Feeding tactile observations to the policy leaves it to the action loss to find this residual, and predicting all future tactile signals spends most of the supervision on the predictable part. TacInno isolates the residual, borrowing the notion of innovation from estimation theory, and supervises the policy with it.</p>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="n">01 · conditional</div><h4>Subtract what vision and actions explain</h4><p>The tokenizer gives the visual observations and the executed actions to both its encoder and its decoder, so the code only has to carry what the two conditions cannot explain.</p></div>
+    <div class="card"><div class="n">02 · dynamic</div><h4>Encode a short window of contact</h4><p>Transient events such as incipient slip span several control steps. The encoder reads four tactile frames from t to t+15 with causal temporal attention and outputs a 16-bit code.</p></div>
+    <div class="card"><div class="n">03 · in the future</div><h4>Use the code only as a training target</h4><p>The policy predicts the code from current observations through four code queries that no other token attends to. The tokenizer and both auxiliary heads are removed at deployment.</p></div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="prose">
+    <p class="kicker">Method</p>
+    <h2>TacInno tokenizer</h2>
+    <p>The encoder and the decoder are spatial-temporal Transformers whose frames hold tactile tokens, frozen DINOv2 image features, and executed actions. The encoder compresses the tactile observations of the window into four code tokens with 16 values each. The decoder reconstructs the future tactile change from the current tactile observation and the code. Because the decoder already receives the images and the actions, information about the tactile innovation reaches it only through the code.</p>
+  </div>
+  <figure>
+    <div class="figcard"><img src="static/img/tokenizer.webp" width="2063" height="687" loading="lazy" alt="Architecture of the TacInno tokenizer"></div>
+    <figcaption><b>TacInno tokenizer.</b> The encoder compresses the tactile observations from t to t+15 into the code, and the decoder reconstructs the future tactile change. Both are conditioned on visual observations and executed actions, so the code retains the tactile innovation.</figcaption>
+  </figure>
+  <div class="split">
+    <div class="prose">
+      <h2>TacInno-VLA</h2>
+      <p>TacInno-VLA is built on the pretrained VLA π<sub>0.5</sub>. Proprioceptive tokens, 60 tactile tokens from the three most recent tactile observations, and four learnable code queries are inserted into the action expert. A block-wise attention mask lets the code queries read the prefix, proprioceptive, and tactile tokens, while no other token reads the code queries. The code prediction loss therefore shapes the tactile representations that action prediction uses, rather than handing the code to the actions.</p>
+      <p>A contact-state head on the tactile encoder predicts contact properties such as contact area, shear, and indentation depth. At deployment the model is π<sub>0.5</sub> with a 60-token tactile branch. No tactile pretraining is used.</p>
+    </div>
+    <figure>
+      <div class="figcard"><img src="static/img/policy.webp" width="985" height="900" loading="lazy" alt="Architecture of TacInno-VLA"></div>
+      <figcaption><b>TacInno-VLA.</b> Two auxiliary heads predict the tactile innovation code and the current contact state during training and are removed at deployment.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="simulation">
+  <div class="prose">
+    <p class="kicker">Results</p>
+    <h2>Six contact-rich tasks in UniVTAC</h2>
+    <p>All policies are trained on the same 50 demonstrations per task and evaluated on the same 100 seeds per task. TacInno-VLA requires no tactile pretraining, whereas FTP-1 and <i class="cal">N</i><sub>0</sub>-VTLA start from policies pretrained on external visuo-tactile data.</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="v">87.5%</div><div class="k">average success on six simulation tasks</div><div class="d">+10.7 points over the strongest visuo-tactile baseline</div></div>
+    <div class="stat"><div class="v">70.5%</div><div class="k">average success on four real-world tasks</div><div class="d">+9.0 points over the strongest visuo-tactile baseline</div></div>
+    <div class="stat"><div class="v">88% → 0%</div><div class="k">on Lift Can when tactile input is removed</div><div class="d">the actions of TacInno-VLA depend on tactile input</div></div>
+  </div>
+  <div class="tbl wide"><table><thead><tr><th scope="col">Method</th><th scope="col">Tactile</th><th scope="col">Insert Hole</th><th scope="col">Insert Tube</th><th scope="col">Lift Bottle</th><th scope="col">Lift Can</th><th scope="col">Pull-out Key</th><th scope="col">Put Bottle</th><th scope="col">Avg.</th></tr></thead><tbody><tr><th scope="row">UniVTAC-ACT</th><td>input</td><td>46</td><td>55</td><td>49</td><td>27</td><td>41</td><td>25</td><td>40.5</td></tr><tr><th scope="row">π<sub>0.5</sub></th><td>none</td><td>88</td><td>70</td><td>26</td><td>25</td><td>36</td><td>40</td><td>47.5</td></tr><tr><th scope="row">FTP-π<sub>0.5</sub></th><td>input</td><td>77</td><td><b>99</b></td><td>45</td><td>33</td><td>19</td><td><b>88</b></td><td>60.2</td></tr><tr><th scope="row">FTP-1</th><td>input</td><td>63</td><td><b>99</b></td><td>61</td><td><b>94</b></td><td>40</td><td><b>88</b></td><td>74.2</td></tr><tr><th scope="row"><i class="cal">N</i><sub>0</sub>-VTLA</th><td>input</td><td><b>99</b></td><td>90</td><td>24</td><td>81</td><td><u>77</u></td><td><u>81</u></td><td>75.3</td></tr><tr><th scope="row">SimpleTouch</th><td>input + predict</td><td>94</td><td>93</td><td><b>82</b></td><td>65</td><td>54</td><td>73</td><td><u>76.8</u></td></tr><tr class="ours"><th scope="row">TacInno-VLA (ours)</th><td>input + innovation target</td><td><u>95</u></td><td><u>95</u></td><td><u>78</u></td><td><u>88</u></td><td><b>94</b></td><td>75</td><td><b>87.5</b></td></tr></tbody></table></div>
+  <p class="tnote">Closed-loop success rates (%). Bold and underlined values denote the best and second-best results.</p>
+  <h3>Closed-loop rollouts of TacInno-VLA</h3>
+  <div class="grid3"><figure class="clip"><img src="static/img/sim/insert_hole.webp" width="480" height="279" loading="lazy" decoding="async" alt="Insert Hole, closed-loop rollout"></figure><figure class="clip"><img src="static/img/sim/insert_tube.webp" width="480" height="279" loading="lazy" decoding="async" alt="Insert Tube, closed-loop rollout"></figure><figure class="clip"><img src="static/img/sim/lift_bottle.webp" width="480" height="279" loading="lazy" decoding="async" alt="Lift Bottle, closed-loop rollout"></figure><figure class="clip"><img src="static/img/sim/lift_can.webp" width="480" height="279" loading="lazy" decoding="async" alt="Lift Can, closed-loop rollout"></figure><figure class="clip"><img src="static/img/sim/pull_out_key.webp" width="480" height="279" loading="lazy" decoding="async" alt="Pull-out Key, closed-loop rollout"></figure><figure class="clip"><img src="static/img/sim/put_bottle_in_shelf.webp" width="480" height="279" loading="lazy" decoding="async" alt="Put Bottle in Shelf, closed-loop rollout"></figure></div>
+  <p class="tnote">Each clip shows the head camera and the two tactile sensors, sped up.</p>
+</section>
+
+<section id="tactile-off">
+  <div class="split">
+    <div class="prose">
+      <p class="kicker">Analysis</p>
+      <h2>Does the policy use tactile input?</h2>
+      <p>A higher success rate does not by itself show that a policy relies on tactile input. In the tactile-off test, the tactile input is replaced with a fixed no-contact frame at test time while all other inputs stay unchanged. On Lift Can, where the can must be held firmly enough to lift yet loosely enough to rotate in the grasp, TacInno-VLA drops from 88% to 0%. It reaches the can but does not lift it. The baselines retain most of their success rates.</p>
+    </div>
+    <div><div class="tbl "><table><thead><tr><th scope="col">Policy</th><th scope="col">With tactile input</th><th scope="col">Tactile-off</th><th scope="col">Change</th></tr></thead><tbody><tr><th scope="row"><i class="cal">N</i><sub>0</sub>-VTLA</th><td>81</td><td>77</td><td>−4</td></tr><tr><th scope="row">FTP-1</th><td>94</td><td>80</td><td>−14</td></tr><tr><th scope="row">SimpleTouch</th><td>65</td><td>55</td><td>−10</td></tr><tr><th scope="row">UniVTAC-ACT</th><td>27</td><td>24</td><td>−3</td></tr><tr class="ours"><th scope="row">TacInno-VLA (ours)</th><td>88</td><td><b>0</b></td><td><b>−88</b></td></tr></tbody></table></div><p class="tnote">Lift Can, success rates (%) on the same 100 seeds.</p></div>
+  </div>
+  <figure>
+    <div class="figcard"><img src="static/img/touchoff_lift_can.webp" width="892" height="300" loading="lazy" alt="Tactile-off test on Lift Can, the same seed with tactile input and with a fixed no-contact tactile frame"></div>
+    <figcaption><b>Same seed, same policy.</b> With tactile input (left), TacInno-VLA lifts the can. With a fixed no-contact tactile frame (right), it reaches the can but does not lift it.</figcaption>
+  </figure>
+  <h3>Where does tactile innovation occur?</h3>
+  <figure>
+    <div class="figcard"><img src="static/img/timeline.webp" width="2063" height="650" loading="lazy" alt="Temporal distribution of tactile innovation on a held-out Lift Can demonstration"></div>
+    <figcaption><b>Tactile innovation over time</b> on a held-out Lift Can demonstration. The part of the tactile change explained by the code (orange) peaks before contact onset and at incipient slip, and vanishes once the motion of the can becomes visible to the cameras.</figcaption>
+  </figure>
+  <h3>Ablation study</h3>
+  <div class="split top">
+    <div class="prose">
+      <p>Each variant removes or alters one design of TacInno-VLA on the two lifting tasks. Removing the conditioning, so that the code encodes the entire future tactile change, lowers the average success rate by 21 points. Conditioning on vision alone, encoding only two frames, or letting the actions read the code queries also lowers it.</p>
+    </div>
+    <div><div class="tbl "><table><thead><tr><th scope="col">Variant</th><th scope="col">Lift Can</th><th scope="col">Lift Bottle</th><th scope="col">Avg.</th></tr></thead><tbody><tr class="ours"><th scope="row">TacInno-VLA (ours)</th><td><b>88</b></td><td><b>78</b></td><td><b>83.0</b></td></tr><tr><th scope="row">w/o conditioning</th><td>63</td><td>61</td><td>62.0</td></tr><tr><th scope="row">vision-only conditioning</th><td>62</td><td>77</td><td>69.5</td></tr><tr><th scope="row">two-frame code</th><td>81</td><td>72</td><td>76.5</td></tr><tr><th scope="row">w/o attention mask</th><td>66</td><td>70</td><td>68.0</td></tr><tr><th scope="row">w/o code loss</th><td>84</td><td>68</td><td>76.0</td></tr><tr><th scope="row">w/o tactile input</th><td>25</td><td>26</td><td>25.5</td></tr></tbody></table></div><p class="tnote">Lift Can and Lift Bottle, success rates (%) on 100 seeds per task.</p></div>
+  </div>
+</section>
+
+<section id="real-world">
+  <div class="prose">
+    <p class="kicker">Real world</p>
+    <h2>Four contact-rich tasks on a Franka FR3</h2>
+    <p>Wiping a board, inserting a plug into a power strip, lifting a lying can upright, and unscrewing a bottle cap, with a vision-based tactile sensor on the fingertip. Every policy is trained on the same 45 teleoperated demonstrations per task and evaluated for 50 trials per task. The code prediction loss improves every task by 16 to 26 percentage points.</p>
+  </div>
+  <div class="grid2"><figure class="clip"><img src="static/img/real/wipe_board.webp" width="520" height="159" loading="lazy" decoding="async" alt="Wipe Board, closed-loop rollout"></figure><figure class="clip"><img src="static/img/real/insert_plug.webp" width="520" height="159" loading="lazy" decoding="async" alt="Insert Plug, closed-loop rollout"></figure><figure class="clip"><img src="static/img/real/lift_can.webp" width="520" height="159" loading="lazy" decoding="async" alt="Lift Can, closed-loop rollout"></figure><figure class="clip"><img src="static/img/real/unscrew_cap.webp" width="520" height="159" loading="lazy" decoding="async" alt="Unscrew Cap, closed-loop rollout"></figure></div>
+  <p class="tnote">Third-person camera, wrist camera, and tactile image, sped up.</p>
+  <div class="tbl "><table><thead><tr><th scope="col">Policy</th><th scope="col">Wipe Board</th><th scope="col">Insert Plug</th><th scope="col">Lift Can</th><th scope="col">Unscrew Cap</th><th scope="col">Avg.</th></tr></thead><tbody><tr><th scope="row">FTP-1</th><td><b>88</b></td><td>16</td><td>66</td><td>64</td><td>58.5</td></tr><tr><th scope="row">SimpleTouch</th><td>82</td><td>28</td><td>62</td><td>74</td><td>61.5</td></tr><tr><th scope="row">TacInno-VLA, tactile-off</th><td>52</td><td>10</td><td>46</td><td>52</td><td>40.0</td></tr><tr><th scope="row">w/o code loss</th><td>62</td><td>22</td><td>50</td><td>56</td><td>47.5</td></tr><tr><th scope="row">w/o tactile input</th><td>62</td><td>14</td><td>52</td><td>78</td><td>51.5</td></tr><tr class="ours"><th scope="row">TacInno-VLA (ours)</th><td><b>88</b></td><td><b>38</b></td><td><b>74</b></td><td><b>82</b></td><td><b>70.5</b></td></tr></tbody></table></div>
+  <p class="tnote">Success rates (%) over 50 trials per task.</p>
+  <figure>
+    <div class="figcard"><img src="static/img/real_robot_setup.webp" width="2063" height="896" loading="lazy" alt="Real-world setup and the four tasks"></div>
+    <figcaption><b>Setup.</b> A Franka FR3 arm with a parallel gripper, a vision-based tactile sensor on the fingertip, a third-person camera, and a wrist camera, with key frames of the four tasks.</figcaption>
+  </figure>
+</section>
+
+<section id="bibtex">
+  <p class="kicker">Citation</p>
+  <h2>BibTeX</h2>
+  <div class="bib"><button type="button" id="copy">Copy</button><pre id="bibtext">@article{li2026tacinno,
+  title   = {TacInno: Teaching Vision-Language-Action Models the
+             Contact Dynamics Beyond Vision and Action},
+  author  = {Li, Weile and Lou, Yunfan and Shi, Muqing and Zhang, Zihao and Huang, Zhenbiao and Yao, Boxian and Zhu, Xiyu and Pang, Zhibo},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</pre></div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 The TacInno authors.</div>
+</footer>
+<script>
+document.getElementById('copy').addEventListener('click', function () {
+  var b = this, t = document.getElementById('bibtext').textContent;
+  function done(m) { b.textContent = m; setTimeout(function () { b.textContent = 'Copy'; }, 1600); }
+  function sel() { var r = document.createRange(); r.selectNodeContents(document.getElementById('bibtext'));
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done('Selected'); }
+  if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(function () { done('Copied'); }, sel); }
+  else { sel(); }
+});
+</script>
+</body>
+</html>
