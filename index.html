@@ -38,6 +38,13 @@ a { color: var(--blue); text-underline-offset: .18em; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
 .wrap { max-width: 68rem; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
 .prose { max-width: 44rem; }
+section > .prose { margin-inline: auto; }
+section > .prose > .kicker, section > .prose > h2, section > h3, section > .kicker, section > h2, section > .tnote { text-align: center; }
+.prose p, .abstract p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+@media (max-width: 600px) { .prose p, .abstract p { text-align: left; } }
+.abstract { max-width: 46rem; margin: 2.8rem auto 0; }
+.abstract h2 { text-align: center; margin-bottom: 1.1rem; }
+.abstract p { font-size: 1.06rem; line-height: 1.75; margin: 0; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 10; }
 nav.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 nav.top .wrap { display: flex; align-items: center; gap: 1.4rem; padding-block: .7rem; overflow-x: auto; }
@@ -72,16 +79,21 @@ figure { margin: 1.6rem 0; }
 .figcard img { display: block; width: 100%; height: auto; }
 figcaption { font-size: .9rem; color: var(--muted); margin-top: .65rem; line-height: 1.55; }
 figcaption b { color: var(--ink); }
-.decomp { display: grid; grid-template-columns: auto 1fr auto 1fr; align-items: stretch; gap: .8rem; margin: 1.6rem 0; }
-.decomp .t { align-self: center; font: 600 1.3rem/1 var(--serif); white-space: nowrap; }
-.decomp .box { border-radius: 12px; padding: 1rem 1.1rem; border: 1.5px solid; min-width: 0; }
-.decomp .box b { display: block; font-size: 1.02rem; margin-bottom: .25rem; }
-.decomp .box span { font-size: .9rem; color: var(--muted); }
-.decomp .b1 { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, var(--surface)); }
+.decomp { max-width: 54rem; margin: 2rem auto; text-align: center; }
+.decomp .dx { font: 600 1.05rem/1.2 var(--sans); color: var(--ink); }
+.decomp .dx .sym { font: 700 1.5rem/1 var(--serif); margin-left: .35rem; }
+.decomp svg.brace { display: block; width: calc(100% - 4rem); height: 22px; margin: .45rem auto .6rem; }
+.decomp svg.brace path { fill: none; stroke: var(--muted); stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.decomp .terms { display: grid; grid-template-columns: minmax(0, 1fr) 3rem minmax(0, 1fr); align-items: stretch; }
+.decomp .op { align-self: center; font: 500 1.6rem/1 var(--serif); color: var(--muted); }
+.decomp .box { border-radius: 14px; padding: 1.15rem 1.4rem 1.25rem; border: 1.5px solid; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: .4rem; }
+.decomp .box b { font: 600 1.06rem/1.3 var(--sans); }
+.decomp .box span { font-size: .93rem; line-height: 1.55; color: var(--muted); text-wrap: balance; }
+.decomp .b1 { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 7%, var(--surface)); }
 .decomp .b1 b { color: var(--blue); }
-.decomp .b2 { border-color: var(--orange-fill); background: color-mix(in srgb, var(--orange-fill) 10%, var(--surface)); }
+.decomp .b2 { border-color: var(--orange-fill); background: color-mix(in srgb, var(--orange-fill) 9%, var(--surface)); }
 .decomp .b2 b { color: var(--orange); }
-@media (max-width: 720px) { .decomp { grid-template-columns: 1fr; } .decomp .t { justify-self: center; } }
+@media (max-width: 720px) { .decomp .terms { grid-template-columns: 1fr; gap: .5rem; } .decomp svg.brace { width: calc(100% - 1rem); } }
 .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.4rem; }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.1rem 1.2rem; min-width: 0; }
 .card .n { font: 700 .8rem/1 var(--mono); color: var(--orange); }
@@ -110,7 +122,11 @@ td u { text-decoration-thickness: 1.5px; text-underline-offset: .2em; }
 @media (max-width: 900px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
 .clip { margin: 0; background: #0d1015; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
-.clip img { display: block; width: 100%; height: auto; }
+.clip img, .clip video { display: block; width: 100%; height: auto; }
+.clip video { aspect-ratio: 1100 / 640; background: #0d1015; }
+.tocard .tolab { display: grid; grid-template-columns: 1fr 1fr; column-gap: 1.1%; margin-bottom: .5rem; text-align: center; font: 600 .92rem/1.3 var(--sans); }
+.tocard .tolab .on { color: var(--orange); } .tocard .tolab .off { color: #6b7280; }
+.tocard video { display: block; width: 100%; height: auto; aspect-ratio: 2224 / 640; }
 .clip figcaption { margin: 0; padding: .5rem .75rem; font-size: .85rem; color: #c9d0da; background: #0d1015; }
 .split { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 2rem; align-items: center; }
 .split.top { align-items: start; }
@@ -150,11 +166,11 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
 <main class="wrap">
 <section class="first">
   <figure>
-    <div class="figcard"><img src="static/img/teaser.webp" width="2063" height="886" alt="Overview of TacInno. The tactile change mixes a component explained by images and actions with a contact response that only tactile input reveals. The TacInno tokenizer encodes the contact response into a code used only as a training target."></div>
+    <div class="figcard"><img src="static/img/teaser.webp" width="3000" height="1289" alt="Overview of TacInno. The tactile change mixes a component explained by images and actions with a contact response that only tactile input reveals. The TacInno tokenizer encodes the contact response into a code used only as a training target."></div>
     <figcaption><b>Overview.</b> (a) The tactile change mixes a component explained by vision and executed actions with a contact response that only tactile input reveals. (b) The TacInno tokenizer encodes the contact response into the tactile innovation code. (c) Existing visuo-tactile VLA models versus TacInno, which uses the code solely as a training target. (d) Average and lowest per-task success rates on six UniVTAC tasks. (e) Success rates on four real-world tasks.</figcaption>
   </figure>
-  <div class="prose">
-    <p class="kicker">Abstract</p>
+  <div class="abstract">
+    <h2>Abstract</h2>
     <p>Vision-Language-Action (VLA) models have recently been equipped with tactile sensing to perceive visually subtle contact events in contact-rich manipulation. However, adding tactile input yields inconsistent gains, and some visuo-tactile VLA models rely little on tactile input, because much of the tactile change, such as the gel deformation during gripper closure, is predictable from visual observations and executed actions. To address this problem, we introduce TacInno, which isolates the contact dynamics that vision and executed actions cannot explain, termed <em>tactile innovation</em>, and uses tactile innovation only as a training target. Specifically, the TacInno tokenizer, conditioned on visual observations and executed actions, compresses the future tactile change into a discrete code, and the policy, TacInno-VLA, learns to predict the code, adding no module for the code at deployment. TacInno-VLA achieves average success rates of 87.5% across six simulation tasks and 70.5% across four real-world tasks, outperforming the strongest visuo-tactile baseline by 10.7 and 9.0 percentage points, respectively. Ablation studies validate the contributions of visual and action conditioning, multi-frame encoding, and auxiliary code prediction. Together, these results demonstrate the effectiveness of tactile innovation as a supervision signal for contact-rich manipulation.</p>
   </div>
 </section>
@@ -166,10 +182,13 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
     <p class="lead">A tactile sensor measures how the contact responds to the robot's own actions. When the gripper closes, the gel deforms in a way the cameras and the executed actions already predict. What they cannot predict is how the contact responds, such as an object that starts to slip or a plug that jams.</p>
   </div>
   <div class="decomp" role="group" aria-label="Decomposition of the future tactile change">
-    <div class="t">ΔX&nbsp;=</div>
-    <div class="box b1"><b>Predictable from vision and actions</b><span>the gel deformation that the images and the executed actions already explain</span></div>
-    <div class="t">+</div>
-    <div class="box b2"><b>Tactile innovation</b><span>the contact response that only tactile input reveals, such as incipient slip</span></div>
+    <div class="dx">Future tactile change<span class="sym">ΔX</span></div>
+    <svg class="brace" viewBox="0 0 1000 22" preserveAspectRatio="none" aria-hidden="true"><path d="M2 21 Q2 11 24 11 L476 11 Q500 11 500 1 Q500 11 524 11 L976 11 Q998 11 998 21"/></svg>
+    <div class="terms">
+      <div class="box b1"><b>Predictable from vision and actions</b><span>what the images and the executed actions already explain, such as the gel deformation during gripper closure</span></div>
+      <div class="op" aria-label="plus">+</div>
+      <div class="box b2"><b>Tactile innovation</b><span>what only tactile input reveals, such as incipient slip of a grasped object or a jamming plug</span></div>
+    </div>
   </div>
   <div class="prose">
     <p>Feeding tactile observations to the policy leaves it to the action loss to find this residual, and predicting all future tactile signals spends most of the supervision on the predictable part. TacInno isolates the residual, borrowing the notion of innovation from estimation theory, and supervises the policy with it.</p>
@@ -188,7 +207,7 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
     <p>The encoder and the decoder are spatial-temporal Transformers whose frames hold tactile tokens, frozen DINOv2 image features, and executed actions. The encoder compresses the tactile observations of the window into four code tokens with 16 values each. The decoder reconstructs the future tactile change from the current tactile observation and the code. Because the decoder already receives the images and the actions, information about the tactile innovation reaches it only through the code.</p>
   </div>
   <figure>
-    <div class="figcard"><img src="static/img/tokenizer.webp" width="2063" height="687" loading="lazy" alt="Architecture of the TacInno tokenizer"></div>
+    <div class="figcard"><img src="static/img/tokenizer.webp" width="3000" height="999" loading="lazy" alt="Architecture of the TacInno tokenizer"></div>
     <figcaption><b>TacInno tokenizer.</b> The encoder compresses the tactile observations from t to t+15 into the code, and the decoder reconstructs the future tactile change. Both are conditioned on visual observations and executed actions, so the code retains the tactile innovation.</figcaption>
   </figure>
   <div class="split">
@@ -198,7 +217,7 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
       <p>A contact-state head on the tactile encoder predicts contact properties such as contact area, shear, and indentation depth. At deployment the model is π<sub>0.5</sub> with a 60-token tactile branch. No tactile pretraining is used.</p>
     </div>
     <figure>
-      <div class="figcard"><img src="static/img/policy.webp" width="985" height="900" loading="lazy" alt="Architecture of TacInno-VLA"></div>
+      <div class="figcard"><img src="static/img/policy.webp" width="1600" height="1463" loading="lazy" alt="Architecture of TacInno-VLA"></div>
       <figcaption><b>TacInno-VLA.</b> Two auxiliary heads predict the tactile innovation code and the current contact state during training and are removed at deployment.</figcaption>
     </figure>
   </div>
@@ -218,8 +237,8 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
   <div class="tbl wide"><table><thead><tr><th scope="col">Method</th><th scope="col">Tactile</th><th scope="col">Insert Hole</th><th scope="col">Insert Tube</th><th scope="col">Lift Bottle</th><th scope="col">Lift Can</th><th scope="col">Pull-out Key</th><th scope="col">Put Bottle</th><th scope="col">Avg.</th></tr></thead><tbody><tr><th scope="row">UniVTAC-ACT</th><td>input</td><td>46</td><td>55</td><td>49</td><td>27</td><td>41</td><td>25</td><td>40.5</td></tr><tr><th scope="row">π<sub>0.5</sub></th><td>none</td><td>88</td><td>70</td><td>26</td><td>25</td><td>36</td><td>40</td><td>47.5</td></tr><tr><th scope="row">FTP-π<sub>0.5</sub></th><td>input</td><td>77</td><td><b>99</b></td><td>45</td><td>33</td><td>19</td><td><b>88</b></td><td>60.2</td></tr><tr><th scope="row">FTP-1</th><td>input</td><td>63</td><td><b>99</b></td><td>61</td><td><b>94</b></td><td>40</td><td><b>88</b></td><td>74.2</td></tr><tr><th scope="row"><i class="cal">N</i><sub>0</sub>-VTLA</th><td>input</td><td><b>99</b></td><td>90</td><td>24</td><td>81</td><td><u>77</u></td><td><u>81</u></td><td>75.3</td></tr><tr><th scope="row">SimpleTouch</th><td>input + predict</td><td>94</td><td>93</td><td><b>82</b></td><td>65</td><td>54</td><td>73</td><td><u>76.8</u></td></tr><tr class="ours"><th scope="row">TacInno-VLA (ours)</th><td>input + innovation target</td><td><u>95</u></td><td><u>95</u></td><td><u>78</u></td><td><u>88</u></td><td><b>94</b></td><td>75</td><td><b>87.5</b></td></tr></tbody></table></div>
   <p class="tnote">Closed-loop success rates (%). Bold and underlined values denote the best and second-best results.</p>
   <h3>Closed-loop rollouts of TacInno-VLA</h3>
-  <div class="grid3"><figure class="clip"><img src="static/img/sim/insert_hole.webp" width="480" height="279" loading="lazy" decoding="async" alt="Insert Hole, closed-loop rollout"></figure><figure class="clip"><img src="static/img/sim/insert_tube.webp" width="480" height="279" loading="lazy" decoding="async" alt="Insert Tube, closed-loop rollout"></figure><figure class="clip"><img src="static/img/sim/lift_bottle.webp" width="480" height="279" loading="lazy" decoding="async" alt="Lift Bottle, closed-loop rollout"></figure><figure class="clip"><img src="static/img/sim/lift_can.webp" width="480" height="279" loading="lazy" decoding="async" alt="Lift Can, closed-loop rollout"></figure><figure class="clip"><img src="static/img/sim/pull_out_key.webp" width="480" height="279" loading="lazy" decoding="async" alt="Pull-out Key, closed-loop rollout"></figure><figure class="clip"><img src="static/img/sim/put_bottle_in_shelf.webp" width="480" height="279" loading="lazy" decoding="async" alt="Put Bottle in Shelf, closed-loop rollout"></figure></div>
-  <p class="tnote">Each clip shows the head camera and the two tactile sensors, sped up.</p>
+  <div class="grid3"><figure class="clip"><video src="static/video/insert_hole.mp4" poster="static/video/insert_hole_poster.jpg" width="1100" height="640" autoplay muted loop playsinline preload="metadata" aria-label="Insert Hole, closed-loop rollout of TacInno-VLA"></video><figcaption>Insert Hole</figcaption></figure><figure class="clip"><video src="static/video/insert_tube.mp4" poster="static/video/insert_tube_poster.jpg" width="1100" height="640" autoplay muted loop playsinline preload="metadata" aria-label="Insert Tube, closed-loop rollout of TacInno-VLA"></video><figcaption>Insert Tube</figcaption></figure><figure class="clip"><video src="static/video/lift_bottle.mp4" poster="static/video/lift_bottle_poster.jpg" width="1100" height="640" autoplay muted loop playsinline preload="metadata" aria-label="Lift Bottle, closed-loop rollout of TacInno-VLA"></video><figcaption>Lift Bottle</figcaption></figure><figure class="clip"><video src="static/video/lift_can.mp4" poster="static/video/lift_can_poster.jpg" width="1100" height="640" autoplay muted loop playsinline preload="metadata" aria-label="Lift Can, closed-loop rollout of TacInno-VLA"></video><figcaption>Lift Can</figcaption></figure><figure class="clip"><video src="static/video/pull_out_key.mp4" poster="static/video/pull_out_key_poster.jpg" width="1100" height="640" autoplay muted loop playsinline preload="metadata" aria-label="Pull-out Key, closed-loop rollout of TacInno-VLA"></video><figcaption>Pull-out Key</figcaption></figure><figure class="clip"><video src="static/video/put_bottle_in_shelf.mp4" poster="static/video/put_bottle_in_shelf_poster.jpg" width="1100" height="640" autoplay muted loop playsinline preload="metadata" aria-label="Put Bottle in Shelf, closed-loop rollout of TacInno-VLA"></video><figcaption>Put Bottle in Shelf</figcaption></figure></div>
+  <p class="tnote">Each clip shows the head camera and the two tactile sensors, played at 2× speed.</p>
 </section>
 
 <section id="tactile-off">
@@ -232,12 +251,15 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
     <div><div class="tbl "><table><thead><tr><th scope="col">Policy</th><th scope="col">With tactile input</th><th scope="col">Tactile-off</th><th scope="col">Change</th></tr></thead><tbody><tr><th scope="row"><i class="cal">N</i><sub>0</sub>-VTLA</th><td>81</td><td>77</td><td>−4</td></tr><tr><th scope="row">FTP-1</th><td>94</td><td>80</td><td>−14</td></tr><tr><th scope="row">SimpleTouch</th><td>65</td><td>55</td><td>−10</td></tr><tr><th scope="row">UniVTAC-ACT</th><td>27</td><td>24</td><td>−3</td></tr><tr class="ours"><th scope="row">TacInno-VLA (ours)</th><td>88</td><td><b>0</b></td><td><b>−88</b></td></tr></tbody></table></div><p class="tnote">Lift Can, success rates (%) on the same 100 seeds.</p></div>
   </div>
   <figure>
-    <div class="figcard"><img src="static/img/touchoff_lift_can.webp" width="892" height="300" loading="lazy" alt="Tactile-off test on Lift Can, the same seed with tactile input and with a fixed no-contact tactile frame"></div>
+    <div class="figcard tocard">
+      <div class="tolab" aria-hidden="true"><span class="on">TacInno-VLA</span><span class="off">TacInno-VLA, tactile-off test</span></div>
+      <video src="static/video/touchoff_lift_can.mp4" poster="static/video/touchoff_lift_can_poster.jpg" width="2224" height="640" autoplay muted loop playsinline preload="metadata" aria-label="Tactile-off test on Lift Can, the same seed with tactile input and with a fixed no-contact tactile frame"></video>
+    </div>
     <figcaption><b>Same seed, same policy.</b> With tactile input (left), TacInno-VLA lifts the can. With a fixed no-contact tactile frame (right), it reaches the can but does not lift it.</figcaption>
   </figure>
   <h3>Where does tactile innovation occur?</h3>
   <figure>
-    <div class="figcard"><img src="static/img/timeline.webp" width="2063" height="650" loading="lazy" alt="Temporal distribution of tactile innovation on a held-out Lift Can demonstration"></div>
+    <div class="figcard"><img src="static/img/timeline.webp" width="3000" height="946" loading="lazy" alt="Temporal distribution of tactile innovation on a held-out Lift Can demonstration"></div>
     <figcaption><b>Tactile innovation over time</b> on a held-out Lift Can demonstration. The part of the tactile change explained by the code (orange) peaks before contact onset and at incipient slip, and vanishes once the motion of the can becomes visible to the cameras.</figcaption>
   </figure>
   <h3>Ablation study</h3>
@@ -260,7 +282,7 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
   <div class="tbl "><table><thead><tr><th scope="col">Policy</th><th scope="col">Wipe Board</th><th scope="col">Insert Plug</th><th scope="col">Lift Can</th><th scope="col">Unscrew Cap</th><th scope="col">Avg.</th></tr></thead><tbody><tr><th scope="row">FTP-1</th><td><b>88</b></td><td>16</td><td>66</td><td>64</td><td>58.5</td></tr><tr><th scope="row">SimpleTouch</th><td>82</td><td>28</td><td>62</td><td>74</td><td>61.5</td></tr><tr><th scope="row">TacInno-VLA, tactile-off</th><td>52</td><td>10</td><td>46</td><td>52</td><td>40.0</td></tr><tr><th scope="row">w/o code loss</th><td>62</td><td>22</td><td>50</td><td>56</td><td>47.5</td></tr><tr><th scope="row">w/o tactile input</th><td>62</td><td>14</td><td>52</td><td>78</td><td>51.5</td></tr><tr class="ours"><th scope="row">TacInno-VLA (ours)</th><td><b>88</b></td><td><b>38</b></td><td><b>74</b></td><td><b>82</b></td><td><b>70.5</b></td></tr></tbody></table></div>
   <p class="tnote">Success rates (%) over 50 trials per task.</p>
   <figure>
-    <div class="figcard"><img src="static/img/real_robot_setup.webp" width="2063" height="896" loading="lazy" alt="Real-world setup and the four tasks"></div>
+    <div class="figcard"><img src="static/img/real_robot_setup.webp" width="3000" height="1303" loading="lazy" alt="Real-world setup and the four tasks"></div>
     <figcaption><b>Setup.</b> A Franka FR3 arm with a parallel gripper, a vision-based tactile sensor on the fingertip, a third-person camera, and a wrist camera, with key frames of the four tasks.</figcaption>
   </figure>
 </section>
@@ -282,6 +304,9 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
   <div class="wrap">© 2026 The TacInno authors.</div>
 </footer>
 <script>
+if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('video').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; });
+}
 document.getElementById('copy').addEventListener('click', function () {
   var b = this, t = document.getElementById('bibtext').textContent;
   function done(m) { b.textContent = m; setTimeout(function () { b.textContent = 'Copy'; }, 1600); }
