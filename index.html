@@ -137,6 +137,108 @@ td u { text-decoration-thickness: 1.5px; text-underline-offset: .2em; }
 .bib pre { margin: 0; padding: 1.1rem 1.2rem; overflow-x: auto; font: 400 .84rem/1.6 var(--mono); }
 .bib button { position: absolute; top: .6rem; right: .6rem; font: 500 .8rem/1 var(--sans); padding: .45rem .7rem; border-radius: 8px; border: 1px solid var(--line); background: var(--chip); color: var(--ink); cursor: pointer; }
 footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size: .85rem; color: var(--muted); padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px)); }
+@font-face { font-family: "TacInnoCola"; font-display: block; src: url(data:font/woff2;base64,d09GMgABAAAAAAUIAA8AAAAACHwAAASzAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGhYbWhwoBmAAZBEICoYshToLEgABNgIkAyAEIAWEFAcgDAcb8gbIxOjfqe0zBOQgTaIQo1q2A4Ryy1bv2HGKwEp1jF8l0P9/v9LJ43m8Hsmo/cg7FWWfJpowCjByq22FeAV2GLu4jFYQAEbg/BIQCvr2cwAKHgiDJCOroAImrareduCArAr9VzS01HW3w8AnzKAMEokzgGBUK0hg0c8xOSSQia8gF5/3qvGCl9wCJ3TPuFYrIUryKeQwLjkj0bCmFW4D+R5heDNNWmNZyHljS178QnllRgVSQKNDOv1BCUrSabKBnp8WJFbSDnRT3BRLOSsWCKuQoSRoBrO8/TQCkQ4VatCKjhl1St0j/ixOixfEzeImcZU41Xu71kxARBGmSGoAZiv3gVhCN6mrZpVVxzhi//8WCaRWMYHGPl4KI8p5diUXrVNw9lqwHk+ivtRMEncdIwiCoOCmWZ6nNLeI2luI13FgY3awCk4gakrD8zwPVsEJAqPj2As8z2vuORxyZtzVGqsvz/DU5OQutSAIiq32Os5aq2WtdvA77HbYCYyW/XIH/4D34TWrqjihvFyn7ughsA1reEpD1Lb3HXVqql8hozttq2WtHvDZbxYEgdtpzXACw2jZHWf4BD5ni2abzS7iFxgd/1vWbAXPV/BgGU4gNh53+IQv2WJOsJ08RO0IuACW0TwAu1IB6tTghORkjDH/OTY8dc1hkqgFhtNqdduttWD/duokAZ9X6zt9GKLsMh5JU7qNI6gpc+AjzGGvnP/y73kN8bUhNZ3da0riHdc6mg5XuO5fbmhgYtElI1a3V9qYOCqvzppaNjKVusDDxtqixeXO/HlpdXID/6zKmSXjsS1Xv73uhIO+E1Jp+N1BZYZzym8jEUXNbfVL8sPonSvNdpecsvo2Nzp19OI8i7qQbzYusXpfkx77W0nKi4Ior5d1OUbDKmVnuFTqNVQ1Q2kuweYIaVVmkoOp3oJDzy0peYVi5cZAa7O8zZUbu7ffD1titdR83cjd9tTCstj81rbcgYDcp4ZYnOp6qa84riRuiVVoagNzuW9ep5VX5U1tgbV7ZdlQ+9CuIaXnb3YRcbm2WYU5Jec+Lw1P8w9xab5n/+65CdEP3bPZOEIOjp5b7nJyC/mvb76dwXfPqP+NpAel5n6lxmqn/vSLl5ZYLd0yVal3sHNBKfP9uG2a7li3HzXVeaPkzDvLGAB41bsRODtKPt804bmBQvpXZubWK1vKFXzI/KCUB0un7zf5JEWEenfbr/6Q+W6BPPhd8AbvFzffLAnHXSKCkCXiYzIGPZILd5Ij/lFbb4Dl0Cd/FRyPprTn61+tXWaIwqfwLEQEZvgNSWCCJ0iKPKxAMtBoRXI4oAzpwRkRnAnzE6ARvehFJ+IQjGD0oAbdaEIneqEiCD0vaUUQOtCNBgSjGFkoQCH7kwyoUI8O1CEQZahDA/rQChW6UQWgu9W+DrSDRiiCEKLj0ijNGqP9qWhl/c1QScJadKMDJVCVcHGwr5Z4OYSNMSkit2Or5nR0oBNDq4SG1a+n4YMa+LaeRs/ESrN43eYe9KEWvTsl7pickvpYEGrQgTb4IgDGGEATetE4Z+jZoXw/6lALIWuf8DkUi6BC28omu2Fw+7ExfpZ4FGHQGk8QcfEB2UcAAA==) format("woff2"); }
+.toy { --guide: #17705f; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: .85rem 1rem .75rem; margin: 2.2rem auto 0; font-size: .9rem; }   /* the guide has its own colour, a teal between the blue and the orange of the figures */
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .toy { --guide: #5fd0b8; } }
+:root[data-theme="dark"] .toy { --guide: #5fd0b8; }
+.toy:lang(zh) { font-family: "IBM Plex Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif; }
+.toy-top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .2rem 1rem; align-items: center; margin-bottom: .55rem; }
+.toy-headline { display: flex; align-items: baseline; gap: .2rem .7rem; flex-wrap: wrap; min-width: 0; }
+.toy-headline .kicker { margin: 0; }
+.toy-headline h3 { font: 700 1.14rem/1.25 var(--serif); margin: 0; }
+.toy:lang(zh) .toy-headline h3 { font-family: "Source Serif 4", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", "SimSun", serif; }
+.toy-sub { grid-column: 1 / -1; margin: 0; font-size: .84rem; line-height: 1.45; color: var(--muted); text-wrap: pretty; }
+.toy-lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.toy-lang button { font: 500 .78rem/1 var(--sans); padding: .34rem .7rem; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
+.toy-lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.toy-guide { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .25rem 1rem; align-items: center; background: color-mix(in srgb, var(--guide) 6%, var(--surface)); border: 1.5px dashed color-mix(in srgb, var(--guide) 70%, transparent); border-radius: 12px; padding: .5rem .85rem .55rem; margin-bottom: .7rem; }
+.toy-guide .toy-link { color: var(--guide); }
+.toy-steps { list-style: none; display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin: 0; padding: 0; font-size: .78rem; color: var(--muted); }
+.toy-steps li { display: flex; align-items: center; gap: .35rem; white-space: nowrap; }
+.toy-steps li em { font-style: normal; }
+.toy-steps li span { display: inline-grid; place-items: center; width: 1.2rem; height: 1.2rem; border-radius: 50%; border: 1px solid var(--line); font: 600 .7rem/1 var(--mono); background: var(--surface); }
+.toy-steps li.cur { color: var(--ink); font-weight: 600; }
+.toy-steps li.cur span { background: var(--guide); color: var(--bg); border-color: var(--guide); }
+.toy-steps li.done span { background: transparent; color: var(--guide); border-color: color-mix(in srgb, var(--guide) 55%, transparent); }
+.toy-guide-text { grid-column: 1 / -1; margin: 0; font-size: .98rem; line-height: 1.4; min-height: 1.4em; text-wrap: pretty; }
+.toy-guide-text b { font-weight: 600; box-shadow: inset 0 -.42em 0 color-mix(in srgb, var(--guide) 26%, transparent); }
+.toy-guide.off { display: flex; justify-content: flex-end; background: none; border: 0; padding: 0; margin: -.3rem 0 .35rem; }
+.toy-guide.off .toy-steps, .toy-guide.off .toy-guide-text { display: none; }
+.toy-hl { outline: 2px dashed var(--guide); outline-offset: 4px; border-radius: 10px; animation: toy-hl 1.4s ease-in-out infinite; }
+.toy-btns button.toy-hl, .toy-switch.toy-hl { border-radius: 999px; }
+@keyframes toy-hl { 50% { outline-color: color-mix(in srgb, var(--guide) 35%, transparent); outline-offset: 7px; } }
+@media (prefers-reduced-motion: reduce) { .toy-hl { animation: none; } }
+.toy-grid { display: grid; grid-template-columns: minmax(0, 29fr) minmax(0, 30fr) minmax(0, 41fr); gap: .9rem; align-items: start; }
+.toy-left, .toy-mid, .toy-right { min-width: 0; }
+.toy-scene { width: 100%; aspect-ratio: 178 / 172; display: block; border-radius: 12px; background: var(--bg); }
+.toy-hidden { font-size: .78rem; color: var(--muted); display: flex; gap: .4rem; align-items: baseline; justify-content: center; flex-wrap: wrap; margin-top: .35rem; }
+.toy-hidden b { font: 600 .78rem/1 var(--mono); color: var(--ink); }
+.toy:lang(zh) .toy-hidden b { font-family: inherit; }
+.toy-link { font: 500 .8rem/1 var(--sans); background: none; border: 0; color: var(--blue); cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: .18em; white-space: nowrap; }
+.toy:lang(zh) .toy-link, .toy:lang(zh) .toy-btns button, .toy:lang(zh) .toy-chart-title { font-family: inherit; }
+.toy-gels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; }
+.toy-gels figure { margin: 0; min-width: 0; }
+.toy-gels canvas { width: 100%; aspect-ratio: 32 / 40; display: block; }
+.toy-gels figcaption { font-size: .74rem; line-height: 1.25; text-align: center; margin-top: .15rem; color: var(--muted); text-wrap: balance; }
+.toy-gels figcaption.b { color: var(--blue); }
+.toy-gels figcaption.o { color: var(--orange); }
+.toy-caption { min-height: 5.8em; margin: .6rem 0 0; font-size: .87rem; line-height: 1.45; border-left: 3px solid var(--orange-fill); padding: .1rem 0 .1rem .7rem; text-wrap: pretty; }
+.toy-chartbox canvas { width: 100%; height: 184px; display: block; }
+.toy-chart-head { display: flex; gap: .15rem 1rem; flex-wrap: wrap; font-size: .76rem; color: var(--muted); margin-bottom: .15rem; align-items: baseline; }
+.toy-chart-title { font: 600 .9rem/1.3 var(--sans); color: var(--ink); }
+.toy-share { margin-left: auto; }
+.toy-share b { font: 600 .8rem/1 var(--mono); color: var(--ink); margin-left: .2rem; }
+.toy-chart-key { display: flex; gap: .1rem .9rem; flex-wrap: wrap; font-size: .74rem; color: var(--muted); align-items: center; }
+.toy-chart-key > span { white-space: nowrap; }
+.toy-chart-key .sw { display: inline-block; width: 1.05rem; height: .6rem; border-radius: 2px; margin-right: .3rem; vertical-align: -.02rem; }
+.toy-chart-key .sw.g { background: color-mix(in srgb, var(--ink) 16%, transparent); }
+.toy-chart-key .sw.o { background: color-mix(in srgb, var(--orange-fill) 30%, transparent); border-top: 2px solid var(--orange-fill); height: .5rem; }
+.toy-chart-key .sw.d { background: none; height: 0; border-top: 2px dashed var(--ink); border-radius: 0; vertical-align: .22rem; }
+.toy-chart-marks { display: flex; flex-wrap: wrap; gap: .05rem .8rem; margin: .1rem 0 0; font-size: .74rem; color: var(--muted); }
+.toy-chart-marks > span { white-space: nowrap; }
+.toy-chart-marks b { font: 700 .8rem/1 var(--serif); color: var(--ink); margin-right: .25rem; }
+.toy-controls { display: flex; flex-wrap: wrap; gap: .5rem 1.05rem; align-items: center; margin-top: .7rem; padding-top: .65rem; border-top: 1px solid var(--line); }
+.toy-range { display: grid; align-items: center; gap: .55rem; font-size: .86rem; white-space: nowrap; }
+.toy-range.grip { grid-template-columns: auto minmax(0, 1fr) 2.5rem; flex: 1 1 10.5rem; }
+.toy-range.speed { grid-template-columns: auto minmax(0, 1fr); flex: 0 1 9.5rem; }
+.toy-range input { -webkit-appearance: none; appearance: none; width: 100%; height: 24px; margin: 0; background: transparent; cursor: pointer; --p: 0%; }
+.toy-range input::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: linear-gradient(to right, var(--ink) 0, var(--ink) var(--p), var(--line) var(--p), var(--line) 100%); }
+.toy-range input::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; margin-top: -7px; border-radius: 50%; background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, .22); }
+.toy-range input::-moz-range-track { height: 4px; border-radius: 2px; background: var(--line); }
+.toy-range input::-moz-range-progress { height: 4px; border-radius: 2px; background: var(--ink); }
+.toy-range input::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, .22); }
+.toy-range input:hover::-webkit-slider-thumb, .toy-range input:active::-webkit-slider-thumb { background: var(--ink); }
+.toy-range input:hover::-moz-range-thumb, .toy-range input:active::-moz-range-thumb { background: var(--ink); }
+.toy-range input:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+.toy-range output { font: 500 .8rem/1 var(--mono); color: var(--muted); text-align: right; }
+.toy-btns { display: flex; gap: .4rem; flex-wrap: wrap; }
+.toy-btns button { font: 500 .84rem/1 var(--sans); padding: .5rem .85rem; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; white-space: nowrap; }
+.toy-btns button:hover { border-color: var(--muted); }
+.toy-btns button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.toy-btns button.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.toy-switch { display: inline-flex; align-items: center; gap: .5rem; font-size: .84rem; cursor: pointer; position: relative; }
+.toy-switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.toy-switch .track { width: 2.1rem; height: 1.2rem; border-radius: 999px; background: var(--line); position: relative; transition: background .15s; flex: none; }
+.toy-switch .track::after { content: ""; position: absolute; top: .14rem; left: .14rem; width: .92rem; height: .92rem; border-radius: 50%; background: var(--surface); box-shadow: 0 1px 2px rgba(0, 0, 0, .25); transition: transform .15s; }
+.toy-switch input:checked + .track { background: var(--blue); }
+.toy-switch input:checked + .track::after { transform: translateX(.9rem); }
+.toy-switch input:focus-visible + .track { outline: 2px solid var(--blue); outline-offset: 2px; }
+.toy-note { font-size: .74rem; line-height: 1.45; color: var(--muted); margin: .55rem 0 0; text-wrap: pretty; }
+@media (max-width: 980px) {
+  .toy-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+  .toy-right { grid-column: 1 / -1; }
+  .toy-chartbox canvas { height: 170px; }
+}
+@media (max-width: 640px) {
+  .toy { display: flex; flex-direction: column; padding: .8rem .75rem .7rem; }
+  .toy-grid { display: contents; }
+  .toy-top { order: 1; } .toy-guide { order: 2; } .toy-left { order: 3; } .toy-controls { order: 4; margin-top: .5rem; padding-top: .55rem; }
+  .toy-mid { order: 5; margin-top: .8rem; } .toy-right { order: 6; margin-top: .8rem; } .toy-note { order: 7; }
+  .toy-scene { max-width: 300px; margin: 0 auto; }
+  .toy-caption { min-height: 4.4em; }
+  .toy-range.speed { flex: 1 1 12rem; }
+}
+@media (prefers-reduced-motion: reduce) { .toy-switch .track, .toy-switch .track::after { transition: none; } }
 </style>
 </head>
 <body>
@@ -161,7 +263,7 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
   <p class="authnote"><sup>*</sup>Equal contribution&nbsp;&nbsp;&nbsp;<sup>&dagger;</sup>Corresponding author: <span class="mail">zhibo.pang@pku.edu.cn</span></p>
   <div class="buttons">
     <span class="btn soon" aria-disabled="true"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 1.5h5l3 3v10H4z"/><path d="M9 1.5v3h3M6 8h4M6 10.5h4"/></svg> Paper <small>coming soon</small></span>
-    <span class="btn soon" aria-disabled="true"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg> Code <small>coming soon</small></span>
+    <a class="btn" href="https://github.com/LisavilaLee/TacInno"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg> Code</a>
     <a class="btn" href="#bibtex">BibTeX</a>
   </div>
 </header>
@@ -195,6 +297,56 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
   </div>
   <div class="prose">
     <p>Feeding tactile observations to the policy leaves it to the action loss to find this residual, and predicting all future tactile signals spends most of the supervision on the predictable part. TacInno isolates the residual, borrowing the notion of innovation from estimation theory, and supervises the policy with it.</p>
+  </div>
+  <div class="toy" id="toy" lang="en">
+    <div class="toy-top">
+      <div class="toy-headline"><span class="kicker" data-i18n="kicker">Try it</span><h3 data-i18n="title">Stand a lying can upright by letting it turn in the fingertips</h3></div>
+      <div class="toy-lang" role="group" aria-label="Language / 语言"><button type="button" id="toy-lang-en" aria-pressed="true" lang="en">EN</button><button type="button" id="toy-lang-zh" aria-pressed="false" lang="zh-Hans">中文</button></div>
+      <p class="toy-sub" data-i18n="sub">The can hides its mass and surface friction. Hold it firmly and lift it, then loosen the grip slowly: it turns upright in the fingertips and settles on the table.</p>
+    </div>
+    <div class="toy-guide" id="toy-guide">
+      <ol class="toy-steps" aria-label="Guide">
+        <li><span>1</span><em data-i18n="s1">Lift, then loosen slowly</em></li>
+        <li><span>2</span><em data-i18n="s2">Remove the conditioning</em></li>
+        <li><span>3</span><em data-i18n="s3">Change the can</em></li>
+      </ol>
+      <button type="button" class="toy-link" id="toy-guide-skip">Skip guide</button>
+      <p class="toy-guide-text" id="toy-guide-text" aria-live="polite"></p>
+    </div>
+    <div class="toy-grid">
+      <div class="toy-left">
+        <canvas id="toy-scene" class="toy-scene" role="img" aria-label="A robot gripper pinches a can that lies on a table, seen along the pinch axis"></canvas>
+        <div class="toy-hidden"><span data-i18n="hidden_lbl">Hidden mass and friction</span> <b id="toy-hidden">? · ?</b> <button type="button" id="toy-reveal" class="toy-link" aria-pressed="false">Reveal</button></div>
+      </div>
+      <div class="toy-mid">
+        <div class="toy-gels">
+          <figure><canvas id="toy-gel-m" role="img" aria-label="Tactile change on the gel pad"></canvas><figcaption data-i18n="gel1">Tactile change</figcaption></figure>
+          <figure><canvas id="toy-gel-p" role="img" aria-label="Part predicted from images and actions"></canvas><figcaption class="b" data-i18n="gel2">Predicted from images + actions</figcaption></figure>
+          <figure><canvas id="toy-gel-n" role="img" aria-label="Tactile innovation"></canvas><figcaption class="o" data-i18n="gel3">Tactile innovation</figcaption></figure>
+        </div>
+        <p class="toy-caption" id="toy-caption" aria-live="polite"></p>
+      </div>
+      <div class="toy-right">
+        <div class="toy-chartbox">
+          <div class="toy-chart-head"><b class="toy-chart-title" data-i18n="ch_title">Tactile innovation over time</b><span class="toy-share"><span data-i18n="ch_share">innovation this run</span> <b id="toy-share">–</b></span></div>
+          <div class="toy-chart-key"><span><i class="sw g"></i><span data-i18n="key_dx">|ΔX| (normalized)</span></span><span><i class="sw o"></i><span data-i18n="key_share">share that is tactile innovation</span></span><span><i class="sw d"></i><span data-i18n="key_tilt">can tilt</span></span></div>
+          <canvas id="toy-chart" role="img" aria-label="Live plot of the tactile change, the share that is tactile innovation, and the tilt of the can"></canvas>
+          <p class="toy-chart-marks"><span><b>a</b><span data-i18n="mk_a">contact</span></span><span><b>b</b><span data-i18n="mk_b">lift</span></span><span><b>c</b><span data-i18n="mk_c">starts to turn</span></span><span><b>d</b><span data-i18n="mk_d">upright</span></span><span><b>e</b><span data-i18n="mk_e">released</span></span></p>
+        </div>
+      </div>
+    </div>
+    <div class="toy-controls">
+      <label class="toy-range grip"><span data-i18n="l_grip">Grip</span><input type="range" id="toy-grip" min="0" max="100" step="1" value="0"><output id="toy-grip-o" for="toy-grip">0%</output></label>
+      <label class="toy-range speed"><span data-i18n="l_speed">Lift speed</span><input type="range" id="toy-speed" min="0" max="100" step="1" value="30"></label>
+      <div class="toy-btns">
+        <button type="button" id="toy-lift" aria-pressed="false">Lift</button>
+        <button type="button" id="toy-new" data-i18n="b_new">New can</button>
+        <button type="button" id="toy-reset" data-i18n="b_reset">Reset</button>
+        <button type="button" id="toy-play" class="primary">Play example</button>
+      </div>
+      <label class="toy-switch"><input type="checkbox" id="toy-cond" checked><span class="track" aria-hidden="true"></span><span data-i18n="sw_cond">Condition on images and actions</span></label>
+    </div>
+    <p class="toy-note" data-i18n="note">A toy contact model that runs in your browser, not the trained TacInno tokenizer. The predictor receives your actions, sees the gripper, and sees the can once its pose is off by more than 6 degrees or 5 mm. It assumes an average mass and friction.</p>
   </div>
   <div class="cards">
     <div class="card"><div class="n">01 · conditional</div><h4>Subtract what vision and actions explain</h4><p>The tokenizer gives the visual observations and the executed actions to both its encoder and its decoder, so the code only has to carry what the two conditions cannot explain.</p></div>
@@ -319,6 +471,836 @@ document.getElementById('copy').addEventListener('click', function () {
   if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(function () { done('Copied'); }, sel); }
   else { sel(); }
 });
+</script>
+<script>
+/* TacInno project page: "stand a lying can upright by letting it turn in the fingertips".
+   An illustrative toy model, not the trained tokenizer. The view looks along the pinch axis: the can lies on the
+   table, the gripper pinches it near its top end, and as the gripper lifts, the can turns in the grip about the
+   pinch axis while its bottom rim stays on the table, until it stands upright.
+   Two copies of the same contact model run side by side. The true one uses the hidden mass and friction of the can.
+   The predictor uses an average mass and friction, receives the same actions, sees the gripper, and sees the can
+   once its pose differs from the expected pose by more than the cameras resolve. The tactile change over the last
+   0.25 s is split into the change the predictor expects (blue) and the residual, the tactile innovation (orange). */
+(function () {
+  'use strict';
+
+  // ---------- model (units: mm, s, N, kg, rad) ----------
+  var DT = 1 / 120, G = 9.81, HALF_PI = Math.PI / 2;
+  var R = 30, L = 100, A = 28;       // can radius and length, distance from the pinch point to the centre of mass
+  var B = L / 2 + A, TOPD = L - B;   // distance from the pinch point to the bottom end and to the top end
+  var RHO = Math.sqrt(B * B + R * R), THS = Math.atan2(R, B);   // pinch height and tilt at which the can balances on its bottom rim
+  var GAP_OPEN = 36, GAP_SHUT = 18;  // half gap between the gel surfaces, open and fully closed
+  var NA = 0.45, KE = 0.31;          // normal force of one pad, N = NA * (exp(KE * indentation) - 1)
+  var KT = 2.2;                      // shear stiffness of the gel (N/mm)
+  var REFF = 0.0075;                 // effective radius of the torsional friction of the contact (m)
+  var PHI0 = 0.061;                  // twist at which a contact of average friction starts to slide (3.5 degrees)
+  var KIN = 0.8;                     // kinetic over static friction
+  var IM = (L * L / 12 + R * R / 4 + A * A) * 1e-6;   // inertia about the pinch axis per unit mass (m^2)
+  var CROT = 7;                      // rotational damping (1/s)
+  var PAD_H = 34, PAD_W = 26;
+  var Y0 = R, LIFT = RHO + 2 - R;    // pinch height when the can lies on the table; the gripper rises until the can clears its rim
+  var AMAX = 3000, TAU_V = 0.1;      // gripper acceleration limit (mm/s^2) and velocity time constant
+  var S_OFF = 9;                     // the pads lose the can after sliding this far along it
+  var WIN = 30;                      // window of the tactile change (steps, 0.25 s)
+  var NX = 7, NY = 9, NM = NX * NY;
+  var VIS_A = 0.105, VIS_D = 5, VIS_DELAY = 10;   // smallest turn (6 degrees) and shift (mm) the cameras resolve, visual delay (steps)
+  var M0 = 0.4, MU0 = 0.65;          // the average can that the predictor assumes
+  var MASS = [['light', 0.25], ['medium', 0.4], ['heavy', 0.6]];
+  var FRIC = [['dry', 0.9], ['normal', 0.65], ['oily', 0.45]];
+  var WD = 0.35;                     // weight of the depth change against the shear change
+  var TIME_SCALE = 0.7;              // simulated seconds per second on screen
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function floorH(th) { return B * Math.cos(th) + R * Math.sin(Math.abs(th)); }   // pinch height at which the base touches the table
+
+  function newState() {
+    return { c: 0, half: GAP_OPEN, delta: 0, N: 0, yg: Y0, vg: 0, ag: 0,
+             attached: false, needsOpen: false, s: 0, hc: Y0, vc: 0,
+             th: HALF_PI, om: 0, anchor: HALF_PI, rotSliding: false, linSliding: false,
+             Nt: 0, F: 0, rhoT: 0, onTable: true, standing: false, atRest: true,
+             tContact: -9, tLoad: -9, loaded: false, dropped: false };
+  }
+
+  function stepPhys(S, P, cmd, t) {
+    var m = P.m, mu = P.mu, mg = m * G;
+    // gripper
+    S.c += (cmd.grip - S.c) * DT / 0.12;
+    S.half = GAP_OPEN - S.c * (GAP_OPEN - GAP_SHUT);
+    var tgt = cmd.up ? Y0 + LIFT : Y0;
+    var vt = clamp((tgt - S.yg) * 3, -cmd.vmax, cmd.vmax);
+    S.ag = clamp((vt - S.vg) / TAU_V, -AMAX, AMAX);
+    S.vg += S.ag * DT; S.yg += S.vg * DT;
+    if (S.yg < Y0) { S.yg = Y0; if (S.vg < 0) S.vg = 0; }
+    if (!S.attached && S.half < P.Rc) {                     // a closed gripper cannot move down through the can: the fingertip stops on top of it
+      var sn = Math.abs(Math.sin(S.th)), cs = Math.abs(Math.cos(S.th));
+      var top = S.hc + Math.min(sn > 1e-3 ? R / sn : 1e9, cs > 1e-3 ? TOPD / cs : 1e9) + 21;
+      if (S.yg < top && S.yg - S.vg * DT >= top - 0.5) { S.yg = top; if (S.vg < 0) S.vg = 0; }
+    }
+    var over = S.attached || (Math.abs(S.yg - S.hc) < 6 && !S.needsOpen);
+    S.delta = over ? Math.max(0, P.Rc - S.half) : 0;
+    S.N = NA * (Math.exp(KE * S.delta) - 1);
+    if (S.attached && S.delta <= 0) S.attached = false;     // the gripper let go
+
+    if (S.attached) {
+      var Fmax = 2 * mu * S.N, Kt = 2 * MU0 * S.N * REFF / PHI0, phiS = PHI0 * mu / MU0;
+      // along the can: the pinch point follows the fingers unless the pads slide
+      if (!S.linSliding) { S.hc = S.yg - S.s; S.vc = S.vg; }
+      else {
+        S.vc += (KIN * Fmax - Math.max(0, mg - S.Nt)) / m * 1000 * DT;
+        if (S.vc > S.vg) S.vc = S.vg;
+        S.hc += S.vc * DT;
+        if (S.hc < R) { S.hc = R; if (S.vc < 0) S.vc = 0; }
+        S.s = S.yg - S.hc;
+      }
+      // about the pinch axis: gravity turns the can towards hanging upright, the twisted gel resists
+      var twist = S.anchor - S.th;
+      if (Math.abs(twist) > phiS) S.rotSliding = true;
+      if (S.rotSliding) { twist = (twist >= 0 ? 1 : -1) * KIN * phiS; S.anchor = S.th + twist; }
+      var tg = Kt * twist, thPrev = S.th;                   // torque of the gel on the can (N m)
+      S.om += ((-G * A * 1e-3 * Math.sin(S.th)) / IM + tg / (m * IM) - CROT * S.om) * DT;
+      S.th += S.om * DT;
+      if (S.th > HALF_PI) { S.th = HALF_PI; if (S.om > 0) S.om = 0; }
+      S.onTable = false; S.standing = false;
+      if (S.th >= THS + 0.02) {
+        if (S.hc < RHO) {                                   // the bottom rim cannot go below the table
+          var tt = Math.min(HALF_PI, THS + Math.acos(clamp(S.hc / RHO, -1, 1)));
+          if (S.th <= tt) { S.th = tt; S.om = (tt - thPrev) / DT; S.onTable = true; }
+        }
+      } else {
+        var fl = floorH(S.th);
+        if (S.hc <= fl + 0.05) {                            // the base is on the table: the can rocks upright
+          S.standing = true;
+          S.th -= S.th * Math.min(1, DT / 0.06); S.om = 0;
+          fl = floorH(S.th);
+          if (S.hc < fl) {
+            S.hc = fl; if (S.vc < 0) S.vc = 0;
+            if (S.linSliding || P.pred) S.s = S.yg - S.hc;
+            else { S.yg = fl + S.s; if (S.vg < 0) S.vg = 0; }
+          }
+        }
+      }
+      if (S.rotSliding && Math.abs(S.om) < 0.05) S.rotSliding = false;
+      // loads on the pinch
+      var xc = B * Math.sin(S.th) - R * Math.cos(S.th);
+      if (S.standing) S.Nt = mg;
+      else if (S.onTable) {
+        var nt = xc > 2 ? clamp((mg * A * Math.sin(S.th) - tg * 1000) / xc, 0, mg) : mg;
+        var wl = clamp((HALF_PI - S.th) / 0.012, 0, 1);     // a can lying flat is carried by the table along its length
+        S.Nt = mg + (nt - mg) * wl;
+      } else S.Nt = 0;
+      S.F = Math.max(0, m * (G + S.ag / 1000) - S.Nt);
+      if (!S.linSliding) { if (S.F > Fmax) S.linSliding = true; }
+      else if (Math.abs(S.vg - S.vc) < 3 && Math.max(0, mg - S.Nt) <= Fmax) S.linSliding = false;
+      S.rhoT = clamp(Math.abs(twist) / phiS, 0, 1);
+      if (S.F > 0.3 && !S.loaded) { S.loaded = true; S.tLoad = t; }
+      else if (S.F <= 0.05 && (S.standing || S.th > HALF_PI - 0.004)) S.loaded = false;
+      if (Math.abs(S.s) > S_OFF) { S.attached = false; S.needsOpen = true; S.dropped = true; }
+    }
+
+    if (!S.attached) {                                      // free can: falls and comes to rest lying, or standing if close to upright
+      S.linSliding = false; S.rotSliding = false; S.F = 0; S.Nt = mg; S.rhoT = 0; S.loaded = false; S.om = 0;
+      var up = Math.abs(S.th) < THS + 0.02, goal = up ? 0 : HALF_PI;
+      S.th += (goal - S.th) * Math.min(1, DT / 0.09); S.anchor = S.th;
+      var flr = up ? floorH(S.th) : Math.max(R, RHO * Math.cos(S.th - THS));
+      S.vc -= G * 1000 * DT; S.hc += S.vc * DT;
+      if (S.hc <= flr) { S.hc = flr; S.vc = 0; }
+      S.atRest = S.hc <= flr + 0.01 && Math.abs(S.th - goal) < 0.01;
+      S.standing = up && S.atRest; S.onTable = !up && S.atRest; S.s = S.yg - S.hc;
+      var near = Math.abs(S.yg - S.hc) < 6;
+      if (S.half >= P.Rc) S.needsOpen = false; else if (!near) S.needsOpen = true;
+      if (S.atRest && near && !S.needsOpen && S.half < P.Rc) {
+        S.attached = true; S.anchor = S.th; S.vc = S.vg; S.tContact = t; S.dropped = false;
+      }
+    }
+  }
+
+  // tactile field of the near pad, seen face on: indentation depth d and marker displacement (ux, uy) at NX x NY markers
+  function tactile(S, P, out) {
+    var on = S.attached && S.delta > 0;
+    var w = on ? Math.min(PAD_W * 0.48, 1.5 * Math.sqrt(S.delta * R / 8)) : 0;
+    var st = Math.sin(S.th), ct = Math.cos(S.th);
+    var u0 = on ? -(S.F / 2) / KT : 0;                      // the weight of the can drags the gel downward
+    var al = on ? S.th - S.anchor : 0;                      // turn of the can against the gel since the contact last stuck
+    var ucap = PHI0 * P.mu / MU0 * 9, sg = al >= 0 ? 1 : -1, aa = Math.abs(al);
+    for (var j = 0; j < NY; j++) {
+      var y = -PAD_H / 2 + PAD_H * (j + 0.5) / NY;
+      for (var i = 0; i < NX; i++) {
+        var x = -PAD_W / 2 + PAD_W * (i + 0.5) / NX, k = j * NX + i;
+        var rx = x, ry = y + S.s;                           // relative to the pinch point of the can
+        var q = rx * ct + ry * st, along = rx * st - ry * ct, aq = Math.abs(q);
+        var d = 0, ux = 0, uy = 0;
+        if (on && along > -TOPD && along < B) {
+          if (aq < w) d = S.delta * (1 - (q / w) * (q / w));
+          var kk = aq <= w ? 1 : Math.exp(-(aq - w) / 2.5);   // the gel next to the contact is dragged along, less with distance
+          var rr = Math.sqrt(rx * rx + ry * ry), mag = rr > 1e-6 ? sg * Math.min(aa * rr, ucap) / rr : 0;
+          ux = kk * mag * -ry; uy = kk * (u0 + mag * rx);   // the outer part of the contact slides first
+        }
+        out.d[k] = d; out.ux[k] = ux; out.uy[k] = uy;
+      }
+    }
+  }
+
+  function field() { return { d: new Float32Array(NM), ux: new Float32Array(NM), uy: new Float32Array(NM) }; }
+  function copyField(a, b) { b.d.set(a.d); b.ux.set(a.ux); b.uy.set(a.uy); }
+  function energy(f) { var e = 0; for (var k = 0; k < NM; k++) e += WD * f.d[k] * f.d[k] + f.ux[k] * f.ux[k] + f.uy[k] * f.uy[k]; return e; }
+
+  function Sim() { this.pick(2, 0, -0.8); }   // the page opens with a heavy, dry can
+  Sim.prototype.pick = function (mi, fi, bias) {
+    this.mi = mi; this.fi = fi;
+    this.bias = bias !== undefined ? bias : (Math.random() < 0.5 ? -1 : 1) * (0.5 + Math.random() * 0.5);   // error of the visual size estimate
+    this.P = { m: MASS[mi][1], mu: FRIC[fi][1], Rc: R };
+    this.Ph = { m: M0, mu: MU0, Rc: R + this.bias, pred: true };
+    this.reset();
+  };
+  Sim.prototype.randomCan = function () {
+    var mi, fi;
+    do { mi = Math.floor(Math.random() * 3); fi = Math.floor(Math.random() * 3); }
+    while ((mi === this.mi && fi === this.fi) || (mi === 1 && fi === 1));   // not the same can again, and not the average can, which hides nothing
+    this.pick(mi, fi);
+  };
+  Sim.prototype.reset = function () {
+    this.Ph.mu = MU0; this.Ph.Rc = R + this.bias;
+    this.t = 0; this.S = newState(); this.H = newState();
+    this.ring = []; this.tracking = 0; this.visible = 0;
+    this.X = field(); this.Xh = field();
+    this.bufX = []; this.bufXh = [];
+    for (var i = 0; i <= WIN; i++) { this.bufX.push(field()); this.bufXh.push(field()); }
+    this.head = 0;
+    this.dX = field(); this.dXh = field(); this.nu = field();
+    this.eX = 0; this.eN = 0; this.eP = 0; this.cumX = 0; this.cumN = 0;
+  };
+  Sim.prototype.step = function (cmd, cond) {
+    var S = this.S, H = this.H, Ph = this.Ph;
+    this.t += DT;
+    stepPhys(S, this.P, cmd, this.t);
+    stepPhys(H, Ph, cmd, this.t);
+    H.yg = S.yg; H.vg = S.vg; H.ag = S.ag;                  // the gripper is seen
+    // the predictor is also given the current tactile observation: once the fingers touch the can, the contact
+    // depth reveals its true size, so only the first contact carries the error of the visual estimate
+    if (S.attached) Ph.Rc += (this.P.Rc - Ph.Rc) * DT / 0.3;
+    // what the cameras see: the pose of the can with a short delay, resolved only above VIS_A and VIS_D
+    this.ring.push({ th: S.th, hc: S.hc });
+    if (this.ring.length > VIS_DELAY) this.ring.shift();
+    var seen = this.ring[0];
+    var moving = Math.abs(S.om) > 0.08 || S.linSliding || (!S.attached && !S.atRest);
+    var mism = Math.abs(H.th - seen.th) > VIS_A || Math.abs(H.hc - seen.hc) > VIS_D;
+    if (mism && this.tracking <= 0 && S.attached && H.attached && S.N > 0.2) {
+      // seeing the can turn where an average can would hold, or hold where it would turn, corrects the assumed friction
+      var hold = M0 * G * A * 1e-3 * Math.abs(Math.sin(S.th)) / (2 * S.N * REFF), dOm = Math.abs(S.om) - Math.abs(H.om);
+      if (dOm > 0.15) Ph.mu = Math.min(Ph.mu, 0.85 * hold);
+      else if (dOm < -0.15) Ph.mu = Math.max(Ph.mu, 1.2 * hold / KIN);
+    }
+    if (mism) this.tracking = 0.3;
+    if (this.tracking > 0) {
+      H.th = S.th; H.om = S.om; H.hc = S.hc; H.vc = S.vc; H.s = S.s;
+      H.attached = S.attached; H.needsOpen = S.needsOpen; H.dropped = S.dropped; H.atRest = S.atRest;
+      H.linSliding = S.linSliding; H.rotSliding = S.rotSliding; H.onTable = S.onTable; H.standing = S.standing;
+      if (!moving && S.attached && S.N > 0.2) {             // a can seen at rest in the grip is a can that the grip holds
+        var needT = S.onTable || S.standing ? 0 : M0 * G * A * 1e-3 * Math.abs(Math.sin(S.th)) / (KIN * 2 * S.N * REFF);
+        var needF = S.standing ? 0 : (S.onTable ? 0.7 : 1) * M0 * G / (KIN * 2 * S.N);
+        Ph.mu = Math.max(Ph.mu, 1.5 * needT, 1.5 * needF);
+      }
+      Ph.mu = clamp(Ph.mu, 0.08, 4);
+      var lim = PHI0 * Ph.mu / MU0 * (S.rotSliding ? KIN : 1), tw = S.anchor - S.th;
+      if (!moving && S.attached && !S.onTable && !S.standing && S.N > 0.2)   // at rest in the air: the twist that carries an average can
+        tw = M0 * G * A * 1e-3 * Math.sin(S.th) * PHI0 / (2 * MU0 * S.N * REFF);
+      H.anchor = H.th + clamp(tw, -lim, lim);
+      if (moving) { this.tracking = 0.3; this.visible = 0.4; } else { this.tracking -= DT; this.visible = Math.max(0, this.visible - DT); }
+    } else this.visible = Math.max(0, this.visible - DT);
+    tactile(S, this.P, this.X);
+    tactile(H, Ph, this.Xh);
+    // tactile change over the last WIN steps
+    var old = this.bufX[this.head], oldh = this.bufXh[this.head], c = cond ? 1 : 0;
+    for (var k = 0; k < NM; k++) {
+      this.dX.d[k] = this.X.d[k] - old.d[k]; this.dX.ux[k] = this.X.ux[k] - old.ux[k]; this.dX.uy[k] = this.X.uy[k] - old.uy[k];
+      this.dXh.d[k] = c * (this.Xh.d[k] - oldh.d[k]); this.dXh.ux[k] = c * (this.Xh.ux[k] - oldh.ux[k]); this.dXh.uy[k] = c * (this.Xh.uy[k] - oldh.uy[k]);
+      this.nu.d[k] = this.dX.d[k] - this.dXh.d[k]; this.nu.ux[k] = this.dX.ux[k] - this.dXh.ux[k]; this.nu.uy[k] = this.dX.uy[k] - this.dXh.uy[k];
+    }
+    copyField(this.X, this.bufX[this.head]); copyField(this.Xh, this.bufXh[this.head]);
+    this.head = (this.head + 1) % (WIN + 1);
+    this.eX = energy(this.dX); this.eN = energy(this.nu); this.eP = energy(this.dXh);
+    this.cumX += this.eX; this.cumN += Math.min(this.eN, this.eX + this.eP);
+  };
+  Sim.prototype.hidden = function () { return { mass: MASS[this.mi][0], friction: FRIC[this.fi][0] }; };
+
+  var API = { Sim: Sim, DT: DT, NM: NM, R: R, B: B, RHO: RHO, THS: THS, GAP_OPEN: GAP_OPEN, GAP_SHUT: GAP_SHUT,
+              Y0: Y0, LIFT: LIFT, M0: M0, MU0: MU0, MASS: MASS, FRIC: FRIC };
+  if (typeof window !== 'undefined') window.TacInnoToyModel = API;
+
+  // ---------- page ----------
+  if (typeof document === 'undefined') return;
+  var root = document.getElementById('toy');
+  if (!root) return;
+  function q(id) { return document.getElementById(id); }
+  var cvScene = q('toy-scene'), cvGel = [q('toy-gel-m'), q('toy-gel-p'), q('toy-gel-n')], cvChart = q('toy-chart');
+  var inGrip = q('toy-grip'), outGrip = q('toy-grip-o'), inSpeed = q('toy-speed'), inCond = q('toy-cond');
+  var bLift = q('toy-lift'), bNew = q('toy-new'), bPlay = q('toy-play'), bReset = q('toy-reset'), bReveal = q('toy-reveal');
+  var outHidden = q('toy-hidden'), outCap = q('toy-caption'), outShare = q('toy-share');
+
+  var sim = new Sim();
+
+  // ---------- texts in English and Chinese ----------
+  var I18N = {
+    en: {
+      kicker: 'Try it', title: 'Stand a lying can upright by letting it turn in the fingertips',
+      sub: 'The can hides its mass and surface friction. Hold it firmly and lift it, then loosen the grip slowly: it turns upright in the fingertips and settles on the table.',
+      s1: 'Lift, then loosen slowly', s2: 'Remove the conditioning', s3: 'Change the can',
+      gel1: 'Tactile change', gel2: 'Predicted from images + actions', gel3: 'Tactile innovation',
+      ch_title: 'Tactile innovation over time', ch_share: 'innovation this run',
+      key_dx: '|ΔX| (normalized)', key_share: 'share that is tactile innovation', key_tilt: 'can tilt',
+      mk_a: 'contact', mk_b: 'lift', mk_c: 'starts to turn', mk_d: 'upright', mk_e: 'released',
+      hidden_lbl: 'Hidden mass and friction', l_grip: 'Grip', l_speed: 'Lift speed', sw_cond: 'Condition on images and actions',
+      b_new: 'New can', b_reset: 'Reset', b_lift: 'Lift', b_lower: 'Lower', b_play: 'Play example', b_stop: 'Stop example', b_reveal: 'Reveal', b_hide: 'Hide',
+      g_skip: 'Skip guide', g_show: 'Show guide', g_restart: 'Restart guide', inset: 'grip', axis_t: 'time (s)',
+      m_light: 'light', m_medium: 'medium', m_heavy: 'heavy', f_dry: 'dry', f_normal: 'normal', f_oily: 'oily',
+      note: 'A toy contact model that runs in your browser, not the trained TacInno tokenizer. The predictor receives your actions, sees the gripper, and sees the can once its pose is off by more than 6 degrees or 5 mm. It assumes an average mass and friction.',
+      c_nocond: 'Without conditioning, every change counts as new, including the deformation that your own grip causes. The code would have to carry all of it.',
+      c_placed: 'Placed upright: the can stands on its own.', c_placed_tip: 'Press Reset, or New can to try another one.',
+      c_dropped: 'The fingers slid off the can before it stood upright.', c_dropped_tip: 'Press Reset, hold it firmly, and loosen more slowly.',
+      c_hidden_lin: 'The fingers start to slide along the can, still too little to see. Only touch knows.',
+      c_hidden_more: 'The can turns in the grip more than its look suggests, still too little to see. Only touch knows.',
+      c_hidden_less: 'The can turns in the grip less than its look suggests, still too little to see. Only touch knows.',
+      c_visible: 'Now the cameras see how the can turns, so the change becomes predictable again.',
+      c_load: 'Lifting loads the contact: it twists, and its edges start to slide before anything is visible. How soon depends on the hidden mass and friction.',
+      c_twist: 'The contact twists close to its limit: its edges slide while the centre still sticks. Nothing is visible yet.',
+      c_size_early: 'First contact came earlier than the images suggested. That timing is tactile innovation.',
+      c_size_late: 'First contact came later than the images suggested. That timing is tactile innovation.',
+      c_close: 'The gel deforms as the fingers close. Your own actions predict this change, so it carries little new information.',
+      c_turn: 'The can turns in the fingertips. The cameras see the turn, so this change is predictable.',
+      c_stuck: 'Held firmly, the can stays lying: the grip carries its weight and its torque.', c_stuck_tip: 'Loosen the grip slowly to let it turn.',
+      c_tilted: 'The can stopped turning: friction in the grip balances its weight again.', c_tilted_tip: 'Loosen a little more.',
+      c_stand: 'Upright on the table.', c_stand_tip: 'Open the gripper to let go.',
+      c_hang: 'Upright: the can hangs in the grip.', c_hang_tip: 'Keep loosening to set it down.',
+      c_deform: 'The gel deforms as the fingers move. Your own actions predict this change, so it carries little new information.',
+      c_stable: 'Stable grasp: nothing changes, so there is nothing new to learn.',
+      c_idle: 'The can lies on the table. Its mass and friction are hidden from the cameras.',
+      c_idle_tip: 'Hold the lying can firmly and lift it, then loosen the grip slowly: the can turns upright in the fingertips and settles on the table.',
+      g_example: 'The example is playing. Follow the captions, then try it yourself.',
+      g_try: 'Now try it yourself: press <b>Reset</b> to lay the can down again.',
+      g_done1: 'Well done: the can stands on its own. Press <b>Reset</b>.',
+      g_fell: 'The can fell before it stood upright. Press <b>Reset</b> and try again, loosening more slowly.',
+      g_grip: 'Drag <b>Grip</b> all the way to 100% to hold the can firmly.', g_firmer: 'Firmer: drag <b>Grip</b> all the way to 100%.',
+      g_lift: 'Press <b>Lift</b>.', g_stand: 'The can stands on the table. Keep loosening <b>Grip</b> until the fingers let go.',
+      g_lift_again: 'Press <b>Lift</b> to raise the can again.', g_lifting: 'The gripper lifts the can.',
+      g_upright: 'Upright. Keep loosening <b>Grip</b> slowly until the fingers let go of the can.',
+      g_turning: 'The can turns in the fingertips. Keep loosening slowly. Orange marks what only touch reveals.',
+      g_loosen: 'Now loosen slowly: drag <b>Grip</b> down little by little until the can starts to turn.',
+      g_more: 'The can stopped turning. Loosen <b>Grip</b> a little more.',
+      g_cond_while: 'Switch <b>Condition on images and actions</b> off while the example plays.',
+      g_orange: 'Every change is orange now. Without conditioning, the code would have to carry all of it, even what your own grip causes.',
+      g_cond_off: 'Now switch off <b>Condition on images and actions</b>.', g_play: 'Press <b>Play example</b>.', g_cond_on: 'Switch the conditioning back on.',
+      g_new: 'Press <b>New can</b> and repeat. The hidden mass and friction have changed, so the can starts to turn at a different grip, and touch notices first.',
+      g_end: 'That is the idea behind TacInno: the policy is supervised with the orange part only. Keep exploring.'
+    },
+    zh: {
+      kicker: '动手试一试', title: '让横躺的罐子在指尖里转到竖直',
+      sub: '罐子的质量和表面摩擦从外观上看不出来。先夹紧并抬起，再慢慢松开夹爪，罐子会在指尖里转到竖直，并落到桌上。',
+      s1: '先抬起，再慢慢松开', s2: '去掉条件', s3: '换一个罐子',
+      gel1: '触觉变化', gel2: '画面与动作可预测的部分', gel3: '触觉新息',
+      ch_title: '触觉新息随时间的变化', ch_share: '本次新息占比',
+      key_dx: '|ΔX|（归一化）', key_share: '其中触觉新息所占比例', key_tilt: '罐子倾角',
+      mk_a: '接触', mk_b: '抬起', mk_c: '开始转动', mk_d: '竖直', mk_e: '松开',
+      hidden_lbl: '隐藏的质量与摩擦', l_grip: '握力', l_speed: '抬升速度', sw_cond: '以画面和动作为条件',
+      b_new: '换罐子', b_reset: '重置', b_lift: '抬起', b_lower: '放下', b_play: '播放示例', b_stop: '停止示例', b_reveal: '揭晓', b_hide: '隐藏',
+      g_skip: '跳过引导', g_show: '显示引导', g_restart: '重新引导', inset: '夹持', axis_t: '时间（秒）',
+      m_light: '轻', m_medium: '中等', m_heavy: '重', f_dry: '干燥', f_normal: '普通', f_oily: '油滑',
+      note: '这是在浏览器里运行的示意接触模型，不是训练好的 TacInno 分词器。预测器知道你的动作，看得到夹爪。罐子的姿态偏离预期超过 6 度或 5 毫米后，预测器才看得到罐子。预测器假定罐子的质量和摩擦取平均值。',
+      c_nocond: '不加条件时，所有变化都算作新的，连自己夹紧造成的形变也算。码要承载全部变化。',
+      c_placed: '罐子竖直立在桌上。', c_placed_tip: '可以点“重置”，或点“换罐子”再试一个。',
+      c_dropped: '罐子还没转正，手指就滑脱了。', c_dropped_tip: '点“重置”，夹紧后松得再慢一些。',
+      c_hidden_lin: '手指开始沿罐身打滑，幅度还小到看不见。只有触觉知道。',
+      c_hidden_more: '罐子在指尖里转得比外观预期的多，幅度还小到看不见。只有触觉知道。',
+      c_hidden_less: '罐子在指尖里转得比外观预期的少，幅度还小到看不见。只有触觉知道。',
+      c_visible: '相机现在看到了罐子的转动，这部分变化重新变得可预测。',
+      c_load: '抬起使接触面受力。接触面发生扭转，边缘先开始滑动，此时还看不出任何变化。何时发生取决于隐藏的质量和摩擦。',
+      c_twist: '接触面的扭转接近极限，边缘在滑动，中心仍然粘着。此时还看不出任何变化。',
+      c_size_early: '首次接触比画面预期的更早。这一时间差就是触觉新息。',
+      c_size_late: '首次接触比画面预期的更晚。这一时间差就是触觉新息。',
+      c_close: '手指合拢时凝胶发生形变。这部分变化可由自身动作预测，新信息很少。',
+      c_turn: '罐子在指尖里转动。相机看得到这一转动，所以这部分变化是可预测的。',
+      c_stuck: '夹得紧时罐子保持横躺，夹持力承担了它的重量和力矩。', c_stuck_tip: '慢慢松开，让它转动。',
+      c_tilted: '罐子停止转动，夹持处的摩擦重新与重量平衡。', c_tilted_tip: '再松一点。',
+      c_stand: '罐子已竖直立在桌上。', c_stand_tip: '松开夹爪。',
+      c_hang: '罐子已竖直，悬在夹爪中。', c_hang_tip: '继续松开，把它放下。',
+      c_deform: '手指移动时凝胶发生形变。这部分变化可由自身动作预测，新信息很少。',
+      c_stable: '抓握稳定，没有变化，也就没有新信息。',
+      c_idle: '罐子横躺在桌上。相机看不出它的质量和摩擦。',
+      c_idle_tip: '先夹紧横躺的罐子并抬起，再慢慢松开夹爪。罐子会在指尖里转到竖直，并落到桌上。',
+      g_example: '示例正在播放。先看说明文字，然后自己试一次。',
+      g_try: '现在自己试一次。点<b>重置</b>，让罐子重新躺下。',
+      g_done1: '做得好，罐子自己立住了。点<b>重置</b>。',
+      g_fell: '罐子还没转正就掉了。点<b>重置</b>再试一次，松得慢一些。',
+      g_grip: '把<b>握力</b>拖到 100%，夹紧罐子。', g_firmer: '再紧一些，把<b>握力</b>拖到 100%。',
+      g_lift: '点<b>抬起</b>。', g_stand: '罐子已立在桌上。继续降低<b>握力</b>，直到手指完全松开。',
+      g_lift_again: '点<b>抬起</b>，把罐子重新提起来。', g_lifting: '夹爪正在把罐子提起。',
+      g_upright: '罐子已竖直。继续慢慢降低<b>握力</b>，直到手指完全松开。',
+      g_turning: '罐子在指尖里转动。继续慢慢松开。橙色表示只有触觉知道的部分。',
+      g_loosen: '现在慢慢松开。一点一点降低<b>握力</b>，直到罐子开始转动。',
+      g_more: '罐子停住了。再把<b>握力</b>降低一点。',
+      g_cond_while: '示例播放时，请关掉<b>以画面和动作为条件</b>。',
+      g_orange: '现在所有变化都是橙色。不加条件时，码要承载全部变化，连自己夹紧造成的形变也算。',
+      g_cond_off: '现在关掉<b>以画面和动作为条件</b>。', g_play: '点<b>播放示例</b>。', g_cond_on: '把条件重新打开。',
+      g_new: '点<b>换罐子</b>，再做一遍。隐藏的质量和摩擦变了，罐子开始转动时的握力也会不同，而触觉最先察觉。',
+      g_end: '这就是 TacInno 的思路，只用橙色的那部分监督策略。可以继续自由尝试。'
+    }
+  };
+  var lang = 'en';
+  function tr(k) { var v = I18N[lang][k]; return v === undefined ? I18N.en[k] : v; }
+  var CJK = '"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", ';
+  var cmd = { grip: 0, up: false, vmax: 60 };
+  var revealed = false, script = null, running = false, inView = false, last = 0, acc = 0;
+  var trace = [], TRACE_N = 1500, peakD = 1.5, peakU = 0.35;
+  var colors = {};
+
+  function readColors() {
+    var cs = getComputedStyle(root);
+    ['--ink', '--muted', '--line', '--surface', '--blue', '--orange-fill', '--chip', '--bg'].forEach(function (k) {
+      colors[k] = cs.getPropertyValue(k).trim() || '#888';
+    });
+  }
+  function hexRgb(hex) {
+    var h = hex.replace('#', ''); if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+    var n = parseInt(h, 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  function rgba(hex, a) { var c = hexRgb(hex); return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+  function fit(cv) {
+    var r = cv.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = Math.max(1, Math.round(r.width * dpr)), h = Math.max(1, Math.round(r.height * dpr));
+    if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+    var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx: ctx, w: r.width, h: r.height };
+  }
+  function rr(ctx, x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h); ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r); ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
+  }
+
+  // sprites of the can and of the arm, drawn once at high resolution and then placed like pictures
+  var ARM_TOP = 250, ARM_BOT = -24, ARM_HW = 34, canSprite = null, armSprite = null;
+  function stops(gr, list) { list.forEach(function (s) { gr.addColorStop(s[0], s[1]); }); return gr; }
+  function makeCan() {
+    var K = 6, c = document.createElement('canvas'); c.width = L * K; c.height = 2 * R * K;
+    var g = c.getContext('2d'); g.scale(K, K); g.translate(0, R);       // mm: x from the top end to the bottom end, y across
+    function outline() {
+      g.beginPath();
+      g.moveTo(0.6, -R * 0.8); g.lineTo(2.8, -R * 0.8);
+      g.bezierCurveTo(6.5, -R * 0.82, 8.5, -R, 13, -R);                 // neck
+      g.lineTo(L - 7, -R);
+      g.bezierCurveTo(L - 3.5, -R, L - 2, -R * 0.92, L - 0.6, -R * 0.84);
+      g.lineTo(L - 0.6, R * 0.84);
+      g.bezierCurveTo(L - 2, R * 0.92, L - 3.5, R, L - 7, R);
+      g.lineTo(13, R);
+      g.bezierCurveTo(8.5, R, 6.5, R * 0.82, 2.8, R * 0.8);
+      g.lineTo(0.6, R * 0.8); g.closePath();
+    }
+    outline(); g.save(); g.clip();
+    // the light comes from the +y side, which faces up when the can lies and left when it stands
+    g.fillStyle = stops(g.createLinearGradient(0, R, 0, -R), [[0, '#8a0c14'], [0.12, '#c8141e'], [0.3, '#f4353f'], [0.44, '#e61e28'], [0.76, '#bd0f19'], [1, '#6a0810']]);
+    g.fillRect(0, -R, L, 2 * R);
+    g.fillStyle = stops(g.createLinearGradient(0, R, 0, -R), [[0, '#757a80'], [0.15, '#cdd1d5'], [0.3, '#f7f8f9'], [0.5, '#c2c6ca'], [0.8, '#989da3'], [1, '#5e6368']]);
+    g.fillRect(0, -R, 3.4, 2 * R); g.fillRect(L - 4.6, -R, 4.6, 2 * R);
+    g.fillStyle = 'rgba(0,0,0,0.28)'; g.fillRect(3.4, -R, 0.5, 2 * R); g.fillRect(L - 5.1, -R, 0.5, 2 * R);
+    // wordmark and ribbon, reading from the bottom end towards the top end
+    g.save(); g.translate(L * 0.685, 0); g.rotate(Math.PI);          // kept clear of the fingertip, which covers the neck of the can
+    g.fillStyle = '#ffffff'; g.font = '400 14px "TacInnoCola", "Brush Script MT", "Segoe Script", cursive';
+    g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('Coca-Cola', 0, -2.5);
+    g.beginPath(); g.moveTo(-23, 9); g.bezierCurveTo(-8, 5.2, 6, 12, 23, 6.8); g.bezierCurveTo(6.5, 13.8, -7.5, 7.8, -23, 10.3); g.closePath(); g.fill();
+    g.restore();
+    g.fillStyle = stops(g.createLinearGradient(0, R, 0, -R), [[0.16, 'rgba(255,255,255,0)'], [0.25, 'rgba(255,255,255,0.3)'], [0.34, 'rgba(255,255,255,0)']]);
+    g.fillRect(0, -R, L, 2 * R);
+    g.restore();
+    outline(); g.strokeStyle = 'rgba(50,8,12,0.6)'; g.lineWidth = 0.5; g.stroke();
+    return c;
+  }
+  function makeArm() {
+    var K = 4, c = document.createElement('canvas'); c.width = 2 * ARM_HW * K; c.height = (ARM_TOP - ARM_BOT) * K;
+    var g = c.getContext('2d'); g.scale(K, -K); g.translate(ARM_HW, -ARM_TOP);   // mm: x from the centre line, y up from the pad centre
+    function hg(x0, x1, list) { return stops(g.createLinearGradient(x0, 0, x1, 0), list); }
+    // white wrist link of the arm
+    rr(g, -27, 112, 54, 200, 15); g.fillStyle = hg(-27, 27, [[0, '#a9aeb5'], [0.24, '#fbfbfc'], [0.55, '#e7e9ec'], [1, '#9a9fa7']]); g.fill();
+    g.strokeStyle = 'rgba(60,66,74,0.55)'; g.lineWidth = 0.5; g.stroke();
+    g.fillStyle = 'rgba(60,66,74,0.3)'; g.fillRect(-27, 162, 54, 1.1);
+    // flange
+    rr(g, -20, 99, 40, 14, 2); g.fillStyle = hg(-20, 20, [[0, '#666b72'], [0.3, '#eceef0'], [0.6, '#b0b5bb'], [1, '#5a5f66']]); g.fill();
+    g.fillStyle = 'rgba(0,0,0,0.28)'; g.fillRect(-20, 105, 40, 0.8);
+    // black gripper body and the near finger
+    g.strokeStyle = 'rgba(150,157,166,0.55)'; g.lineWidth = 0.6;       // a light edge keeps the black parts visible on a dark page
+    g.fillStyle = hg(-7.5, 7.5, [[0, '#101215'], [0.4, '#454a52'], [1, '#101215']]); g.fillRect(-7.5, 14, 15, 44); g.strokeRect(-7.5, 14, 15, 44);
+    rr(g, -23, 56, 46, 44, 5); g.fillStyle = hg(-23, 23, [[0, '#0e1013'], [0.3, '#3d424a'], [0.62, '#1c1f24'], [1, '#0a0b0d']]); g.fill(); g.stroke();
+    g.fillStyle = '#8d939b'; [27, 47].forEach(function (y) { g.beginPath(); g.arc(0, y, 1.7, 0, 6.283); g.fill(); });
+    // white housing of the tactile sensor at the fingertip
+    rr(g, -14, -21, 28, 42, 5); g.fillStyle = hg(-14, 14, [[0, '#d3d7dc'], [0.3, '#ffffff'], [1, '#ccd0d6']]); g.fill();
+    g.strokeStyle = 'rgba(70,76,84,0.65)'; g.lineWidth = 0.5; g.stroke();
+    return c;
+  }
+  function makeSprites() { canSprite = makeCan(); armSprite = makeArm(); }
+
+  function drawScene() {
+    var f = fit(cvScene), ctx = f.ctx, W = f.w, H = f.h, S = sim.S, ink = colors['--ink'];
+    var sc = Math.min(W / 178, H / 172), ox = W / 2 + 24 * sc, oy = H - 13 * sc;
+    function X(x) { return ox - x * sc; } function Y(y) { return oy - y * sc; }   // the can extends to the left of the gripper
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = colors['--chip']; ctx.fillRect(0, Y(0), W, H - Y(0));
+    ctx.strokeStyle = colors['--line']; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, Y(0)); ctx.lineTo(W, Y(0)); ctx.stroke();
+    // soft shadow of the can on the table
+    var st = Math.sin(S.th), ct = Math.cos(S.th), xs = [], ymin = 1e9;
+    [[-TOPD, -R], [-TOPD, R], [B, -R], [B, R]].forEach(function (p) {
+      xs.push(p[0] * st + p[1] * ct); ymin = Math.min(ymin, S.hc - p[0] * ct + p[1] * st);
+    });
+    var xa = Math.min.apply(null, xs), xb = Math.max.apply(null, xs), sh = 0.2 * Math.max(0, 1 - Math.max(0, ymin) / 30);
+    if (sh > 0.01) {
+      ctx.fillStyle = 'rgba(0,0,0,' + sh.toFixed(3) + ')'; ctx.beginPath();
+      ctx.ellipse(X((xa + xb) / 2), Y(0) + 2.5 * sc, (xb - xa) / 2 * sc * 0.96, 3 * sc, 0, 0, 6.283); ctx.fill();
+    }
+    // can: the sprite runs from the top end to the bottom end, the pinch point sits TOPD from the top end
+    ctx.save(); ctx.translate(X(0), Y(S.hc)); ctx.rotate(HALF_PI + S.th);
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(canSprite, -TOPD * sc, -R * sc, L * sc, 2 * R * sc);
+    ctx.restore();
+    // arm and gripper in front of the can
+    ctx.drawImage(armSprite, X(0) - ARM_HW * sc, Y(S.yg + ARM_TOP), 2 * ARM_HW * sc, (ARM_TOP - ARM_BOT) * sc);
+    rr(ctx, X(0) - 8.5 * sc, Y(S.yg + 13), 17 * sc, 26 * sc, 3 * sc);   // the gel of the sensor glows with the grip force
+    ctx.fillStyle = rgba(colors['--orange-fill'], 0.22 + 0.6 * Math.min(1, S.N / 9)); ctx.fill();
+    ctx.strokeStyle = 'rgba(70,76,84,0.55)'; ctx.lineWidth = 1; ctx.stroke();
+    // inset: the two pads and the can seen along the can, to show how far the gripper is closed
+    var iw = 78, ih = 52, ix = 8, iy = 8, k = 0.5, cx = ix + iw / 2, cy = iy + ih / 2 + 5;
+    rr(ctx, ix, iy, iw, ih, 6); ctx.fillStyle = colors['--surface']; ctx.fill(); ctx.strokeStyle = colors['--line']; ctx.lineWidth = 1; ctx.stroke();
+    ctx.fillStyle = colors['--muted']; ctx.font = '500 10px "IBM Plex Sans", ' + CJK + 'Arial, sans-serif'; ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+    ctx.fillText(tr('inset'), ix + 6, iy + 4);
+    var shown = S.attached || (Math.abs(S.yg - S.hc) < 6 + S_OFF && S.half >= R);
+    if (shown) {
+      ctx.beginPath(); ctx.arc(cx, cy, R * k * 0.8, 0, 6.283); ctx.fillStyle = '#d81e28'; ctx.fill();
+      ctx.strokeStyle = 'rgba(50,8,12,0.6)'; ctx.lineWidth = 1; ctx.stroke();
+    }
+    var face = (S.attached ? Math.max(R, S.half) : S.half) * 0.8, back = face + Math.max(2.5, 8 - 0.5 * S.delta);
+    [-1, 1].forEach(function (s) {
+      ctx.fillStyle = rgba(colors['--orange-fill'], 0.75);
+      ctx.fillRect(Math.min(cx + s * face * k, cx + s * back * k), cy - 8, Math.abs(back - face) * k, 16);
+      ctx.fillStyle = '#eef0f2'; ctx.strokeStyle = 'rgba(70,76,84,0.7)';
+      var bx = Math.min(cx + s * back * k, cx + s * (back + 7) * k);
+      ctx.fillRect(bx, cy - 10, 7 * k, 20); ctx.strokeRect(bx, cy - 10, 7 * k, 20);
+    });
+    void ink;
+  }
+
+  var off = document.createElement('canvas'); off.width = NX; off.height = NY;
+  var offCtx = off.getContext('2d'), offImg = offCtx.createImageData(NX, NY);
+  function drawGel(cv, fld, col) {
+    var f = fit(cv), ctx = f.ctx, W = f.w, H = f.h, c3 = hexRgb(col);
+    ctx.clearRect(0, 0, W, H);
+    var pad = 5, pw = W - 2 * pad, ph = H - 2 * pad, cw = pw / NX, ch = ph / NY;
+    rr(ctx, pad, pad, pw, ph, 8); ctx.fillStyle = rgba(col, 0.06); ctx.fill();
+    // indentation change as a smooth field: one pixel per marker, upsampled with bilinear smoothing
+    for (var k = 0; k < NM; k++) {
+      var jj = Math.floor(k / NX), ii = NX - 1 - k % NX, px = ((NY - 1 - jj) * NX + ii) * 4;   // mirrored like the scene
+      offImg.data[px] = c3[0]; offImg.data[px + 1] = c3[1]; offImg.data[px + 2] = c3[2];
+      offImg.data[px + 3] = Math.round(255 * 0.8 * Math.min(1, Math.abs(fld.d[k]) / peakD));
+    }
+    offCtx.putImageData(offImg, 0, 0);
+    ctx.save(); rr(ctx, pad, pad, pw, ph, 8); ctx.clip();
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(off, pad - cw / 2, pad - ch / 2, pw + cw, ph + ch);
+    ctx.restore();
+    ctx.strokeStyle = rgba(col, 0.5); ctx.lineWidth = 1; rr(ctx, pad, pad, pw, ph, 8); ctx.stroke();
+    // markers: faint rest position, line to the displaced position, solid dot
+    var rdot = Math.max(1.7, cw * 0.1), trail = col === colors['--ink'] ? rgba(col, 0.55) : rgba(col, 0.95), gain = ch * 0.8 / peakU, cap = ch * 1.1;
+    for (k = 0; k < NM; k++) {
+      var j2 = Math.floor(k / NX), i2 = NX - 1 - k % NX;
+      var x = pad + (i2 + 0.5) * cw, y = pad + (NY - 0.5 - j2) * ch;
+      var dx = -fld.ux[k] * gain, dy = -fld.uy[k] * gain, dl = Math.sqrt(dx * dx + dy * dy);
+      if (dl > cap) { dx *= cap / dl; dy *= cap / dl; dl = cap; }
+      if (dl > 0.8) {
+        ctx.fillStyle = rgba(colors['--ink'], 0.18); ctx.beginPath(); ctx.arc(x, y, rdot, 0, 6.283); ctx.fill();
+        ctx.strokeStyle = trail; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + dx, y + dy); ctx.stroke();
+      }
+      ctx.fillStyle = colors['--ink']; ctx.beginPath(); ctx.arc(x + dx, y + dy, rdot, 0, 6.283); ctx.fill();
+    }
+  }
+
+  // live version of the "tactile innovation over time" plot of the paper: the size of the tactile change (grey),
+  // the share of it that is tactile innovation (orange), the tilt of the can (dashed), and the key moments a to e
+  var events = {};
+  function markEvents() {
+    var S = sim.S;
+    function mark(k) { if (events[k] === undefined) events[k] = sim.t; }
+    if (S.attached) { mark('a'); if (S.yg > Y0 + 1) mark('b'); if (S.rotSliding && events.b !== undefined) mark('c'); }
+    if (events.a !== undefined && Math.abs(S.th) <= THS + 0.02) mark('d');
+    if (events.a !== undefined && !S.attached) mark('e');
+  }
+  function drawChart() {
+    var f = fit(cvChart), ctx = f.ctx, W = f.w, H = f.h, ink = colors['--ink'], org = colors['--orange-fill'];
+    ctx.clearRect(0, 0, W, H);
+    var L0 = 27, R0 = 8, T0 = 17, B0 = 27, pw = W - L0 - R0, ph = H - T0 - B0, n = trace.length;
+    var tEnd = Math.max(12, sim.t), tStart = Math.max(0, tEnd - 40);          // the run so far, at most its last 40 s
+    function xx(t) { return L0 + pw * (t - tStart) / (tEnd - tStart); }
+    function yy(v) { return T0 + ph * (1 - v); }
+    var i0 = 0; while (i0 < n && trace[i0][0] < tStart) i0++;
+    var mx = 0.3; for (var i = i0; i < n; i++) mx = Math.max(mx, trace[i][1]);   // |dX| is normalised by its largest value in the run
+    ctx.save(); ctx.beginPath(); ctx.rect(L0, T0 - 1, pw + 1, ph + 2); ctx.clip();
+    if (n - i0 > 1) {
+      function area(val, col) {
+        ctx.beginPath(); ctx.moveTo(xx(trace[i0][0]), yy(0));
+        for (var i = i0; i < n; i++) ctx.lineTo(xx(trace[i][0]), yy(val(i)));
+        ctx.lineTo(xx(trace[n - 1][0]), yy(0)); ctx.closePath(); ctx.fillStyle = col; ctx.fill();
+      }
+      function share(i) {                                    // five-sample moving average, as in the figure of the paper
+        var a = Math.max(i0, i - 2), b = Math.min(n - 1, i + 2), v = 0;
+        for (var k = a; k <= b; k++) v += trace[k][2];
+        return v / (b - a + 1);
+      }
+      area(function (i) { return trace[i][1] / mx; }, rgba(ink, 0.15));
+      area(share, rgba(org, 0.26));
+      ctx.beginPath(); for (i = i0; i < n; i++) ctx.lineTo(xx(trace[i][0]), yy(share(i)));
+      ctx.strokeStyle = org; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.stroke();
+      ctx.beginPath(); for (i = i0; i < n; i++) ctx.lineTo(xx(trace[i][0]), yy(trace[i][3]));
+      ctx.setLineDash([5, 4]); ctx.strokeStyle = rgba(ink, 0.85); ctx.lineWidth = 1.4; ctx.stroke(); ctx.setLineDash([]);
+    }
+    ctx.restore();
+    // axes
+    ctx.strokeStyle = ink; ctx.lineWidth = 1; ctx.beginPath();
+    ctx.moveTo(L0 + 0.5, T0); ctx.lineTo(L0 + 0.5, T0 + ph + 0.5); ctx.lineTo(L0 + pw, T0 + ph + 0.5); ctx.stroke();
+    ctx.fillStyle = colors['--muted']; ctx.font = '500 10px "IBM Plex Sans", ' + CJK + 'Arial, sans-serif'; ctx.textBaseline = 'middle'; ctx.textAlign = 'right';
+    [0, 0.5, 1].forEach(function (v) {
+      ctx.fillText(String(v), L0 - 6, yy(v)); ctx.beginPath(); ctx.moveTo(L0 - 3, yy(v) + 0.5); ctx.lineTo(L0, yy(v) + 0.5); ctx.stroke();
+    });
+    var span = tEnd - tStart, stepT = span <= 14 ? 2 : span <= 28 ? 5 : 10;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    for (var t = Math.ceil(tStart / stepT) * stepT; t <= tEnd + 1e-6; t += stepT) {
+      ctx.beginPath(); ctx.moveTo(xx(t) + 0.5, T0 + ph); ctx.lineTo(xx(t) + 0.5, T0 + ph + 3); ctx.stroke();
+      ctx.fillText(String(t), xx(t), T0 + ph + 5);
+    }
+    ctx.fillText(tr('axis_t'), L0 + pw / 2, H - 11);
+    // key moments
+    var lastX = -99;
+    ['a', 'b', 'c', 'd', 'e'].forEach(function (k) {
+      var te = events[k]; if (te === undefined || te < tStart) return;
+      var x = Math.round(xx(te)) + 0.5, lx = Math.max(x, lastX + 10); lastX = lx;
+      ctx.setLineDash([3, 3]); ctx.strokeStyle = rgba(ink, 0.7); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x, T0); ctx.lineTo(x, T0 + ph); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = ink; ctx.font = '700 12px "Source Serif 4", Georgia, serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+      ctx.fillText(k, lx, T0 - 4);
+    });
+  }
+
+  var capCur = '', capShownAt = -9, capQueue = [], capSeen = {}, lastKey = '', activeSteps = 0;
+  var PRI = { idle: 0, stable: 1, deform: 2, turn: 2, stuck: 2, tilted: 2, upright: 2, size: 3, close: 3, load: 5, twist: 5, hidden: 6, visible: 7,
+              dropped: 8, placed: 8, nocond: 9 };
+  function caption() {
+    var S = sim.S, H = sim.H, x = Math.sqrt(sim.eX / NM), nn = Math.sqrt(sim.eN / NM), fr = Math.min(1, nn / Math.max(x, 1e-6));
+    var cond = inCond.checked, key, txt, tips = guide.off;   // with the guide on, the guide says what to do and the caption only describes
+    var air = S.attached && !S.onTable && !S.standing, turning = S.attached && Math.abs(S.om) > 0.08, quiet = x < 0.05 && !turning;
+    var dOm = Math.abs(S.om) - Math.abs(H.om);
+    var unseen = S.attached && !S.standing && sim.tracking <= 0 && nn > 0.08 && (Math.abs(S.th - H.th) > 0.02 || Math.abs(dOm) > 0.2);
+    var flat = S.onTable && S.th > HALF_PI - 0.004;
+    function tip(k) { return tr(k) + (tips ? (lang === 'zh' ? '' : ' ') + tr(k + '_tip') : ''); }
+    if (!cond && x > 0.05) { key = 'nocond'; txt = tr('c_nocond'); }
+    else if (!S.attached && S.standing) { key = 'placed'; txt = tip('c_placed'); }
+    else if (S.dropped) { key = 'dropped'; txt = tip('c_dropped'); }
+    else if (unseen) { key = 'hidden'; txt = tr(S.linSliding ? 'c_hidden_lin' : dOm >= 0 ? 'c_hidden_more' : 'c_hidden_less'); }
+    else if (sim.visible > 0 && S.attached) { key = 'visible'; txt = tr('c_visible'); }
+    else if (S.attached && S.loaded && S.th > THS + 0.02 && sim.t - S.tLoad < 0.8 && fr > 0.15 && x > 0.05) { key = 'load'; txt = tr('c_load'); }
+    else if (air && S.rhoT > 0.85 && !S.rotSliding && fr > 0.2 && x > 0.03) { key = 'twist'; txt = tr('c_twist'); }
+    else if (S.attached && sim.t - S.tContact < 0.35 && fr > 0.3) { key = 'size'; txt = tr(sim.bias < 0 ? 'c_size_early' : 'c_size_late'); }
+    else if (S.attached && flat && x > 0.05 && fr <= 0.4) { key = 'close'; txt = tr('c_close'); }
+    else if (turning && fr <= 0.4) { key = 'turn'; txt = tr('c_turn'); }
+    else if (air && quiet && S.th > 1.2) { key = 'stuck'; txt = tip('c_stuck'); }
+    else if (air && quiet && S.th > THS) { key = 'tilted'; txt = tip('c_tilted'); }
+    else if (S.attached && quiet && Math.abs(S.th) <= THS) { key = 'upright'; txt = tip(S.standing ? 'c_stand' : 'c_hang'); }
+    else if (x > 0.05) { key = 'deform'; txt = tr('c_deform'); }
+    else if (S.attached) { key = 'stable'; txt = tr('c_stable'); }
+    else { key = 'idle'; txt = tr(tips ? 'c_idle_tip' : 'c_idle'); }
+    // events are queued and each stays on screen for a while, so that short events such as an unseen turn are readable
+    var now = performance.now() / 1000;
+    if (key !== lastKey) {
+      lastKey = key;
+      if (window.__toyLog) window.__toyLog.push(sim.t.toFixed(2) + ' ' + key);
+      // each kind of event is announced once in a while, not every time the state flickers back to it
+      if (PRI[key] >= 3 && !(capSeen[key] > now - 5)) { capSeen[key] = now; capQueue.push({ key: key, txt: txt, t: now }); }
+    }
+    var shown = now - capShownAt;                           // an event stays for 1.6 s, a state description gives way sooner
+    if (!capCur || shown >= 1.6 || (PRI[capCur] < 3 && ((capQueue.length && shown >= 0.5) || shown >= 1.1))) {
+      while (capQueue.length > 1 && now - capQueue[0].t > 4) capQueue.shift();
+      var next = capQueue.length ? capQueue.shift() : { key: key, txt: txt };
+      if (next.key !== capCur || outCap.textContent !== next.txt) { capCur = next.key; capShownAt = now; outCap.textContent = next.txt; }
+    }
+    if (sim.eX > 1e-3) activeSteps++;
+    var share = sim.cumX > 1e-6 ? Math.min(1, sim.cumN / sim.cumX) : 0;
+    outShare.textContent = activeSteps > 90 ? Math.round(100 * share) + '%' : '–';
+  }
+
+  // ---------- guide: says what to do next, from the state of the scene, and marks the control to use ----------
+  var gBox = q('toy-guide'), gText = q('toy-guide-text'), gSkip = q('toy-guide-skip'), gSteps = gBox ? gBox.querySelectorAll('.toy-steps li') : [];
+  var guide = { stage: 1, off: !gBox, auto: false, ok: false, armed: false, played: false, cur: '', cand: '', candT: 0, hl: null };
+  var HL = { grip: inGrip.parentNode, lift: bLift, cond: inCond.parentNode, play: bPlay, newcan: bNew, reset: bReset };
+  function guideState() {
+    var S = sim.S, x = Math.sqrt(sim.eX / NM), turning = S.attached && Math.abs(S.om) > 0.08, quiet = x < 0.05 && !turning;
+    var on = inCond.checked;
+    if (guide.stage === 1) {
+      if (script) return ['g_example', null];
+      var upr = Math.abs(S.th) <= THS + 0.02;
+      if (!S.attached) {
+        if (!S.atRest) return null;
+        if (S.standing) {
+          if (guide.auto) return ['g_try', 'reset'];
+          guide.ok = true; return ['g_done1', 'reset'];
+        }
+        if (cmd.up || S.yg > Y0 + 3 || S.half < R) return ['g_fell', 'reset'];
+        return ['g_grip', 'grip'];
+      }
+      if (!cmd.up) {
+        if (S.onTable && S.th > HALF_PI - 0.02) return cmd.grip < 0.9 ? ['g_firmer', 'grip'] : ['g_lift', 'lift'];
+        if (S.standing) return ['g_stand', 'grip'];
+        return ['g_lift_again', 'lift'];
+      }
+      if (S.yg < Y0 + LIFT - 1.5 && S.vg > 1) return ['g_lifting', null];
+      if (upr) return ['g_upright', 'grip'];
+      if (turning) return ['g_turning', 'grip'];
+      return [S.th > 1.2 ? 'g_loosen' : 'g_more', 'grip'];
+    }
+    if (guide.stage === 2) {
+      if (script) return on ? ['g_cond_while', 'cond'] : ['g_orange', null];
+      if (!guide.played) return on ? ['g_cond_off', 'cond'] : ['g_play', 'play'];
+      if (!on) return ['g_cond_on', 'cond'];
+      guide.stage = 3; return guideState();
+    }
+    if (guide.stage === 3) return ['g_new', 'newcan'];
+    return ['g_end', null];
+  }
+  function guideShow(g, force) {
+    var key = g[0] + '|' + g[1], now = performance.now() / 1000;
+    if (key !== guide.cand) { guide.cand = key; guide.candT = now; }
+    if (key === guide.cur || (!force && guide.cur && now - guide.candT < 0.35)) return;   // a state must last a moment before the text changes
+    guide.cur = key; gText.innerHTML = tr(g[0]);
+    if (guide.hl) guide.hl.classList.remove('toy-hl');
+    guide.hl = g[1] ? HL[g[1]] : null;
+    if (guide.hl) guide.hl.classList.add('toy-hl');
+    for (var i = 0; i < gSteps.length; i++) {
+      gSteps[i].className = i + 1 < guide.stage ? 'done' : i + 1 === guide.stage ? 'cur' : '';
+      gSteps[i].firstChild.textContent = i + 1 < guide.stage ? '✓' : String(i + 1);
+    }
+    gSkip.textContent = tr(guide.stage >= 4 ? 'g_restart' : 'g_skip');
+    if (guide.stage >= 4) remember();
+  }
+  function guideUpdate() {
+    if (guide.off) return;
+    if (guide.stage === 2) {
+      if (script && !inCond.checked) guide.armed = true;
+      else if (!script && guide.armed) { guide.armed = false; guide.played = true; }
+    }
+    var g = guideState();
+    if (g) guideShow(g, false);
+  }
+  function remember() { try { window.localStorage.setItem('tacinno-toy-guide', '1'); } catch (e) { /* storage may be unavailable */ } }
+  function guideOff() {
+    guide.off = true; gBox.classList.add('off'); gSkip.textContent = tr('g_show');
+    if (guide.hl) guide.hl.classList.remove('toy-hl');
+    guide.hl = null; remember();
+  }
+  function guideOn() {
+    guide.off = false; guide.stage = 1; guide.auto = false; guide.ok = false; guide.armed = false; guide.played = false; guide.cur = '';
+    gBox.classList.remove('off');
+  }
+  if (gBox) {
+    gSkip.addEventListener('click', function () { if (guide.off || guide.stage >= 4) guideOn(); else guideOff(); });
+    var seen = false; try { seen = window.localStorage.getItem('tacinno-toy-guide') === '1'; } catch (e) { seen = false; }
+    if (seen) guideOff();
+  }
+
+  function hiddenText() {
+    var h = sim.hidden();
+    outHidden.textContent = revealed ? tr('m_' + h.mass) + ' · ' + tr('f_' + h.friction) : '? · ?';
+  }
+
+  function tick(now) {
+    if (!running) return;
+    var dt = last ? Math.min(0.1, (now - last) / 1000) * TIME_SCALE : 0; last = now; acc += dt;   // slowed down so that events are readable
+    if (script) script(dt);
+    var n = 0;
+    while (acc >= DT && n < 12) { sim.step(cmd, inCond.checked); acc -= DT; n++; markEvents(); if (++traceTick % 4 === 0) pushTrace(); }
+    var sD = 0, sU = 0, fs = [sim.dX, sim.dXh, sim.nu];
+    for (var a = 0; a < 3; a++) for (var k = 0; k < NM; k++) {
+      sD = Math.max(sD, Math.abs(fs[a].d[k]));
+      sU = Math.max(sU, Math.abs(fs[a].ux[k]), Math.abs(fs[a].uy[k]));
+    }
+    peakD = Math.max(1.5, sD, peakD * 0.985); peakU = Math.max(0.35, sU, peakU * 0.985);
+    drawScene();
+    drawGel(cvGel[0], sim.dX, colors['--ink']);
+    drawGel(cvGel[1], sim.dXh, colors['--blue']);
+    drawGel(cvGel[2], sim.nu, colors['--orange-fill']);
+    drawChart(); caption(); guideUpdate();
+    requestAnimationFrame(tick);
+  }
+  var traceTick = 0;
+  function pushTrace() {                                    // time, size of the tactile change, share of it that is innovation, tilt of the can
+    var x = Math.sqrt(sim.eX / NM), sh = x > 0.04 ? Math.min(1, sim.eN / Math.max(sim.eX, 1e-9)) : 0;
+    trace.push([sim.t, x, sh, clamp(Math.abs(sim.S.th) / HALF_PI, 0, 1)]); if (trace.length > TRACE_N) trace.shift();
+  }
+  function start() { if (running) return; running = true; last = 0; requestAnimationFrame(tick); }
+  function stop() { running = false; }
+  function fill(el, v) { el.style.setProperty('--p', 'calc(9px + (100% - 18px) * ' + (v / 100).toFixed(3) + ')'); }   // filled part of the track, up to the thumb
+  function setGrip(v) { inGrip.value = v; fill(inGrip, v); cmd.grip = v / 100; outGrip.textContent = Math.round(v) + '%'; }
+  function setSpeed(v) { inSpeed.value = v; fill(inSpeed, v); cmd.vmax = 20 + 1.2 * v; }
+  function setUp(u) { cmd.up = u; bLift.textContent = tr(u ? 'b_lower' : 'b_lift'); bLift.setAttribute('aria-pressed', u ? 'true' : 'false'); }
+  function resetAll() { sim.reset(); setGrip(0); setUp(false); trace = []; events = {}; capCur = ''; capQueue = []; capSeen = {}; lastKey = ''; activeSteps = 0; }
+  function user() { if (script) { script = null; bPlay.textContent = tr('b_play'); } }
+
+  inGrip.addEventListener('input', function () { user(); setGrip(+inGrip.value); });
+  inSpeed.addEventListener('input', function () { user(); setSpeed(+inSpeed.value); });
+  bLift.addEventListener('click', function () { user(); setUp(!cmd.up); });
+  bNew.addEventListener('click', function () { user(); sim.randomCan(); resetAll(); hiddenText(); guide.auto = false; guide.ok = false; if (guide.stage === 3) guide.stage = 4; });
+  bReset.addEventListener('click', function () {
+    user(); resetAll(); guide.auto = false;
+    if (guide.stage === 1 && guide.ok) { guide.stage = 2; guide.played = false; guide.armed = false; }
+    guide.ok = false;
+  });
+  bReveal.addEventListener('click', function () { revealed = !revealed; bReveal.setAttribute('aria-pressed', revealed ? 'true' : 'false'); bReveal.textContent = tr(revealed ? 'b_hide' : 'b_reveal'); hiddenText(); });
+  inCond.addEventListener('change', function () { sim.cumX = 0; sim.cumN = 0; activeSteps = 0; });
+  bPlay.addEventListener('click', function () {
+    if (script) { user(); return; }
+    sim.pick(2, 0, -0.8); resetAll(); hiddenText(); setSpeed(30);   // a fixed heavy, dry can for the example
+    if (guide.stage === 1) guide.auto = true;
+    var T = 0; bPlay.textContent = tr('b_stop');
+    script = function (dt) {                                // hold firmly, lift, loosen slowly until the can has turned upright and is released
+      T += dt;
+      if (T < 0.5) setGrip(0);
+      else if (T < 1.5) setGrip((T - 0.5) * 100);
+      else if (T < 2.6) setGrip(100);
+      else if (T < 4.6) { if (!cmd.up) setUp(true); }
+      else if (T < 9.0) setGrip(100 - (T - 4.6) / 4.4 * 36);
+      else if (T < 10.0) setGrip(Math.max(0, 64 - (T - 9.0) * 64));
+      else if (T < 10.6) setGrip(0);
+      else { script = null; bPlay.textContent = tr('b_play'); }
+    };
+  });
+
+  // language: English or Chinese, chosen with the two buttons at the top of the widget
+  var bEn = q('toy-lang-en'), bZh = q('toy-lang-zh');
+  function setLang(l, keep) {
+    lang = l === 'zh' ? 'zh' : 'en';
+    root.lang = lang === 'zh' ? 'zh-Hans' : 'en';
+    Array.prototype.forEach.call(root.querySelectorAll('[data-i18n]'), function (el) { el.textContent = tr(el.getAttribute('data-i18n')); });
+    bEn.setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false'); bZh.setAttribute('aria-pressed', lang === 'zh' ? 'true' : 'false');
+    bLift.textContent = tr(cmd.up ? 'b_lower' : 'b_lift'); bPlay.textContent = tr(script ? 'b_stop' : 'b_play');
+    bReveal.textContent = tr(revealed ? 'b_hide' : 'b_reveal'); hiddenText();
+    if (gSkip) gSkip.textContent = tr(guide.off ? 'g_show' : guide.stage >= 4 ? 'g_restart' : 'g_skip');
+    capCur = ''; capQueue = []; capSeen = {}; lastKey = ''; guide.cur = '';     // captions and guide text are written again in the new language
+    if (keep) { try { window.localStorage.setItem('tacinno-toy-lang', lang); } catch (e) { /* storage may be unavailable */ } }
+  }
+  bEn.addEventListener('click', function () { setLang('en', true); });
+  bZh.addEventListener('click', function () { setLang('zh', true); });
+  var lang0 = ''; try { lang0 = window.localStorage.getItem('tacinno-toy-lang') || ''; } catch (e) { lang0 = ''; }
+  if (!lang0) lang0 = /^zh/i.test(navigator.language || '') ? 'zh' : 'en';
+
+  readColors(); makeSprites(); setGrip(0); setSpeed(+inSpeed.value); setLang(lang0, false);
+  if (document.fonts && document.fonts.load) document.fonts.load('400 14px "TacInnoCola"').then(makeSprites, function () {});
+  if (window.matchMedia) { var mq = window.matchMedia('(prefers-color-scheme: dark)'); if (mq.addEventListener) mq.addEventListener('change', readColors); }
+  new MutationObserver(readColors).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'class'] });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { inView = es[0].isIntersecting; if (inView && !document.hidden) start(); else stop(); }, { rootMargin: '120px' }).observe(root);
+  } else { inView = true; start(); }
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (inView) start(); });
+})();
 </script>
 </body>
 </html>
