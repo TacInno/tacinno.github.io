@@ -15,6 +15,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap">
+<script>(function () { var s = ''; try { s = window.localStorage.getItem('tacinno-lang') || ''; } catch (e) { s = ''; }
+  var q = /[?&]lang=(zh|en)/.exec(location.search), l = q ? q[1] : (s === 'zh' || s === 'en') ? s : (/^zh/i.test(navigator.language || '') ? 'zh' : 'en');
+  var d = document.documentElement; d.setAttribute('data-lang', l); d.lang = l === 'zh' ? 'zh-Hans' : 'en'; })();</script>
 <style>
 :root {
   --bg: #f6f5f1; --surface: #ffffff; --ink: #18202b; --muted: #5a6472; --line: #dcdcd6; --chip: #ebe9e3;
@@ -137,20 +140,30 @@ td u { text-decoration-thickness: 1.5px; text-underline-offset: .2em; }
 .bib pre { margin: 0; padding: 1.1rem 1.2rem; overflow-x: auto; font: 400 .84rem/1.6 var(--mono); }
 .bib button { position: absolute; top: .6rem; right: .6rem; font: 500 .8rem/1 var(--sans); padding: .45rem .7rem; border-radius: 8px; border: 1px solid var(--line); background: var(--chip); color: var(--ink); cursor: pointer; }
 footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size: .85rem; color: var(--muted); padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px)); }
+
+.l-zh { display: none; }
+html[data-lang="zh"] .l-zh { display: inline; }
+html[data-lang="zh"] .l-en { display: none; }
+html[data-lang="zh"] body { font-family: "IBM Plex Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif; }
+html[data-lang="zh"] h2, html[data-lang="zh"] .subtitle { font-family: "Source Serif 4", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", "SimSun", serif; }
+html[data-lang="zh"] .subtitle { max-width: 30rem; }
+html[data-lang="zh"] .kicker { letter-spacing: .2em; }
+html[data-lang="zh"] .prose p, html[data-lang="zh"] .abstract p { hyphens: manual; -webkit-hyphens: manual; line-break: strict; }
+nav.top .brand { margin-right: 0; }
+.langsw { display: inline-flex; flex: none; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; margin-right: auto; }
+.langsw button { font: 500 .76rem/1 var(--sans); padding: .34rem .64rem; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
+.langsw button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 @font-face { font-family: "TacInnoCola"; font-display: block; src: url(data:font/woff2;base64,d09GMgABAAAAAAUIAA8AAAAACHwAAASzAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGhYbWhwoBmAAZBEICoYshToLEgABNgIkAyAEIAWEFAcgDAcb8gbIxOjfqe0zBOQgTaIQo1q2A4Ryy1bv2HGKwEp1jF8l0P9/v9LJ43m8Hsmo/cg7FWWfJpowCjByq22FeAV2GLu4jFYQAEbg/BIQCvr2cwAKHgiDJCOroAImrareduCArAr9VzS01HW3w8AnzKAMEokzgGBUK0hg0c8xOSSQia8gF5/3qvGCl9wCJ3TPuFYrIUryKeQwLjkj0bCmFW4D+R5heDNNWmNZyHljS178QnllRgVSQKNDOv1BCUrSabKBnp8WJFbSDnRT3BRLOSsWCKuQoSRoBrO8/TQCkQ4VatCKjhl1St0j/ixOixfEzeImcZU41Xu71kxARBGmSGoAZiv3gVhCN6mrZpVVxzhi//8WCaRWMYHGPl4KI8p5diUXrVNw9lqwHk+ivtRMEncdIwiCoOCmWZ6nNLeI2luI13FgY3awCk4gakrD8zwPVsEJAqPj2As8z2vuORxyZtzVGqsvz/DU5OQutSAIiq32Os5aq2WtdvA77HbYCYyW/XIH/4D34TWrqjihvFyn7ughsA1reEpD1Lb3HXVqql8hozttq2WtHvDZbxYEgdtpzXACw2jZHWf4BD5ni2abzS7iFxgd/1vWbAXPV/BgGU4gNh53+IQv2WJOsJ08RO0IuACW0TwAu1IB6tTghORkjDH/OTY8dc1hkqgFhtNqdduttWD/duokAZ9X6zt9GKLsMh5JU7qNI6gpc+AjzGGvnP/y73kN8bUhNZ3da0riHdc6mg5XuO5fbmhgYtElI1a3V9qYOCqvzppaNjKVusDDxtqixeXO/HlpdXID/6zKmSXjsS1Xv73uhIO+E1Jp+N1BZYZzym8jEUXNbfVL8sPonSvNdpecsvo2Nzp19OI8i7qQbzYusXpfkx77W0nKi4Ior5d1OUbDKmVnuFTqNVQ1Q2kuweYIaVVmkoOp3oJDzy0peYVi5cZAa7O8zZUbu7ffD1titdR83cjd9tTCstj81rbcgYDcp4ZYnOp6qa84riRuiVVoagNzuW9ep5VX5U1tgbV7ZdlQ+9CuIaXnb3YRcbm2WYU5Jec+Lw1P8w9xab5n/+65CdEP3bPZOEIOjp5b7nJyC/mvb76dwXfPqP+NpAel5n6lxmqn/vSLl5ZYLd0yVal3sHNBKfP9uG2a7li3HzXVeaPkzDvLGAB41bsRODtKPt804bmBQvpXZubWK1vKFXzI/KCUB0un7zf5JEWEenfbr/6Q+W6BPPhd8AbvFzffLAnHXSKCkCXiYzIGPZILd5Ij/lFbb4Dl0Cd/FRyPprTn61+tXWaIwqfwLEQEZvgNSWCCJ0iKPKxAMtBoRXI4oAzpwRkRnAnzE6ARvehFJ+IQjGD0oAbdaEIneqEiCD0vaUUQOtCNBgSjGFkoQCH7kwyoUI8O1CEQZahDA/rQChW6UQWgu9W+DrSDRiiCEKLj0ijNGqP9qWhl/c1QScJadKMDJVCVcHGwr5Z4OYSNMSkit2Or5nR0oBNDq4SG1a+n4YMa+LaeRs/ESrN43eYe9KEWvTsl7pickvpYEGrQgTb4IgDGGEATetE4Z+jZoXw/6lALIWuf8DkUi6BC28omu2Fw+7ExfpZ4FGHQGk8QcfEB2UcAAA==) format("woff2"); }
 .toy { --guide: #17705f; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: .85rem 1rem .75rem; margin: 2.2rem auto 0; font-size: .9rem; }   /* the guide has its own colour, a teal between the blue and the orange of the figures */
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .toy { --guide: #5fd0b8; } }
 :root[data-theme="dark"] .toy { --guide: #5fd0b8; }
 .toy:lang(zh) { font-family: "IBM Plex Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif; }
-.toy-top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .2rem 1rem; align-items: center; margin-bottom: .55rem; }
+.toy-top { display: grid; grid-template-columns: minmax(0, 1fr); gap: .2rem 1rem; align-items: center; margin-bottom: .55rem; }
 .toy-headline { display: flex; align-items: baseline; gap: .2rem .7rem; flex-wrap: wrap; min-width: 0; }
 .toy-headline .kicker { margin: 0; }
 .toy-headline h3 { font: 700 1.14rem/1.25 var(--serif); margin: 0; }
 .toy:lang(zh) .toy-headline h3 { font-family: "Source Serif 4", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", "SimSun", serif; }
 .toy-sub { grid-column: 1 / -1; margin: 0; font-size: .84rem; line-height: 1.45; color: var(--muted); text-wrap: pretty; }
-.toy-lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
-.toy-lang button { font: 500 .78rem/1 var(--sans); padding: .34rem .7rem; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
-.toy-lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 .toy-guide { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .25rem 1rem; align-items: center; background: color-mix(in srgb, var(--guide) 6%, var(--surface)); border: 1.5px dashed color-mix(in srgb, var(--guide) 70%, transparent); border-radius: 12px; padding: .5rem .85rem .55rem; margin-bottom: .7rem; }
 .toy-guide .toy-link { color: var(--guide); }
 .toy-steps { list-style: none; display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin: 0; padding: 0; font-size: .78rem; color: var(--muted); }
@@ -239,31 +252,33 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
   .toy-range.speed { flex: 1 1 12rem; }
 }
 @media (prefers-reduced-motion: reduce) { .toy-switch .track, .toy-switch .track::after { transition: none; } }
+.marker-field-live { display: block; width: min(100%, 46rem); aspect-ratio: 748 / 112; margin: 1.25rem auto .85rem; touch-action: pan-y; }
 </style>
 </head>
 <body>
 <nav class="top" aria-label="Sections">
   <div class="wrap">
     <a class="brand" href="#top">Tac<span>Inno</span></a>
-    <a class="l" href="#idea">Idea</a>
-    <a class="l" href="#method">Method</a>
-    <a class="l" href="#simulation">Simulation</a>
-    <a class="l" href="#tactile-off">Tactile-off test</a>
-    <a class="l" href="#real-world">Real world</a>
+    <div class="langsw" role="group" aria-label="Language / 语言"><button type="button" data-set-lang="en" aria-pressed="true" lang="en">EN</button><button type="button" data-set-lang="zh" aria-pressed="false" lang="zh-Hans">中文</button></div>
+    <a class="l" href="#idea"><span class="l-en">Idea</span><span class="l-zh" lang="zh-Hans">思路</span></a>
+    <a class="l" href="#method"><span class="l-en">Method</span><span class="l-zh" lang="zh-Hans">方法</span></a>
+    <a class="l" href="#simulation"><span class="l-en">Simulation</span><span class="l-zh" lang="zh-Hans">仿真</span></a>
+    <a class="l" href="#tactile-off"><span class="l-en">Tactile-off test</span><span class="l-zh" lang="zh-Hans">撤触觉检验</span></a>
+    <a class="l" href="#real-world"><span class="l-en">Real world</span><span class="l-zh" lang="zh-Hans">真机</span></a>
     <a class="l" href="#bibtex">BibTeX</a>
   </div>
 </nav>
 
 <header class="hero wrap" id="top">
   <h1>Tac<span class="inno">Inno</span></h1>
-  <p class="subtitle">Teaching Vision-Language-Action Models the Contact Dynamics Beyond Vision and Action</p>
+  <p class="subtitle"><span class="l-en">Teaching Vision-Language-Action Models the Contact Dynamics Beyond Vision and Action</span><span class="l-zh" lang="zh-Hans">教视觉-语言-动作模型学习视觉与动作之外的接触动力学</span></p>
   <svg class="marker-field" viewBox="0 0 748 88" role="img" aria-label="Marker field of a vision-based tactile sensor, with the markers displaced by an unexpected contact shown in orange" preserveAspectRatio="xMidYMid meet"><line x1="341.0" y1="11.0" x2="342.7" y2="10.4" class="mf-tail"/><line x1="363.0" y1="11.0" x2="365.9" y2="10.0" class="mf-tail"/><line x1="385.0" y1="11.0" x2="389.3" y2="9.6" class="mf-tail"/><line x1="407.0" y1="11.0" x2="412.8" y2="9.1" class="mf-tail"/><line x1="429.0" y1="11.0" x2="436.1" y2="8.6" class="mf-tail"/><line x1="451.0" y1="11.0" x2="458.9" y2="8.4" class="mf-tail"/><line x1="473.0" y1="11.0" x2="481.0" y2="8.3" class="mf-tail"/><line x1="495.0" y1="11.0" x2="502.3" y2="8.6" class="mf-tail"/><line x1="517.0" y1="11.0" x2="523.0" y2="9.0" class="mf-tail"/><line x1="539.0" y1="11.0" x2="543.5" y2="9.5" class="mf-tail"/><line x1="561.0" y1="11.0" x2="564.1" y2="10.0" class="mf-tail"/><line x1="583.0" y1="11.0" x2="584.9" y2="10.4" class="mf-tail"/><line x1="341.0" y1="33.0" x2="342.9" y2="32.4" class="mf-tail"/><line x1="363.0" y1="33.0" x2="366.2" y2="31.9" class="mf-tail"/><line x1="385.0" y1="33.0" x2="389.7" y2="31.4" class="mf-tail"/><line x1="407.0" y1="33.0" x2="413.4" y2="30.9" class="mf-tail"/><line x1="429.0" y1="33.0" x2="436.9" y2="30.4" class="mf-tail"/><line x1="451.0" y1="33.0" x2="459.7" y2="30.1" class="mf-tail"/><line x1="473.0" y1="33.0" x2="481.8" y2="30.1" class="mf-tail"/><line x1="495.0" y1="33.0" x2="503.0" y2="30.3" class="mf-tail"/><line x1="517.0" y1="33.0" x2="523.7" y2="30.8" class="mf-tail"/><line x1="539.0" y1="33.0" x2="544.0" y2="31.3" class="mf-tail"/><line x1="561.0" y1="33.0" x2="564.4" y2="31.9" class="mf-tail"/><line x1="583.0" y1="33.0" x2="585.1" y2="32.3" class="mf-tail"/><line x1="341.0" y1="55.0" x2="342.9" y2="55.6" class="mf-tail"/><line x1="363.0" y1="55.0" x2="366.2" y2="56.1" class="mf-tail"/><line x1="385.0" y1="55.0" x2="389.7" y2="56.6" class="mf-tail"/><line x1="407.0" y1="55.0" x2="413.4" y2="57.1" class="mf-tail"/><line x1="429.0" y1="55.0" x2="436.9" y2="57.6" class="mf-tail"/><line x1="451.0" y1="55.0" x2="459.7" y2="57.9" class="mf-tail"/><line x1="473.0" y1="55.0" x2="481.8" y2="57.9" class="mf-tail"/><line x1="495.0" y1="55.0" x2="503.0" y2="57.7" class="mf-tail"/><line x1="517.0" y1="55.0" x2="523.7" y2="57.2" class="mf-tail"/><line x1="539.0" y1="55.0" x2="544.0" y2="56.7" class="mf-tail"/><line x1="561.0" y1="55.0" x2="564.4" y2="56.1" class="mf-tail"/><line x1="583.0" y1="55.0" x2="585.1" y2="55.7" class="mf-tail"/><line x1="341.0" y1="77.0" x2="342.7" y2="77.6" class="mf-tail"/><line x1="363.0" y1="77.0" x2="365.9" y2="78.0" class="mf-tail"/><line x1="385.0" y1="77.0" x2="389.3" y2="78.4" class="mf-tail"/><line x1="407.0" y1="77.0" x2="412.8" y2="78.9" class="mf-tail"/><line x1="429.0" y1="77.0" x2="436.1" y2="79.4" class="mf-tail"/><line x1="451.0" y1="77.0" x2="458.9" y2="79.6" class="mf-tail"/><line x1="473.0" y1="77.0" x2="481.0" y2="79.7" class="mf-tail"/><line x1="495.0" y1="77.0" x2="502.3" y2="79.4" class="mf-tail"/><line x1="517.0" y1="77.0" x2="523.0" y2="79.0" class="mf-tail"/><line x1="539.0" y1="77.0" x2="543.5" y2="78.5" class="mf-tail"/><line x1="561.0" y1="77.0" x2="564.1" y2="78.0" class="mf-tail"/><line x1="583.0" y1="77.0" x2="584.9" y2="77.6" class="mf-tail"/><circle cx="10.9" cy="11.0" r="2.4" class="mf-dot"/><circle cx="32.8" cy="11.0" r="2.4" class="mf-dot"/><circle cx="55.1" cy="11.0" r="2.4" class="mf-dot"/><circle cx="76.7" cy="11.0" r="2.4" class="mf-dot"/><circle cx="99.0" cy="11.0" r="2.4" class="mf-dot"/><circle cx="120.9" cy="11.0" r="2.4" class="mf-dot"/><circle cx="142.7" cy="11.0" r="2.4" class="mf-dot"/><circle cx="165.0" cy="11.0" r="2.4" class="mf-dot"/><circle cx="186.7" cy="11.0" r="2.4" class="mf-dot"/><circle cx="209.0" cy="11.0" r="2.4" class="mf-dot"/><circle cx="230.7" cy="11.0" r="2.4" class="mf-dot"/><circle cx="252.8" cy="11.0" r="2.4" class="mf-dot"/><circle cx="275.0" cy="11.0" r="2.4" class="mf-dot"/><circle cx="297.2" cy="11.0" r="2.4" class="mf-dot"/><circle cx="318.8" cy="11.0" r="2.4" class="mf-dot"/><circle cx="342.7" cy="10.4" r="2.4" class="mf-hot"/><circle cx="365.9" cy="10.0" r="2.4" class="mf-hot"/><circle cx="389.3" cy="9.6" r="2.4" class="mf-hot"/><circle cx="412.8" cy="9.1" r="2.4" class="mf-hot"/><circle cx="436.1" cy="8.6" r="2.4" class="mf-hot"/><circle cx="458.9" cy="8.4" r="2.4" class="mf-hot"/><circle cx="481.0" cy="8.3" r="2.4" class="mf-hot"/><circle cx="502.3" cy="8.6" r="2.4" class="mf-hot"/><circle cx="523.0" cy="9.0" r="2.4" class="mf-hot"/><circle cx="543.5" cy="9.5" r="2.4" class="mf-hot"/><circle cx="564.1" cy="10.0" r="2.4" class="mf-hot"/><circle cx="584.9" cy="10.4" r="2.4" class="mf-hot"/><circle cx="604.8" cy="11.0" r="2.4" class="mf-dot"/><circle cx="627.1" cy="11.0" r="2.4" class="mf-dot"/><circle cx="649.3" cy="11.0" r="2.4" class="mf-dot"/><circle cx="671.0" cy="11.0" r="2.4" class="mf-dot"/><circle cx="692.9" cy="11.0" r="2.4" class="mf-dot"/><circle cx="715.3" cy="11.0" r="2.4" class="mf-dot"/><circle cx="736.7" cy="11.0" r="2.4" class="mf-dot"/><circle cx="11.2" cy="33.0" r="2.4" class="mf-dot"/><circle cx="32.9" cy="33.0" r="2.4" class="mf-dot"/><circle cx="54.8" cy="33.0" r="2.4" class="mf-dot"/><circle cx="76.8" cy="33.0" r="2.4" class="mf-dot"/><circle cx="98.9" cy="33.0" r="2.4" class="mf-dot"/><circle cx="121.2" cy="33.0" r="2.4" class="mf-dot"/><circle cx="142.8" cy="33.0" r="2.4" class="mf-dot"/><circle cx="165.0" cy="33.0" r="2.4" class="mf-dot"/><circle cx="187.1" cy="33.0" r="2.4" class="mf-dot"/><circle cx="208.9" cy="33.0" r="2.4" class="mf-dot"/><circle cx="231.0" cy="33.0" r="2.4" class="mf-dot"/><circle cx="252.7" cy="33.0" r="2.4" class="mf-dot"/><circle cx="274.7" cy="33.0" r="2.4" class="mf-dot"/><circle cx="296.8" cy="33.0" r="2.4" class="mf-dot"/><circle cx="319.1" cy="33.0" r="2.4" class="mf-dot"/><circle cx="342.9" cy="32.4" r="2.4" class="mf-hot"/><circle cx="366.2" cy="31.9" r="2.4" class="mf-hot"/><circle cx="389.7" cy="31.4" r="2.4" class="mf-hot"/><circle cx="413.4" cy="30.9" r="2.4" class="mf-hot"/><circle cx="436.9" cy="30.4" r="2.4" class="mf-hot"/><circle cx="459.7" cy="30.1" r="2.4" class="mf-hot"/><circle cx="481.8" cy="30.1" r="2.4" class="mf-hot"/><circle cx="503.0" cy="30.3" r="2.4" class="mf-hot"/><circle cx="523.7" cy="30.8" r="2.4" class="mf-hot"/><circle cx="544.0" cy="31.3" r="2.4" class="mf-hot"/><circle cx="564.4" cy="31.9" r="2.4" class="mf-hot"/><circle cx="585.1" cy="32.3" r="2.4" class="mf-hot"/><circle cx="605.0" cy="33.0" r="2.4" class="mf-dot"/><circle cx="626.9" cy="33.0" r="2.4" class="mf-dot"/><circle cx="649.1" cy="33.0" r="2.4" class="mf-dot"/><circle cx="671.0" cy="33.0" r="2.4" class="mf-dot"/><circle cx="692.9" cy="33.0" r="2.4" class="mf-dot"/><circle cx="715.2" cy="33.0" r="2.4" class="mf-dot"/><circle cx="737.1" cy="33.0" r="2.4" class="mf-dot"/><circle cx="10.8" cy="55.0" r="2.4" class="mf-dot"/><circle cx="33.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="55.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="77.2" cy="55.0" r="2.4" class="mf-dot"/><circle cx="99.1" cy="55.0" r="2.4" class="mf-dot"/><circle cx="120.9" cy="55.0" r="2.4" class="mf-dot"/><circle cx="143.3" cy="55.0" r="2.4" class="mf-dot"/><circle cx="164.8" cy="55.0" r="2.4" class="mf-dot"/><circle cx="187.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="209.2" cy="55.0" r="2.4" class="mf-dot"/><circle cx="230.8" cy="55.0" r="2.4" class="mf-dot"/><circle cx="253.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="274.7" cy="55.0" r="2.4" class="mf-dot"/><circle cx="297.1" cy="55.0" r="2.4" class="mf-dot"/><circle cx="319.2" cy="55.0" r="2.4" class="mf-dot"/><circle cx="342.9" cy="55.6" r="2.4" class="mf-hot"/><circle cx="366.2" cy="56.1" r="2.4" class="mf-hot"/><circle cx="389.7" cy="56.6" r="2.4" class="mf-hot"/><circle cx="413.4" cy="57.1" r="2.4" class="mf-hot"/><circle cx="436.9" cy="57.6" r="2.4" class="mf-hot"/><circle cx="459.7" cy="57.9" r="2.4" class="mf-hot"/><circle cx="481.8" cy="57.9" r="2.4" class="mf-hot"/><circle cx="503.0" cy="57.7" r="2.4" class="mf-hot"/><circle cx="523.7" cy="57.2" r="2.4" class="mf-hot"/><circle cx="544.0" cy="56.7" r="2.4" class="mf-hot"/><circle cx="564.4" cy="56.1" r="2.4" class="mf-hot"/><circle cx="585.1" cy="55.7" r="2.4" class="mf-hot"/><circle cx="605.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="627.2" cy="55.0" r="2.4" class="mf-dot"/><circle cx="648.9" cy="55.0" r="2.4" class="mf-dot"/><circle cx="671.1" cy="55.0" r="2.4" class="mf-dot"/><circle cx="693.1" cy="55.0" r="2.4" class="mf-dot"/><circle cx="715.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="737.0" cy="55.0" r="2.4" class="mf-dot"/><circle cx="11.2" cy="77.0" r="2.4" class="mf-dot"/><circle cx="33.3" cy="77.0" r="2.4" class="mf-dot"/><circle cx="55.0" cy="77.0" r="2.4" class="mf-dot"/><circle cx="77.1" cy="77.0" r="2.4" class="mf-dot"/><circle cx="98.7" cy="77.0" r="2.4" class="mf-dot"/><circle cx="121.1" cy="77.0" r="2.4" class="mf-dot"/><circle cx="143.1" cy="77.0" r="2.4" class="mf-dot"/><circle cx="165.3" cy="77.0" r="2.4" class="mf-dot"/><circle cx="187.2" cy="77.0" r="2.4" class="mf-dot"/><circle cx="208.9" cy="77.0" r="2.4" class="mf-dot"/><circle cx="230.9" cy="77.0" r="2.4" class="mf-dot"/><circle cx="253.1" cy="77.0" r="2.4" class="mf-dot"/><circle cx="274.7" cy="77.0" r="2.4" class="mf-dot"/><circle cx="297.0" cy="77.0" r="2.4" class="mf-dot"/><circle cx="318.8" cy="77.0" r="2.4" class="mf-dot"/><circle cx="342.7" cy="77.6" r="2.4" class="mf-hot"/><circle cx="365.9" cy="78.0" r="2.4" class="mf-hot"/><circle cx="389.3" cy="78.4" r="2.4" class="mf-hot"/><circle cx="412.8" cy="78.9" r="2.4" class="mf-hot"/><circle cx="436.1" cy="79.4" r="2.4" class="mf-hot"/><circle cx="458.9" cy="79.6" r="2.4" class="mf-hot"/><circle cx="481.0" cy="79.7" r="2.4" class="mf-hot"/><circle cx="502.3" cy="79.4" r="2.4" class="mf-hot"/><circle cx="523.0" cy="79.0" r="2.4" class="mf-hot"/><circle cx="543.5" cy="78.5" r="2.4" class="mf-hot"/><circle cx="564.1" cy="78.0" r="2.4" class="mf-hot"/><circle cx="584.9" cy="77.6" r="2.4" class="mf-hot"/><circle cx="604.8" cy="77.0" r="2.4" class="mf-dot"/><circle cx="626.7" cy="77.0" r="2.4" class="mf-dot"/><circle cx="649.2" cy="77.0" r="2.4" class="mf-dot"/><circle cx="670.8" cy="77.0" r="2.4" class="mf-dot"/><circle cx="692.8" cy="77.0" r="2.4" class="mf-dot"/><circle cx="714.9" cy="77.0" r="2.4" class="mf-dot"/><circle cx="737.2" cy="77.0" r="2.4" class="mf-dot"/></svg>
   <ul class="authors"><li>Weile Li<sup>1,2*</sup></li><li>Yunfan Lou<sup>3*</sup></li><li>Muqing Shi<sup>4*</sup></li><li>Zihao Zhang<sup>2</sup></li><li>Zhenbiao Huang<sup>5</sup></li><li>Boxian Yao<sup>3</sup></li><li>Xiyu Zhu<sup>3</sup></li><li>Zhibo Pang<sup>3&dagger;</sup></li></ul>
   <ul class="affil"><li><sup>1</sup>ShanghaiTech University</li><li><sup>2</sup>Institute of AI for Industries (IAII), Chinese Academy of Sciences</li><li><sup>3</sup>Peking University</li><li><sup>4</sup>Washington University in St. Louis</li><li><sup>5</sup>Beijing FiveAges Technology</li></ul>
-  <p class="authnote"><sup>*</sup>Equal contribution&nbsp;&nbsp;&nbsp;<sup>&dagger;</sup>Corresponding author: <span class="mail">zhibo.pang@pku.edu.cn</span></p>
+  <p class="authnote"><sup>*</sup><span class="l-en">Equal contribution</span><span class="l-zh" lang="zh-Hans">共同第一作者</span>&nbsp;&nbsp;&nbsp;<sup>&dagger;</sup><span class="l-en">Corresponding author: </span><span class="l-zh" lang="zh-Hans">通讯作者 </span><span class="mail">zhibo.pang@pku.edu.cn</span></p>
   <div class="buttons">
-    <span class="btn soon" aria-disabled="true"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 1.5h5l3 3v10H4z"/><path d="M9 1.5v3h3M6 8h4M6 10.5h4"/></svg> Paper <small>coming soon</small></span>
-    <a class="btn" href="https://github.com/LisavilaLee/TacInno"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg> Code</a>
+    <span class="btn soon" aria-disabled="true"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 1.5h5l3 3v10H4z"/><path d="M9 1.5v3h3M6 8h4M6 10.5h4"/></svg> <span class="l-en">Paper</span><span class="l-zh" lang="zh-Hans">论文</span> <small><span class="l-en">coming soon</span><span class="l-zh" lang="zh-Hans">即将发布</span></small></span>
+    <a class="btn" href="https://github.com/LisavilaLee/TacInno"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg> <span class="l-en">Code</span><span class="l-zh" lang="zh-Hans">代码</span></a>
     <a class="btn" href="#bibtex">BibTeX</a>
   </div>
 </header>
@@ -272,36 +287,35 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
 <section class="first">
   <figure>
     <div class="figcard"><img src="static/img/teaser.webp" width="3000" height="1289" alt="Overview of TacInno. The tactile change mixes a component explained by images and actions with a contact response that only tactile input reveals. The TacInno tokenizer encodes the contact response into a code used only as a training target."></div>
-    <figcaption><b>Overview.</b> (a) The tactile change mixes a component explained by vision and executed actions with a contact response that only tactile input reveals. (b) The TacInno tokenizer encodes the contact response into the tactile innovation code. (c) Existing visuo-tactile VLA models versus TacInno, which uses the code solely as a training target. (d) Average and lowest per-task success rates on six UniVTAC tasks. (e) Success rates on four real-world tasks.</figcaption>
+    <figcaption><span class="l-en"><b>Overview.</b> (a) The tactile change mixes a component explained by vision and executed actions with a contact response that only tactile input reveals. (b) The TacInno tokenizer encodes the contact response into the tactile innovation code. (c) Existing visuo-tactile VLA models versus TacInno, which uses the code solely as a training target. (d) Average and lowest per-task success rates on six UniVTAC tasks. (e) Success rates on four real-world tasks.</span><span class="l-zh" lang="zh-Hans"><b>概览。</b>(a) 触觉变化由可由视觉和已执行动作解释的成分与只有触觉输入才能揭示的接触响应混合而成。(b) TacInno 分词器将接触响应编码为触觉新息码。(c) 现有视触觉 VLA 模型与 TacInno 的对比，TacInno 仅将该码用作训练目标。(d) 六个 UniVTAC 任务上的平均成功率与最低单任务成功率。(e) 四个真机任务上的成功率。</span></figcaption>
   </figure>
   <div class="abstract">
-    <h2>Abstract</h2>
-    <p>Vision-Language-Action (VLA) models have recently been equipped with tactile sensing to perceive visually subtle contact events in contact-rich manipulation. However, adding tactile input yields inconsistent gains, and some visuo-tactile VLA models rely little on tactile input, because much of the tactile change, such as the gel deformation during gripper closure, is predictable from visual observations and executed actions. To address this problem, we introduce TacInno, which isolates the contact dynamics that vision and executed actions cannot explain, termed <em>tactile innovation</em>, and uses tactile innovation only as a training target. Specifically, the TacInno tokenizer, conditioned on visual observations and executed actions, compresses the future tactile change into a discrete code, and the policy, TacInno-VLA, learns to predict the code, adding no module for the code at deployment. TacInno-VLA achieves average success rates of 87.5% across six simulation tasks and 70.5% across four real-world tasks, outperforming the strongest visuo-tactile baseline by 10.7 and 9.0 percentage points, respectively. Ablation studies validate the contributions of visual and action conditioning, multi-frame encoding, and auxiliary code prediction. Together, these results demonstrate the effectiveness of tactile innovation as a supervision signal for contact-rich manipulation.</p>
+    <h2><span class="l-en">Abstract</span><span class="l-zh" lang="zh-Hans">摘要</span></h2>
+    <p><span class="l-en">Vision-Language-Action (VLA) models have recently been equipped with tactile sensing to perceive visually subtle contact events in contact-rich manipulation. However, adding tactile input yields inconsistent gains, and some visuo-tactile VLA models rely little on tactile input, because much of the tactile change, such as the gel deformation during gripper closure, is predictable from visual observations and executed actions. To address this problem, we introduce TacInno, which isolates the contact dynamics that vision and executed actions cannot explain, termed <em>tactile innovation</em>, and uses tactile innovation only as a training target. Specifically, the TacInno tokenizer, conditioned on visual observations and executed actions, compresses the future tactile change into a discrete code, and the policy, TacInno-VLA, learns to predict the code, adding no module for the code at deployment. TacInno-VLA achieves average success rates of 87.5% across six simulation tasks and 70.5% across four real-world tasks, outperforming the strongest visuo-tactile baseline by 10.7 and 9.0 percentage points, respectively. Ablation studies validate the contributions of visual and action conditioning, multi-frame encoding, and auxiliary code prediction. Together, these results demonstrate the effectiveness of tactile innovation as a supervision signal for contact-rich manipulation.</span><span class="l-zh" lang="zh-Hans">视觉-语言-动作（VLA）模型近来开始引入触觉感知，以感知富接触操作中视觉上细微的接触事件。然而，加入触觉输入带来的收益并不稳定，部分视触觉 VLA 模型对触觉输入依赖较少，原因在于触觉变化中有很大一部分可由视觉观测和已执行动作预测，例如夹爪闭合时的凝胶形变。为解决这一问题，我们提出 TacInno，它分离出视觉与已执行动作无法解释的接触动力学，称为<em>触觉新息</em>（tactile innovation），并仅将触觉新息用作训练目标。具体而言，TacInno 分词器以视觉观测和已执行动作为条件，将未来触觉变化压缩为离散码，策略 TacInno-VLA 学习预测该码，部署时不为该码引入任何额外模块。TacInno-VLA 在六个仿真任务和四个真机任务上的平均成功率分别为 87.5% 和 70.5%，比最强的视触觉基线分别高 10.7 和 9.0 个百分点。消融实验验证了视觉与动作条件、多帧编码以及辅助码预测各自的作用。这些结果共同表明，触觉新息作为监督信号对富接触操作是有效的。</span></p>
   </div>
 </section>
 
 <section id="idea">
   <div class="prose">
-    <p class="kicker">The idea</p>
-    <h2>What can tactile sensing still tell a policy that already sees the scene and knows its own actions?</h2>
-    <p class="lead">A tactile sensor measures how the contact responds to the robot's own actions. When the gripper closes, the gel deforms in a way the cameras and the executed actions already predict. What they cannot predict is how the contact responds, such as an object that starts to slip or a plug that jams.</p>
+    <p class="kicker"><span class="l-en">The idea</span><span class="l-zh" lang="zh-Hans">思路</span></p>
+    <h2><span class="l-en">What can tactile sensing still tell a policy that already sees the scene and knows its own actions?</span><span class="l-zh" lang="zh-Hans">策略已经看得见场景，也知道自己的动作，触觉还能告诉它什么？</span></h2>
+    <p class="lead"><span class="l-en">A tactile sensor measures how the contact responds to the robot's own actions. When the gripper closes, the gel deforms in a way the cameras and the executed actions already predict. What they cannot predict is how the contact responds, such as an object that starts to slip or a plug that jams.</span><span class="l-zh" lang="zh-Hans">触觉传感器测量的是接触对机器人自身动作的响应。夹爪闭合时，凝胶的形变可由相机图像和已执行动作预测。两者无法预测的是接触如何响应，例如物体开始打滑，或插头卡住。</span></p>
   </div>
   <div class="decomp" role="group" aria-label="Decomposition of the future tactile change">
-    <div class="dx">Future tactile change<span class="sym">ΔX</span></div>
+    <div class="dx"><span class="l-en">Future tactile change</span><span class="l-zh" lang="zh-Hans">未来触觉变化</span><span class="sym">ΔX</span></div>
     <svg class="brace" viewBox="0 0 1000 22" preserveAspectRatio="none" aria-hidden="true"><path d="M2 21 Q2 11 24 11 L476 11 Q500 11 500 1 Q500 11 524 11 L976 11 Q998 11 998 21"/></svg>
     <div class="terms">
-      <div class="box b1"><b>Predictable from vision and actions</b><span>what the images and the executed actions already explain, such as the gel deformation during gripper closure</span></div>
+      <div class="box b1"><b><span class="l-en">Predictable from vision and actions</span><span class="l-zh" lang="zh-Hans">可由视觉与动作预测</span></b><span><span class="l-en">what the images and the executed actions already explain, such as the gel deformation during gripper closure</span><span class="l-zh" lang="zh-Hans">视觉观测和已执行动作已经能解释的部分，例如夹爪闭合时的凝胶形变</span></span></div>
       <div class="op" aria-label="plus">+</div>
-      <div class="box b2"><b>Tactile innovation</b><span>what only tactile input reveals, such as incipient slip of a grasped object or a jamming plug</span></div>
+      <div class="box b2"><b><span class="l-en">Tactile innovation</span><span class="l-zh" lang="zh-Hans">触觉新息</span></b><span><span class="l-en">what only tactile input reveals, such as incipient slip of a grasped object or a jamming plug</span><span class="l-zh" lang="zh-Hans">只有触觉输入才能揭示的部分，例如被抓物体的初期打滑，或插头卡住</span></span></div>
     </div>
   </div>
   <div class="prose">
-    <p>Feeding tactile observations to the policy leaves it to the action loss to find this residual, and predicting all future tactile signals spends most of the supervision on the predictable part. TacInno isolates the residual, borrowing the notion of innovation from estimation theory, and supervises the policy with it.</p>
+    <p><span class="l-en">Feeding tactile observations to the policy leaves it to the action loss to find this residual, and predicting all future tactile signals spends most of the supervision on the predictable part. TacInno isolates the residual, borrowing the notion of innovation from estimation theory, and supervises the policy with it.</span><span class="l-zh" lang="zh-Hans">把触觉观测作为策略的输入时，这一残差只能靠动作损失去发现。预测全部未来触觉信号时，大部分监督又用在了可预测的部分上。TacInno 借用估计理论中新息的概念，把这一残差分离出来，并用它监督策略。</span></p>
   </div>
   <div class="toy" id="toy" lang="en">
     <div class="toy-top">
       <div class="toy-headline"><span class="kicker" data-i18n="kicker">Try it</span><h3 data-i18n="title">Stand a lying can upright by letting it turn in the fingertips</h3></div>
-      <div class="toy-lang" role="group" aria-label="Language / 语言"><button type="button" id="toy-lang-en" aria-pressed="true" lang="en">EN</button><button type="button" id="toy-lang-zh" aria-pressed="false" lang="zh-Hans">中文</button></div>
       <p class="toy-sub" data-i18n="sub">The can hides its mass and surface friction. Hold it firmly and lift it, then loosen the grip slowly: it turns upright in the fingertips and settles on the table.</p>
     </div>
     <div class="toy-guide" id="toy-guide">
@@ -349,104 +363,104 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
     <p class="toy-note" data-i18n="note">A toy contact model that runs in your browser, not the trained TacInno tokenizer. The predictor receives your actions, sees the gripper, and sees the can once its pose is off by more than 6 degrees or 5 mm. It assumes an average mass and friction.</p>
   </div>
   <div class="cards">
-    <div class="card"><div class="n">01 · conditional</div><h4>Subtract what vision and actions explain</h4><p>The tokenizer gives the visual observations and the executed actions to both its encoder and its decoder, so the code only has to carry what the two conditions cannot explain.</p></div>
-    <div class="card"><div class="n">02 · dynamic</div><h4>Encode a short window of contact</h4><p>Transient events such as incipient slip span several control steps. The encoder reads four tactile frames from t to t+15 with causal temporal attention and outputs a 16-bit code.</p></div>
-    <div class="card"><div class="n">03 · in the future</div><h4>Use the code only as a training target</h4><p>The policy predicts the code from current observations through four code queries that no other token attends to. The tokenizer and both auxiliary heads are removed at deployment.</p></div>
+    <div class="card"><div class="n"><span class="l-en">01 · conditional</span><span class="l-zh" lang="zh-Hans">01 · 带条件</span></div><h4><span class="l-en">Subtract what vision and actions explain</span><span class="l-zh" lang="zh-Hans">扣除视觉与动作已能解释的部分</span></h4><p><span class="l-en">The tokenizer gives the visual observations and the executed actions to both its encoder and its decoder, so the code only has to carry what the two conditions cannot explain.</span><span class="l-zh" lang="zh-Hans">分词器把视觉观测和已执行动作同时提供给编码器和解码器，因此码只需承载这两个条件无法解释的部分。</span></p></div>
+    <div class="card"><div class="n"><span class="l-en">02 · dynamic</span><span class="l-zh" lang="zh-Hans">02 · 动态</span></div><h4><span class="l-en">Encode a short window of contact</span><span class="l-zh" lang="zh-Hans">编码一小段接触过程</span></h4><p><span class="l-en">Transient events such as incipient slip span several control steps. The encoder reads four tactile frames from t to t+15 with causal temporal attention and outputs a 16-bit code.</span><span class="l-zh" lang="zh-Hans">初期打滑这类瞬态事件会持续若干个控制步。编码器以因果时间注意力读取 t 至 t+15 的四帧触觉观测，输出 16 比特的码。</span></p></div>
+    <div class="card"><div class="n"><span class="l-en">03 · in the future</span><span class="l-zh" lang="zh-Hans">03 · 发生在未来</span></div><h4><span class="l-en">Use the code only as a training target</span><span class="l-zh" lang="zh-Hans">码只用作训练目标</span></h4><p><span class="l-en">The policy predicts the code from current observations through four code queries that no other token attends to. The tokenizer and both auxiliary heads are removed at deployment.</span><span class="l-zh" lang="zh-Hans">策略通过四个码查询，由当前观测预测该码，其他 token 都不关注码查询。部署时分词器和两个辅助头均被移除。</span></p></div>
   </div>
 </section>
 
 <section id="method">
   <div class="prose">
-    <p class="kicker">Method</p>
-    <h2>TacInno tokenizer</h2>
-    <p>The encoder and the decoder are spatial-temporal Transformers whose frames hold tactile tokens, frozen DINOv2 image features, and executed actions. The encoder compresses the tactile observations of the window into four code tokens with 16 values each. The decoder reconstructs the future tactile change from the current tactile observation and the code. Because the decoder already receives the images and the actions, information about the tactile innovation reaches it only through the code.</p>
+    <p class="kicker"><span class="l-en">Method</span><span class="l-zh" lang="zh-Hans">方法</span></p>
+    <h2><span class="l-en">TacInno tokenizer</span><span class="l-zh" lang="zh-Hans">TacInno 分词器</span></h2>
+    <p><span class="l-en">The encoder and the decoder are spatial-temporal Transformers whose frames hold tactile tokens, frozen DINOv2 image features, and executed actions. The encoder compresses the tactile observations of the window into four code tokens with 16 values each. The decoder reconstructs the future tactile change from the current tactile observation and the code. Because the decoder already receives the images and the actions, information about the tactile innovation reaches it only through the code.</span><span class="l-zh" lang="zh-Hans">编码器和解码器都是时空 Transformer，每一帧包含触觉 token、冻结的 DINOv2 图像特征和已执行动作。编码器把窗口内的触觉观测压缩为四个码 token，每个取 16 个值之一。解码器由当前触觉观测和码重建未来的触觉变化。解码器已经得到图像和动作，因此关于触觉新息的信息只能通过码传给它。</span></p>
   </div>
   <figure>
     <div class="figcard"><img src="static/img/tokenizer.webp" width="3000" height="999" loading="lazy" alt="Architecture of the TacInno tokenizer"></div>
-    <figcaption><b>TacInno tokenizer.</b> The encoder compresses the tactile observations from t to t+15 into the code, and the decoder reconstructs the future tactile change. Both are conditioned on visual observations and executed actions, so the code retains the tactile innovation.</figcaption>
+    <figcaption><span class="l-en"><b>TacInno tokenizer.</b> The encoder compresses the tactile observations from t to t+15 into the code, and the decoder reconstructs the future tactile change. Both are conditioned on visual observations and executed actions, so the code retains the tactile innovation.</span><span class="l-zh" lang="zh-Hans"><b>TacInno 分词器。</b>编码器将 t 至 t+15 的触觉观测压缩为码，解码器重建未来的触觉变化。两者均以视觉观测和已执行动作为条件，使码保留触觉新息。</span></figcaption>
   </figure>
   <div class="split">
     <div class="prose">
       <h2>TacInno-VLA</h2>
-      <p>TacInno-VLA is built on the pretrained VLA π<sub>0.5</sub>. Proprioceptive tokens, 60 tactile tokens from the three most recent tactile observations, and four learnable code queries are inserted into the action expert. A block-wise attention mask lets the code queries read the prefix, proprioceptive, and tactile tokens, while no other token reads the code queries. The code prediction loss therefore shapes the tactile representations that action prediction uses, rather than handing the code to the actions.</p>
-      <p>A contact-state head on the tactile encoder predicts contact properties such as contact area, shear, and indentation depth. At deployment the model is π<sub>0.5</sub> with a 60-token tactile branch. No tactile pretraining is used.</p>
+      <p><span class="l-en">TacInno-VLA is built on the pretrained VLA π<sub>0.5</sub>. Proprioceptive tokens, 60 tactile tokens from the three most recent tactile observations, and four learnable code queries are inserted into the action expert. A block-wise attention mask lets the code queries read the prefix, proprioceptive, and tactile tokens, while no other token reads the code queries. The code prediction loss therefore shapes the tactile representations that action prediction uses, rather than handing the code to the actions.</span><span class="l-zh" lang="zh-Hans">TacInno-VLA 建立在预训练的 VLA 模型 π<sub>0.5</sub> 之上。在动作专家中插入本体 token、由最近三帧触觉观测得到的 60 个触觉 token，以及四个可学习的码查询。分块注意力掩码使码查询可以读取前缀 token、本体 token 和触觉 token，而其他 token 都读不到码查询。因此，码预测损失塑造的是动作预测所用的触觉表示，而不是把码直接交给动作。</span></p>
+      <p><span class="l-en">A contact-state head on the tactile encoder predicts contact properties such as contact area, shear, and indentation depth. At deployment the model is π<sub>0.5</sub> with a 60-token tactile branch. No tactile pretraining is used.</span><span class="l-zh" lang="zh-Hans">触觉编码器上的接触状态头预测接触面积、剪切和压入深度等接触属性。部署时的模型是带有 60 个触觉 token 分支的 π<sub>0.5</sub>。全程不使用触觉预训练。</span></p>
     </div>
     <figure>
       <div class="figcard"><img src="static/img/policy.webp" width="1600" height="1463" loading="lazy" alt="Architecture of TacInno-VLA"></div>
-      <figcaption><b>TacInno-VLA.</b> Two auxiliary heads predict the tactile innovation code and the current contact state during training and are removed at deployment.</figcaption>
+      <figcaption><span class="l-en"><b>TacInno-VLA.</b> Two auxiliary heads predict the tactile innovation code and the current contact state during training and are removed at deployment.</span><span class="l-zh" lang="zh-Hans"><b>TacInno-VLA。</b>训练时，两个辅助头分别预测触觉新息码和当前接触状态，部署时均被移除。</span></figcaption>
     </figure>
   </div>
 </section>
 
 <section id="simulation">
   <div class="prose">
-    <p class="kicker">Results</p>
-    <h2>Six contact-rich tasks in UniVTAC</h2>
-    <p>All policies are trained on the same 50 demonstrations per task and evaluated on the same 100 seeds per task. TacInno-VLA requires no tactile pretraining, whereas FTP-1 and <i class="cal">N</i><sub>0</sub>-VTLA start from policies pretrained on external visuo-tactile data.</p>
+    <p class="kicker"><span class="l-en">Results</span><span class="l-zh" lang="zh-Hans">结果</span></p>
+    <h2><span class="l-en">Six contact-rich tasks in UniVTAC</span><span class="l-zh" lang="zh-Hans">UniVTAC 中的六个富接触任务</span></h2>
+    <p><span class="l-en">All policies are trained on the same 50 demonstrations per task and evaluated on the same 100 seeds per task. TacInno-VLA requires no tactile pretraining, whereas FTP-1 and <i class="cal">N</i><sub>0</sub>-VTLA start from policies pretrained on external visuo-tactile data.</span><span class="l-zh" lang="zh-Hans">所有策略在每个任务的同一批 50 条示范上训练，并在每个任务的同一批 100 个种子上评测。TacInno-VLA 不需要触觉预训练，而 FTP-1 和 <i class="cal">N</i><sub>0</sub>-VTLA 由在外部视触觉数据上预训练的策略初始化。</span></p>
   </div>
   <div class="stats">
-    <div class="stat"><div class="v">87.5%</div><div class="k">average success on six simulation tasks</div><div class="d">+10.7 points over the strongest visuo-tactile baseline</div></div>
-    <div class="stat"><div class="v">70.5%</div><div class="k">average success on four real-world tasks</div><div class="d">+9.0 points over the strongest visuo-tactile baseline</div></div>
-    <div class="stat"><div class="v">88% → 0%</div><div class="k">on Lift Can when tactile input is removed</div><div class="d">the actions of TacInno-VLA depend on tactile input</div></div>
+    <div class="stat"><div class="v">87.5%</div><div class="k"><span class="l-en">average success on six simulation tasks</span><span class="l-zh" lang="zh-Hans">六个仿真任务上的平均成功率</span></div><div class="d"><span class="l-en">+10.7 points over the strongest visuo-tactile baseline</span><span class="l-zh" lang="zh-Hans">比最强的视触觉基线高 10.7 个百分点</span></div></div>
+    <div class="stat"><div class="v">70.5%</div><div class="k"><span class="l-en">average success on four real-world tasks</span><span class="l-zh" lang="zh-Hans">四个真机任务上的平均成功率</span></div><div class="d"><span class="l-en">+9.0 points over the strongest visuo-tactile baseline</span><span class="l-zh" lang="zh-Hans">比最强的视触觉基线高 9.0 个百分点</span></div></div>
+    <div class="stat"><div class="v">88% → 0%</div><div class="k"><span class="l-en">on Lift Can when tactile input is removed</span><span class="l-zh" lang="zh-Hans">撤掉触觉输入后 Lift Can 上的成功率</span></div><div class="d"><span class="l-en">the actions of TacInno-VLA depend on tactile input</span><span class="l-zh" lang="zh-Hans">TacInno-VLA 的动作依赖触觉输入</span></div></div>
   </div>
-  <div class="tbl wide"><table><thead><tr><th scope="col">Method</th><th scope="col">Tactile</th><th scope="col">Insert Hole</th><th scope="col">Insert Tube</th><th scope="col">Lift Bottle</th><th scope="col">Lift Can</th><th scope="col">Pull-out Key</th><th scope="col">Put Bottle</th><th scope="col">Avg.</th></tr></thead><tbody><tr><th scope="row">UniVTAC-ACT</th><td>input</td><td>46</td><td>55</td><td>49</td><td>27</td><td>41</td><td>25</td><td>40.5</td></tr><tr><th scope="row">π<sub>0.5</sub></th><td>none</td><td>88</td><td>70</td><td>26</td><td>25</td><td>36</td><td>40</td><td>47.5</td></tr><tr><th scope="row">FTP-π<sub>0.5</sub></th><td>input</td><td>77</td><td><b>99</b></td><td>45</td><td>33</td><td>19</td><td><b>88</b></td><td>60.2</td></tr><tr><th scope="row">FTP-1</th><td>input</td><td>63</td><td><b>99</b></td><td>61</td><td><b>94</b></td><td>40</td><td><b>88</b></td><td>74.2</td></tr><tr><th scope="row"><i class="cal">N</i><sub>0</sub>-VTLA</th><td>input</td><td><b>99</b></td><td>90</td><td>24</td><td>81</td><td><u>77</u></td><td><u>81</u></td><td>75.3</td></tr><tr><th scope="row">SimpleTouch</th><td>input + predict</td><td>94</td><td>93</td><td><b>82</b></td><td>65</td><td>54</td><td>73</td><td><u>76.8</u></td></tr><tr class="ours"><th scope="row">TacInno-VLA (ours)</th><td>input + innovation target</td><td><u>95</u></td><td><u>95</u></td><td><u>78</u></td><td><u>88</u></td><td><b>94</b></td><td>75</td><td><b>87.5</b></td></tr></tbody></table></div>
-  <p class="tnote">Closed-loop success rates (%). Bold and underlined values denote the best and second-best results.</p>
-  <h3>Closed-loop rollouts of TacInno-VLA</h3>
+  <div class="tbl wide"><table><thead><tr><th scope="col"><span class="l-en">Method</span><span class="l-zh" lang="zh-Hans">方法</span></th><th scope="col"><span class="l-en">Tactile</span><span class="l-zh" lang="zh-Hans">触觉</span></th><th scope="col">Insert Hole</th><th scope="col">Insert Tube</th><th scope="col">Lift Bottle</th><th scope="col">Lift Can</th><th scope="col">Pull-out Key</th><th scope="col">Put Bottle</th><th scope="col"><span class="l-en">Avg.</span><span class="l-zh" lang="zh-Hans">平均</span></th></tr></thead><tbody><tr><th scope="row">UniVTAC-ACT</th><td><span class="l-en">input</span><span class="l-zh" lang="zh-Hans">输入</span></td><td>46</td><td>55</td><td>49</td><td>27</td><td>41</td><td>25</td><td>40.5</td></tr><tr><th scope="row">π<sub>0.5</sub></th><td><span class="l-en">none</span><span class="l-zh" lang="zh-Hans">无</span></td><td>88</td><td>70</td><td>26</td><td>25</td><td>36</td><td>40</td><td>47.5</td></tr><tr><th scope="row">FTP-π<sub>0.5</sub></th><td><span class="l-en">input</span><span class="l-zh" lang="zh-Hans">输入</span></td><td>77</td><td><b>99</b></td><td>45</td><td>33</td><td>19</td><td><b>88</b></td><td>60.2</td></tr><tr><th scope="row">FTP-1</th><td><span class="l-en">input</span><span class="l-zh" lang="zh-Hans">输入</span></td><td>63</td><td><b>99</b></td><td>61</td><td><b>94</b></td><td>40</td><td><b>88</b></td><td>74.2</td></tr><tr><th scope="row"><i class="cal">N</i><sub>0</sub>-VTLA</th><td><span class="l-en">input</span><span class="l-zh" lang="zh-Hans">输入</span></td><td><b>99</b></td><td>90</td><td>24</td><td>81</td><td><u>77</u></td><td><u>81</u></td><td>75.3</td></tr><tr><th scope="row">SimpleTouch</th><td><span class="l-en">input + predict</span><span class="l-zh" lang="zh-Hans">输入 + 预测</span></td><td>94</td><td>93</td><td><b>82</b></td><td>65</td><td>54</td><td>73</td><td><u>76.8</u></td></tr><tr class="ours"><th scope="row"><span class="l-en">TacInno-VLA (ours)</span><span class="l-zh" lang="zh-Hans">TacInno-VLA（本文）</span></th><td><span class="l-en">input + innovation target</span><span class="l-zh" lang="zh-Hans">输入 + 新息目标</span></td><td><u>95</u></td><td><u>95</u></td><td><u>78</u></td><td><u>88</u></td><td><b>94</b></td><td>75</td><td><b>87.5</b></td></tr></tbody></table></div>
+  <p class="tnote"><span class="l-en">Closed-loop success rates (%). Bold and underlined values denote the best and second-best results.</span><span class="l-zh" lang="zh-Hans">闭环成功率（%）。粗体与下划线分别标出最高与第二高。</span></p>
+  <h3><span class="l-en">Closed-loop rollouts of TacInno-VLA</span><span class="l-zh" lang="zh-Hans">TacInno-VLA 的闭环执行过程</span></h3>
   <div class="grid3"><figure class="clip"><video src="static/video/insert_hole.mp4" poster="static/video/insert_hole_poster.jpg" width="1100" height="640" style="aspect-ratio: 1100 / 640" autoplay muted loop playsinline preload="metadata" aria-label="Insert Hole, closed-loop rollout of TacInno-VLA"></video><figcaption>Insert Hole</figcaption></figure><figure class="clip"><video src="static/video/insert_tube.mp4" poster="static/video/insert_tube_poster.jpg" width="1100" height="640" style="aspect-ratio: 1100 / 640" autoplay muted loop playsinline preload="metadata" aria-label="Insert Tube, closed-loop rollout of TacInno-VLA"></video><figcaption>Insert Tube</figcaption></figure><figure class="clip"><video src="static/video/lift_bottle.mp4" poster="static/video/lift_bottle_poster.jpg" width="1100" height="640" style="aspect-ratio: 1100 / 640" autoplay muted loop playsinline preload="metadata" aria-label="Lift Bottle, closed-loop rollout of TacInno-VLA"></video><figcaption>Lift Bottle</figcaption></figure><figure class="clip"><video src="static/video/lift_can.mp4" poster="static/video/lift_can_poster.jpg" width="1100" height="640" style="aspect-ratio: 1100 / 640" autoplay muted loop playsinline preload="metadata" aria-label="Lift Can, closed-loop rollout of TacInno-VLA"></video><figcaption>Lift Can</figcaption></figure><figure class="clip"><video src="static/video/pull_out_key.mp4" poster="static/video/pull_out_key_poster.jpg" width="1100" height="640" style="aspect-ratio: 1100 / 640" autoplay muted loop playsinline preload="metadata" aria-label="Pull-out Key, closed-loop rollout of TacInno-VLA"></video><figcaption>Pull-out Key</figcaption></figure><figure class="clip"><video src="static/video/put_bottle_in_shelf.mp4" poster="static/video/put_bottle_in_shelf_poster.jpg" width="1100" height="640" style="aspect-ratio: 1100 / 640" autoplay muted loop playsinline preload="metadata" aria-label="Put Bottle in Shelf, closed-loop rollout of TacInno-VLA"></video><figcaption>Put Bottle in Shelf</figcaption></figure></div>
-  <p class="tnote">Each clip shows the head camera and the two tactile sensors, played at 2× speed.</p>
+  <p class="tnote"><span class="l-en">Each clip shows the head camera and the two tactile sensors, played at 2× speed.</span><span class="l-zh" lang="zh-Hans">每段视频包含头部相机图像和两个触觉传感器的图像，以 2 倍速播放。</span></p>
 </section>
 
 <section id="tactile-off">
   <div class="split">
     <div class="prose">
-      <p class="kicker">Analysis</p>
-      <h2>Does the policy use tactile input?</h2>
-      <p>A higher success rate does not by itself show that a policy relies on tactile input. In the tactile-off test, the tactile input is replaced with a fixed no-contact frame at test time while all other inputs stay unchanged. On Lift Can, where the can must be held firmly enough to lift yet loosely enough to rotate in the grasp, TacInno-VLA drops from 88% to 0%. It reaches the can but does not lift it. The baselines retain most of their success rates.</p>
+      <p class="kicker"><span class="l-en">Analysis</span><span class="l-zh" lang="zh-Hans">分析</span></p>
+      <h2><span class="l-en">Does the policy use tactile input?</span><span class="l-zh" lang="zh-Hans">策略是否用到了触觉输入？</span></h2>
+      <p><span class="l-en">A higher success rate does not by itself show that a policy relies on tactile input. In the tactile-off test, the tactile input is replaced with a fixed no-contact frame at test time while all other inputs stay unchanged. On Lift Can, where the can must be held firmly enough to lift yet loosely enough to rotate in the grasp, TacInno-VLA drops from 88% to 0%. It reaches the can but does not lift it. The baselines retain most of their success rates.</span><span class="l-zh" lang="zh-Hans">更高的成功率本身并不能说明策略依赖触觉输入。在撤触觉检验中，测试时把触觉输入替换为一帧固定的无接触帧，其他输入保持不变。Lift Can 要求把罐子夹得足够紧才能提起，又足够松才能让它在夹爪中转动。在这个任务上，TacInno-VLA 的成功率从 88% 降到 0%，它能够到罐子，却提不起来。各基线则保留了大部分成功率。</span></p>
     </div>
-    <div><div class="tbl "><table><thead><tr><th scope="col">Policy</th><th scope="col">With tactile input</th><th scope="col">Tactile-off</th><th scope="col">Change</th></tr></thead><tbody><tr><th scope="row"><i class="cal">N</i><sub>0</sub>-VTLA</th><td>81</td><td>77</td><td>−4</td></tr><tr><th scope="row">FTP-1</th><td>94</td><td>80</td><td>−14</td></tr><tr><th scope="row">SimpleTouch</th><td>65</td><td>55</td><td>−10</td></tr><tr><th scope="row">UniVTAC-ACT</th><td>27</td><td>24</td><td>−3</td></tr><tr class="ours"><th scope="row">TacInno-VLA (ours)</th><td>88</td><td><b>0</b></td><td><b>−88</b></td></tr></tbody></table></div><p class="tnote">Lift Can, success rates (%) on the same 100 seeds.</p></div>
+    <div><div class="tbl "><table><thead><tr><th scope="col"><span class="l-en">Policy</span><span class="l-zh" lang="zh-Hans">策略</span></th><th scope="col"><span class="l-en">With tactile input</span><span class="l-zh" lang="zh-Hans">带触觉输入</span></th><th scope="col"><span class="l-en">Tactile-off</span><span class="l-zh" lang="zh-Hans">撤触觉</span></th><th scope="col"><span class="l-en">Change</span><span class="l-zh" lang="zh-Hans">变化</span></th></tr></thead><tbody><tr><th scope="row"><i class="cal">N</i><sub>0</sub>-VTLA</th><td>81</td><td>77</td><td>−4</td></tr><tr><th scope="row">FTP-1</th><td>94</td><td>80</td><td>−14</td></tr><tr><th scope="row">SimpleTouch</th><td>65</td><td>55</td><td>−10</td></tr><tr><th scope="row">UniVTAC-ACT</th><td>27</td><td>24</td><td>−3</td></tr><tr class="ours"><th scope="row"><span class="l-en">TacInno-VLA (ours)</span><span class="l-zh" lang="zh-Hans">TacInno-VLA（本文）</span></th><td>88</td><td><b>0</b></td><td><b>−88</b></td></tr></tbody></table></div><p class="tnote"><span class="l-en">Lift Can, success rates (%) on the same 100 seeds.</span><span class="l-zh" lang="zh-Hans">Lift Can，相同 100 个种子上的成功率（%）。</span></p></div>
   </div>
   <figure>
     <div class="figcard tocard">
-      <div class="tolab" aria-hidden="true"><span class="on">TacInno-VLA</span><span class="off">TacInno-VLA, tactile-off test</span></div>
+      <div class="tolab" aria-hidden="true"><span class="on">TacInno-VLA</span><span class="off"><span class="l-en">TacInno-VLA, tactile-off test</span><span class="l-zh" lang="zh-Hans">TacInno-VLA，撤触觉检验</span></span></div>
       <video src="static/video/touchoff_lift_can.mp4" poster="static/video/touchoff_lift_can_poster.jpg" width="2224" height="640" autoplay muted loop playsinline preload="metadata" aria-label="Tactile-off test on Lift Can, the same seed with tactile input and with a fixed no-contact tactile frame"></video>
     </div>
-    <figcaption><b>Same seed, same policy.</b> With tactile input (left), TacInno-VLA lifts the can. With a fixed no-contact tactile frame (right), it reaches the can but does not lift it.</figcaption>
+    <figcaption><span class="l-en"><b>Same seed, same policy.</b> With tactile input (left), TacInno-VLA lifts the can. With a fixed no-contact tactile frame (right), it reaches the can but does not lift it.</span><span class="l-zh" lang="zh-Hans"><b>同一种子，同一策略。</b>有触觉输入时（左），TacInno-VLA 把罐子提起。换成固定的无接触帧后（右），它能够到罐子，却提不起来。</span></figcaption>
   </figure>
-  <h3>Where does tactile innovation occur?</h3>
+  <h3><span class="l-en">Where does tactile innovation occur?</span><span class="l-zh" lang="zh-Hans">触觉新息出现在什么时候？</span></h3>
   <figure>
     <div class="figcard"><img src="static/img/timeline.webp" width="3000" height="946" loading="lazy" alt="Temporal distribution of tactile innovation on a held-out Lift Can demonstration"></div>
-    <figcaption><b>Tactile innovation over time</b> on a held-out Lift Can demonstration. The part of the tactile change explained by the code (orange) peaks before contact onset and at incipient slip, and vanishes once the motion of the can becomes visible to the cameras.</figcaption>
+    <figcaption><span class="l-en"><b>Tactile innovation over time</b> on a held-out Lift Can demonstration. The part of the tactile change explained by the code (orange) peaks before contact onset and at incipient slip, and vanishes once the motion of the can becomes visible to the cameras.</span><span class="l-zh" lang="zh-Hans"><b>触觉新息随时间的变化</b>，取自一条留出的 Lift Can 示范。触觉变化中由码解释的部分（橙）在接触起始之前和初期打滑时达到峰值，在罐子的运动能被相机看到之后消失。</span></figcaption>
   </figure>
-  <h3>Ablation study</h3>
+  <h3><span class="l-en">Ablation study</span><span class="l-zh" lang="zh-Hans">消融实验</span></h3>
   <div class="split top">
     <div class="prose">
-      <p>Each variant removes or alters one design of TacInno-VLA on the two lifting tasks. Removing the conditioning, so that the code encodes the entire future tactile change, lowers the average success rate by 21 points. Conditioning on vision alone, encoding only two frames, or letting the actions read the code queries also lowers it.</p>
+      <p><span class="l-en">Each variant removes or alters one design of TacInno-VLA on the two lifting tasks. Removing the conditioning, so that the code encodes the entire future tactile change, lowers the average success rate by 21 points. Conditioning on vision alone, encoding only two frames, or letting the actions read the code queries also lowers it.</span><span class="l-zh" lang="zh-Hans">每个变体在两个提举任务上去掉或改动 TacInno-VLA 的一处设计。去掉条件后，码编码的是全部未来触觉变化，平均成功率下降 21 个百分点。仅以视觉为条件、只编码两帧，或让动作读取码查询，同样会使成功率下降。</span></p>
     </div>
-    <div><div class="tbl "><table><thead><tr><th scope="col">Variant</th><th scope="col">Lift Can</th><th scope="col">Lift Bottle</th><th scope="col">Avg.</th></tr></thead><tbody><tr class="ours"><th scope="row">TacInno-VLA (ours)</th><td><b>88</b></td><td><b>78</b></td><td><b>83.0</b></td></tr><tr><th scope="row">w/o conditioning</th><td>63</td><td>61</td><td>62.0</td></tr><tr><th scope="row">vision-only conditioning</th><td>62</td><td>77</td><td>69.5</td></tr><tr><th scope="row">two-frame code</th><td>81</td><td>72</td><td>76.5</td></tr><tr><th scope="row">w/o attention mask</th><td>66</td><td>70</td><td>68.0</td></tr><tr><th scope="row">w/o code loss</th><td>84</td><td>68</td><td>76.0</td></tr><tr><th scope="row">w/o tactile input</th><td>25</td><td>26</td><td>25.5</td></tr></tbody></table></div><p class="tnote">Lift Can and Lift Bottle, success rates (%) on 100 seeds per task.</p></div>
+    <div><div class="tbl "><table><thead><tr><th scope="col"><span class="l-en">Variant</span><span class="l-zh" lang="zh-Hans">变体</span></th><th scope="col">Lift Can</th><th scope="col">Lift Bottle</th><th scope="col"><span class="l-en">Avg.</span><span class="l-zh" lang="zh-Hans">平均</span></th></tr></thead><tbody><tr class="ours"><th scope="row"><span class="l-en">TacInno-VLA (ours)</span><span class="l-zh" lang="zh-Hans">TacInno-VLA（本文）</span></th><td><b>88</b></td><td><b>78</b></td><td><b>83.0</b></td></tr><tr><th scope="row"><span class="l-en">w/o conditioning</span><span class="l-zh" lang="zh-Hans">无条件</span></th><td>63</td><td>61</td><td>62.0</td></tr><tr><th scope="row"><span class="l-en">vision-only conditioning</span><span class="l-zh" lang="zh-Hans">仅视觉条件</span></th><td>62</td><td>77</td><td>69.5</td></tr><tr><th scope="row"><span class="l-en">two-frame code</span><span class="l-zh" lang="zh-Hans">两帧码</span></th><td>81</td><td>72</td><td>76.5</td></tr><tr><th scope="row"><span class="l-en">w/o attention mask</span><span class="l-zh" lang="zh-Hans">无注意力掩码</span></th><td>66</td><td>70</td><td>68.0</td></tr><tr><th scope="row"><span class="l-en">w/o code loss</span><span class="l-zh" lang="zh-Hans">无码损失</span></th><td>84</td><td>68</td><td>76.0</td></tr><tr><th scope="row"><span class="l-en">w/o tactile input</span><span class="l-zh" lang="zh-Hans">无触觉输入</span></th><td>25</td><td>26</td><td>25.5</td></tr></tbody></table></div><p class="tnote"><span class="l-en">Lift Can and Lift Bottle, success rates (%) on 100 seeds per task.</span><span class="l-zh" lang="zh-Hans">Lift Can 与 Lift Bottle，每个任务 100 个种子上的成功率（%）。</span></p></div>
   </div>
 </section>
 
 <section id="real-world">
   <div class="prose">
-    <p class="kicker">Real world</p>
-    <h2>Four contact-rich tasks on a Franka FR3</h2>
-    <p>Wiping a board, inserting a plug into a power strip, lifting a lying can upright, and unscrewing a bottle cap, with a vision-based tactile sensor on the fingertip. Every policy is trained on the same 45 teleoperated demonstrations per task and evaluated for 50 trials per task. The code prediction loss improves every task by 16 to 26 percentage points.</p>
+    <p class="kicker"><span class="l-en">Real world</span><span class="l-zh" lang="zh-Hans">真机</span></p>
+    <h2><span class="l-en">Four contact-rich tasks on a Franka FR3</span><span class="l-zh" lang="zh-Hans">Franka FR3 上的四个富接触任务</span></h2>
+    <p><span class="l-en">Wiping a board, inserting a plug into a power strip, lifting a lying can upright, and unscrewing a bottle cap, with a vision-based tactile sensor on the fingertip. Every policy is trained on the same 45 teleoperated demonstrations per task and evaluated for 50 trials per task. The code prediction loss improves every task by 16 to 26 percentage points.</span><span class="l-zh" lang="zh-Hans">四个任务分别是擦白板、把插头插入插线板、把横躺的罐子立起来、拧开瓶盖，指尖装有视触觉传感器。每个策略在每个任务的同一批 45 条遥操作示范上训练，每个任务评测 50 次。码预测损失使每个任务的成功率提高 16 至 26 个百分点。</span></p>
   </div>
-  <h3>Closed-loop rollouts of TacInno-VLA</h3>
-  <div class="grid2"><figure class="clip"><video src="static/video/real/wipe_board.mp4" poster="static/video/real/wipe_board_poster.jpg" width="1280" height="720" style="aspect-ratio: 1280 / 720" autoplay muted loop playsinline preload="metadata" aria-label="Wipe Board, closed-loop rollout of TacInno-VLA"></video><figcaption>Wipe Board</figcaption></figure><figure class="clip"><video src="static/video/real/insert_plug.mp4" poster="static/video/real/insert_plug_poster.jpg" width="1280" height="720" style="aspect-ratio: 1280 / 720" autoplay muted loop playsinline preload="metadata" aria-label="Insert Plug, closed-loop rollout of TacInno-VLA"></video><figcaption>Insert Plug</figcaption></figure><figure class="clip"><video src="static/video/real/lift_can.mp4" poster="static/video/real/lift_can_poster.jpg" width="1280" height="720" style="aspect-ratio: 1280 / 720" autoplay muted loop playsinline preload="metadata" aria-label="Lift Can, closed-loop rollout of TacInno-VLA"></video><figcaption>Lift Can</figcaption></figure><figure class="clip"><video src="static/video/real/unscrew_cap.mp4" poster="static/video/real/unscrew_cap_poster.jpg" width="1280" height="720" style="aspect-ratio: 1280 / 720" autoplay muted loop playsinline preload="metadata" aria-label="Unscrew Cap, closed-loop rollout of TacInno-VLA"></video><figcaption>Unscrew Cap</figcaption></figure></div>
-  <p class="tnote">Recorded with an external camera, played at 4× speed.</p>
-  <div class="tbl "><table><thead><tr><th scope="col">Policy</th><th scope="col">Wipe Board</th><th scope="col">Insert Plug</th><th scope="col">Lift Can</th><th scope="col">Unscrew Cap</th><th scope="col">Avg.</th></tr></thead><tbody><tr><th scope="row">FTP-1</th><td><b>88</b></td><td>16</td><td>66</td><td>64</td><td>58.5</td></tr><tr><th scope="row">SimpleTouch</th><td>82</td><td>28</td><td>62</td><td>74</td><td>61.5</td></tr><tr><th scope="row">TacInno-VLA, tactile-off</th><td>52</td><td>10</td><td>46</td><td>52</td><td>40.0</td></tr><tr><th scope="row">w/o code loss</th><td>62</td><td>22</td><td>50</td><td>56</td><td>47.5</td></tr><tr><th scope="row">w/o tactile input</th><td>62</td><td>14</td><td>52</td><td>78</td><td>51.5</td></tr><tr class="ours"><th scope="row">TacInno-VLA (ours)</th><td><b>88</b></td><td><b>38</b></td><td><b>74</b></td><td><b>82</b></td><td><b>70.5</b></td></tr></tbody></table></div>
-  <p class="tnote">Success rates (%) over 50 trials per task.</p>
+  <h3><span class="l-en">Closed-loop rollouts of TacInno-VLA</span><span class="l-zh" lang="zh-Hans">TacInno-VLA 的闭环执行过程</span></h3>
+  <div class="grid2"><figure class="clip"><video src="static/video/real/wipe_board.mp4" poster="static/video/real/wipe_board_poster.jpg" width="1280" height="720" style="aspect-ratio: 1280 / 720" autoplay muted loop playsinline preload="metadata" aria-label="Wipe Board, closed-loop rollout of TacInno-VLA"></video><figcaption><span class="l-en">Wipe Board</span><span class="l-zh" lang="zh-Hans">擦白板</span></figcaption></figure><figure class="clip"><video src="static/video/real/insert_plug.mp4" poster="static/video/real/insert_plug_poster.jpg" width="1280" height="720" style="aspect-ratio: 1280 / 720" autoplay muted loop playsinline preload="metadata" aria-label="Insert Plug, closed-loop rollout of TacInno-VLA"></video><figcaption><span class="l-en">Insert Plug</span><span class="l-zh" lang="zh-Hans">插插头</span></figcaption></figure><figure class="clip"><video src="static/video/real/lift_can.mp4" poster="static/video/real/lift_can_poster.jpg" width="1280" height="720" style="aspect-ratio: 1280 / 720" autoplay muted loop playsinline preload="metadata" aria-label="Lift Can, closed-loop rollout of TacInno-VLA"></video><figcaption><span class="l-en">Lift Can</span><span class="l-zh" lang="zh-Hans">立罐</span></figcaption></figure><figure class="clip"><video src="static/video/real/unscrew_cap.mp4" poster="static/video/real/unscrew_cap_poster.jpg" width="1280" height="720" style="aspect-ratio: 1280 / 720" autoplay muted loop playsinline preload="metadata" aria-label="Unscrew Cap, closed-loop rollout of TacInno-VLA"></video><figcaption><span class="l-en">Unscrew Cap</span><span class="l-zh" lang="zh-Hans">拧瓶盖</span></figcaption></figure></div>
+  <p class="tnote"><span class="l-en">Recorded with an external camera, played at 4× speed.</span><span class="l-zh" lang="zh-Hans">由外部相机拍摄，以 4 倍速播放。</span></p>
+  <div class="tbl "><table><thead><tr><th scope="col"><span class="l-en">Policy</span><span class="l-zh" lang="zh-Hans">策略</span></th><th scope="col"><span class="l-en">Wipe Board</span><span class="l-zh" lang="zh-Hans">擦白板</span></th><th scope="col"><span class="l-en">Insert Plug</span><span class="l-zh" lang="zh-Hans">插插头</span></th><th scope="col"><span class="l-en">Lift Can</span><span class="l-zh" lang="zh-Hans">立罐</span></th><th scope="col"><span class="l-en">Unscrew Cap</span><span class="l-zh" lang="zh-Hans">拧瓶盖</span></th><th scope="col"><span class="l-en">Avg.</span><span class="l-zh" lang="zh-Hans">平均</span></th></tr></thead><tbody><tr><th scope="row">FTP-1</th><td><b>88</b></td><td>16</td><td>66</td><td>64</td><td>58.5</td></tr><tr><th scope="row">SimpleTouch</th><td>82</td><td>28</td><td>62</td><td>74</td><td>61.5</td></tr><tr><th scope="row"><span class="l-en">TacInno-VLA, tactile-off</span><span class="l-zh" lang="zh-Hans">TacInno-VLA，撤触觉</span></th><td>52</td><td>10</td><td>46</td><td>52</td><td>40.0</td></tr><tr><th scope="row"><span class="l-en">w/o code loss</span><span class="l-zh" lang="zh-Hans">无码损失</span></th><td>62</td><td>22</td><td>50</td><td>56</td><td>47.5</td></tr><tr><th scope="row"><span class="l-en">w/o tactile input</span><span class="l-zh" lang="zh-Hans">无触觉输入</span></th><td>62</td><td>14</td><td>52</td><td>78</td><td>51.5</td></tr><tr class="ours"><th scope="row"><span class="l-en">TacInno-VLA (ours)</span><span class="l-zh" lang="zh-Hans">TacInno-VLA（本文）</span></th><td><b>88</b></td><td><b>38</b></td><td><b>74</b></td><td><b>82</b></td><td><b>70.5</b></td></tr></tbody></table></div>
+  <p class="tnote"><span class="l-en">Success rates (%) over 50 trials per task.</span><span class="l-zh" lang="zh-Hans">每个任务 50 次试验的成功率（%）。</span></p>
   <figure>
     <div class="figcard"><img src="static/img/real_robot_setup.webp" width="3000" height="1303" loading="lazy" alt="Real-world setup and the four tasks"></div>
-    <figcaption><b>Setup.</b> A Franka FR3 arm with a parallel gripper, a vision-based tactile sensor on the fingertip, a third-person camera, and a wrist camera, with key frames of the four tasks.</figcaption>
+    <figcaption><span class="l-en"><b>Setup.</b> A Franka FR3 arm with a parallel gripper, a vision-based tactile sensor on the fingertip, a third-person camera, and a wrist camera, with key frames of the four tasks.</span><span class="l-zh" lang="zh-Hans"><b>实验装置。</b>Franka FR3 机械臂配平行夹爪，指尖装有视触觉传感器，另有第三人称相机和腕部相机。图中还给出四个任务的关键帧。</span></figcaption>
   </figure>
 </section>
 
 <section id="bibtex">
-  <p class="kicker">Citation</p>
+  <p class="kicker"><span class="l-en">Citation</span><span class="l-zh" lang="zh-Hans">引用</span></p>
   <h2>BibTeX</h2>
-  <div class="bib"><button type="button" id="copy">Copy</button><pre id="bibtext">@article{li2026tacinno,
+  <div class="bib"><button type="button" id="copy"><span class="l-en">Copy</span><span class="l-zh" lang="zh-Hans">复制</span></button><pre id="bibtext">@article{li2026tacinno,
   title   = {TacInno: Teaching Vision-Language-Action Models the
              Contact Dynamics Beyond Vision and Action},
   author  = {Li, Weile and Lou, Yunfan and Shi, Muqing and Zhang, Zihao and Huang, Zhenbiao and Yao, Boxian and Zhu, Xiyu and Pang, Zhibo},
@@ -457,20 +471,167 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
 </main>
 
 <footer>
-  <div class="wrap">© 2026 The TacInno authors.</div>
+  <div class="wrap"><span class="l-en">© 2026 The TacInno authors.</span><span class="l-zh" lang="zh-Hans">© 2026 TacInno 作者</span></div>
 </footer>
 <script>
 if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   document.querySelectorAll('video').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; });
 }
+(function () {
+  var d = document.documentElement, btns = document.querySelectorAll('[data-set-lang]');
+  function show(l) { Array.prototype.forEach.call(btns, function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set-lang') === l ? 'true' : 'false'); }); }
+  function set(l) {
+    d.setAttribute('data-lang', l); d.lang = l === 'zh' ? 'zh-Hans' : 'en'; show(l);
+    try { window.localStorage.setItem('tacinno-lang', l); } catch (e) { /* storage may be unavailable */ }
+    document.dispatchEvent(new Event('tacinno-lang'));
+  }
+  Array.prototype.forEach.call(btns, function (b) { b.addEventListener('click', function () { set(b.getAttribute('data-set-lang')); }); });
+  show(d.getAttribute('data-lang') === 'zh' ? 'zh' : 'en');
+})();
 document.getElementById('copy').addEventListener('click', function () {
-  var b = this, t = document.getElementById('bibtext').textContent;
-  function done(m) { b.textContent = m; setTimeout(function () { b.textContent = 'Copy'; }, 1600); }
+  var b = this, t = document.getElementById('bibtext').textContent, orig = b.getAttribute('data-orig') || b.innerHTML;
+  b.setAttribute('data-orig', orig);
+  function done(en, zh) { b.textContent = document.documentElement.getAttribute('data-lang') === 'zh' ? zh : en; setTimeout(function () { b.innerHTML = orig; }, 1600); }
   function sel() { var r = document.createRange(); r.selectNodeContents(document.getElementById('bibtext'));
-    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done('Selected'); }
-  if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(function () { done('Copied'); }, sel); }
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done('Selected', '已选中'); }
+  if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(function () { done('Copied', '已复制'); }, sel); }
   else { sel(); }
 });
+</script>
+<script>
+/* Hero marker field: the markers of a tactile sensor respond to a contact that glides across the gel, twists,
+   and slips, and to the pointer of the visitor. Decorative. The static SVG stays in place when scripts are off
+   or when reduced motion is requested. */
+(function () {
+  'use strict';
+  var svg = document.querySelector('svg.marker-field');
+  if (!svg || !window.requestAnimationFrame) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var COLS = 34, ROWS = 4, D = 22, PAD = 12, W = COLS * D, H = ROWS * D + 2 * PAD, N = COLS * ROWS;
+  var SIG = 70, R0 = 2.4, CYCLE = 9.6;
+  var cv = document.createElement('canvas');
+  cv.className = 'marker-field-live'; cv.setAttribute('role', 'img'); cv.setAttribute('aria-label', svg.getAttribute('aria-label') || '');
+  svg.parentNode.insertBefore(cv, svg); svg.style.display = 'none';
+  var ctx = cv.getContext('2d');
+
+  // markers: rest position, displacement, velocity, and a slightly different stiffness for each one
+  var x0 = new Float32Array(N), y0 = new Float32Array(N), ux = new Float32Array(N), uy = new Float32Array(N);
+  var vx = new Float32Array(N), vy = new Float32Array(N), kf = new Float32Array(N), seed = 7;
+  function rnd() { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
+  for (var j = 0; j < ROWS; j++) for (var i = 0; i < COLS; i++) {
+    var k = j * COLS + i; x0[k] = D / 2 + i * D; y0[k] = PAD + D / 2 + j * D; kf[k] = 0.85 + 0.3 * rnd();
+  }
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function ease(s) { s = clamp(s, 0, 1); return s * s * (3 - 2 * s); }
+  function dease(s) { return s <= 0 || s >= 1 ? 0 : 6 * s * (1 - s); }
+
+  // contact: centre, strength, shear of the gel, twist about the centre
+  var C = { x: W * 0.62, y: H / 2, a: 0, sx: 0, sy: 0, phi: 0 };
+  var wave = { t: 9, x: 0, y: 0 };                          // slip wave: a ring that runs outward from the contact
+  var ptr = { on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, w: 0, last: -9 };
+  var time = 0, lastCycle = -1, slipped = false;
+
+  function autoContact(t, out) {
+    var n = Math.floor(t / CYCLE), tau = t - n * CYCLE, dir = n % 2 === 0 ? 1 : -1;
+    var xa = W * (0.5 - 0.26 * dir), xb = W * (0.5 + 0.26 * dir), TG = 3.2;
+    var s = (tau - 0.5) / TG;
+    out.x = xa + (xb - xa) * ease(s);
+    out.y = H / 2 + 5 * Math.sin(t * 2 * Math.PI / 6.3);
+    out.a = ease(tau / 0.7) * (1 - ease((tau - 7.4) / 1.6));            // the contact forms, and lifts off at the end
+    var vel = (xb - xa) * dease(s) / TG;                              // gliding drags the gel along and opens it slightly
+    out.sx = clamp(vel * 0.05, -10, 10); out.sy = 0.33 * Math.abs(out.sx);
+    var tw = (tau - 3.9) / 2.7;                                       // then the contact twists slowly, and slips
+    out.phi = tau < 6.6 ? -dir * 0.26 * clamp(tw, 0, 1) * clamp(tw, 0, 1) : 0;
+    if (n !== lastCycle) { lastCycle = n; slipped = false; }
+    if (tau >= 6.6 && !slipped) { slipped = true; wave.t = 0; wave.x = out.x; wave.y = out.y; }
+  }
+
+  var A = { x: 0, y: 0, a: 0, sx: 0, sy: 0, phi: 0 };
+  function step(dt) {
+    time += dt;
+    autoContact(time, A);
+    // the pointer takes over while it is on the field, and hands back a moment after it leaves
+    var want = ptr.on || time - ptr.last < 0.9 ? 1 : 0;
+    ptr.w += (want - ptr.w) * Math.min(1, dt * (want ? 9 : 2.5));
+    ptr.vx *= Math.exp(-dt * 5); ptr.vy *= Math.exp(-dt * 5);
+    var w = ptr.w, psx = clamp(ptr.vx * 0.035, -11, 11), psy = clamp(ptr.vy * 0.035, -7, 7);
+    C.x = A.x + (ptr.x - A.x) * w; C.y = A.y + (ptr.y - A.y) * w;
+    C.a = A.a + (1 - A.a) * w; C.sx = A.sx * (1 - w) + psx * w; C.sy = A.sy * (1 - w); C.phi = A.phi * (1 - w);
+    var psy2 = psy * w, press = 2.6 * w;
+    wave.t += dt;
+    for (var k = 0; k < N; k++) {
+      var rx = x0[k] - C.x, ry = y0[k] - C.y, g = C.a * Math.exp(-(rx * rx + ry * ry) / (2 * SIG * SIG));
+      var tx = g * (C.sx - C.phi * ry + press * rx / SIG);
+      var ty = g * (psy2 - C.sy * (ry < 0 ? 1 : -1) + C.phi * rx + press * ry / SIG);
+      var ks = 95 * kf[k], cs = 2 * 0.42 * Math.sqrt(ks);             // a lightly damped spring: the gel wobbles after a slip
+      vx[k] += (ks * (tx - ux[k]) - cs * vx[k]) * dt; vy[k] += (ks * (ty - uy[k]) - cs * vy[k]) * dt;
+      ux[k] += vx[k] * dt; uy[k] += vy[k] * dt;
+    }
+  }
+
+  var col = { dot: [120, 126, 134], hot: [217, 140, 10] };
+  function readColors() {
+    var cs = getComputedStyle(document.documentElement);
+    function rgb(v, d) { var m = /^#?([0-9a-f]{6})$/i.exec((v || '').trim()); if (!m) return d; var n = parseInt(m[1], 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+    col.dot = rgb(cs.getPropertyValue('--muted'), col.dot); col.hot = rgb(cs.getPropertyValue('--orange-fill'), col.hot);
+  }
+
+  function draw() {
+    var r = cv.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var pw = Math.max(1, Math.round(r.width * dpr)), ph = Math.max(1, Math.round(r.height * dpr));
+    if (cv.width !== pw || cv.height !== ph) { cv.width = pw; cv.height = ph; }
+    var sc = pw / W; ctx.setTransform(sc, 0, 0, sc, 0, 0); ctx.clearRect(0, 0, W, H); ctx.lineCap = 'round';
+    var wr = 300 * wave.t, wa = wave.t < 2.4 ? 9 * Math.exp(-wave.t * 1.9) : 0, d = col.dot, h = col.hot;
+    for (var k = 0; k < N; k++) {
+      var dx = ux[k], dy = uy[k];
+      if (wa > 0.05) {                                                // the ring of the slip wave pushes the markers outward as it passes
+        var qx = x0[k] - wave.x, qy = y0[k] - wave.y, q = Math.sqrt(qx * qx + qy * qy) + 1e-6;
+        var e = wa * Math.exp(-(q - wr) * (q - wr) / (2 * 22 * 22));
+        dx += e * qx / q; dy += e * qy / q;
+      }
+      dy = clamp(dy, R0 + 1 - y0[k], H - R0 - 1 - y0[k]);                // the outer rows stay inside the canvas
+      var m = Math.sqrt(dx * dx + dy * dy), hot = clamp((m - 0.8) / 3.7, 0, 1); hot = hot * hot * (3 - 2 * hot);
+      if (hot > 0.02) {
+        ctx.strokeStyle = 'rgba(' + h[0] + ',' + h[1] + ',' + h[2] + ',' + (0.55 * hot).toFixed(3) + ')'; ctx.lineWidth = 1.4;
+        ctx.beginPath(); ctx.moveTo(x0[k], y0[k]); ctx.lineTo(x0[k] + dx, y0[k] + dy); ctx.stroke();
+      }
+      ctx.fillStyle = 'rgba(' + Math.round(d[0] + (h[0] - d[0]) * hot) + ',' + Math.round(d[1] + (h[1] - d[1]) * hot) + ',' +
+        Math.round(d[2] + (h[2] - d[2]) * hot) + ',' + (0.55 + 0.45 * hot).toFixed(3) + ')';
+      ctx.beginPath(); ctx.arc(x0[k] + dx, y0[k] + dy, R0 * (1 + 0.14 * hot), 0, 6.2832); ctx.fill();
+    }
+  }
+
+  var running = false, visible = true, lastT = 0, acc = 0;
+  function frame(now) {
+    if (!running) return;
+    var dt = lastT ? Math.min(0.1, (now - lastT) / 1000) : 0; lastT = now; acc += dt;
+    var n = 0; while (acc >= 1 / 120 && n < 10) { step(1 / 120); acc -= 1 / 120; n++; }
+    draw(); requestAnimationFrame(frame);
+  }
+  function start() { if (running || !visible || document.hidden) return; running = true; lastT = 0; requestAnimationFrame(frame); }
+  function stop() { running = false; }
+
+  function toField(e) { var r = cv.getBoundingClientRect(); return [(e.clientX - r.left) * W / r.width, (e.clientY - r.top) * H / r.height]; }
+  function move(e) {
+    var p = toField(e), now = performance.now() / 1000, dt = Math.max(1 / 240, now - ptr.t);
+    if (ptr.on && dt < 0.2) { ptr.vx += ((p[0] - ptr.x) / dt - ptr.vx) * 0.35; ptr.vy += ((p[1] - ptr.y) / dt - ptr.vy) * 0.35; }
+    ptr.x = p[0]; ptr.y = p[1]; ptr.t = now; ptr.on = true; ptr.last = time;
+  }
+  cv.addEventListener('pointerenter', move); cv.addEventListener('pointermove', move);
+  cv.addEventListener('pointerleave', function () { ptr.on = false; ptr.last = time; });
+  cv.addEventListener('pointercancel', function () { ptr.on = false; ptr.last = time; });
+  cv.addEventListener('pointerdown', function (e) { move(e); wave.t = 0; wave.x = ptr.x; wave.y = ptr.y; });   // a tap or click sends a slip wave
+  cv.addEventListener('pointerup', function (e) { if (e.pointerType !== 'mouse') { ptr.on = false; ptr.last = time; } });
+
+  readColors();
+  if (window.matchMedia) { var mq = window.matchMedia('(prefers-color-scheme: dark)'); if (mq.addEventListener) mq.addEventListener('change', readColors); }
+  new MutationObserver(readColors).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'class'] });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) start(); else stop(); }).observe(cv);
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
+  start();
+})();
 </script>
 <script>
 /* TacInno project page: "stand a lying can upright by letting it turn in the fingertips".
@@ -796,11 +957,11 @@ document.getElementById('copy').addEventListener('click', function () {
       kicker: '动手试一试', title: '让横躺的罐子在指尖里转到竖直',
       sub: '罐子的质量和表面摩擦从外观上看不出来。先夹紧并抬起，再慢慢松开夹爪，罐子会在指尖里转到竖直，并落到桌上。',
       s1: '先抬起，再慢慢松开', s2: '去掉条件', s3: '换一个罐子',
-      gel1: '触觉变化', gel2: '画面与动作可预测的部分', gel3: '触觉新息',
+      gel1: '触觉变化', gel2: '视觉与动作可预测的部分', gel3: '触觉新息',
       ch_title: '触觉新息随时间的变化', ch_share: '本次新息占比',
       key_dx: '|ΔX|（归一化）', key_share: '其中触觉新息所占比例', key_tilt: '罐子倾角',
       mk_a: '接触', mk_b: '抬起', mk_c: '开始转动', mk_d: '竖直', mk_e: '松开',
-      hidden_lbl: '隐藏的质量与摩擦', l_grip: '握力', l_speed: '抬升速度', sw_cond: '以画面和动作为条件',
+      hidden_lbl: '隐藏的质量与摩擦', l_grip: '握力', l_speed: '抬升速度', sw_cond: '以视觉和动作为条件',
       b_new: '换罐子', b_reset: '重置', b_lift: '抬起', b_lower: '放下', b_play: '播放示例', b_stop: '停止示例', b_reveal: '揭晓', b_hide: '隐藏',
       g_skip: '跳过引导', g_show: '显示引导', g_restart: '重新引导', inset: '夹持', axis_t: '时间（秒）',
       m_light: '轻', m_medium: '中等', m_heavy: '重', f_dry: '干燥', f_normal: '普通', f_oily: '油滑',
@@ -814,8 +975,8 @@ document.getElementById('copy').addEventListener('click', function () {
       c_visible: '相机现在看到了罐子的转动，这部分变化重新变得可预测。',
       c_load: '抬起使接触面受力。接触面发生扭转，边缘先开始滑动，此时还看不出任何变化。何时发生取决于隐藏的质量和摩擦。',
       c_twist: '接触面的扭转接近极限，边缘在滑动，中心仍然粘着。此时还看不出任何变化。',
-      c_size_early: '首次接触比画面预期的更早。这一时间差就是触觉新息。',
-      c_size_late: '首次接触比画面预期的更晚。这一时间差就是触觉新息。',
+      c_size_early: '首次接触比视觉估计的更早。这一时间差就是触觉新息。',
+      c_size_late: '首次接触比视觉估计的更晚。这一时间差就是触觉新息。',
       c_close: '手指合拢时凝胶发生形变。这部分变化可由自身动作预测，新信息很少。',
       c_turn: '罐子在指尖里转动。相机看得到这一转动，所以这部分变化是可预测的。',
       c_stuck: '夹得紧时罐子保持横躺，夹持力承担了它的重量和力矩。', c_stuck_tip: '慢慢松开，让它转动。',
@@ -837,9 +998,9 @@ document.getElementById('copy').addEventListener('click', function () {
       g_turning: '罐子在指尖里转动。继续慢慢松开。橙色表示只有触觉知道的部分。',
       g_loosen: '现在慢慢松开。一点一点降低<b>握力</b>，直到罐子开始转动。',
       g_more: '罐子停住了。再把<b>握力</b>降低一点。',
-      g_cond_while: '示例播放时，请关掉<b>以画面和动作为条件</b>。',
+      g_cond_while: '示例播放时，请关掉<b>以视觉和动作为条件</b>。',
       g_orange: '现在所有变化都是橙色。不加条件时，码要承载全部变化，连自己夹紧造成的形变也算。',
-      g_cond_off: '现在关掉<b>以画面和动作为条件</b>。', g_play: '点<b>播放示例</b>。', g_cond_on: '把条件重新打开。',
+      g_cond_off: '现在关掉<b>以视觉和动作为条件</b>。', g_play: '点<b>播放示例</b>。', g_cond_on: '把条件重新打开。',
       g_new: '点<b>换罐子</b>，再做一遍。隐藏的质量和摩擦变了，罐子开始转动时的握力也会不同，而触觉最先察觉。',
       g_end: '这就是 TacInno 的思路，只用橙色的那部分监督策略。可以继续自由尝试。'
     }
@@ -1274,25 +1435,20 @@ document.getElementById('copy').addEventListener('click', function () {
     };
   });
 
-  // language: English or Chinese, chosen with the two buttons at the top of the widget
-  var bEn = q('toy-lang-en'), bZh = q('toy-lang-zh');
-  function setLang(l, keep) {
+  // language: the widget follows the language of the page, which is chosen in the navigation bar
+  function pageLang() { return document.documentElement.getAttribute('data-lang') === 'zh' ? 'zh' : 'en'; }
+  function setLang(l) {
     lang = l === 'zh' ? 'zh' : 'en';
     root.lang = lang === 'zh' ? 'zh-Hans' : 'en';
     Array.prototype.forEach.call(root.querySelectorAll('[data-i18n]'), function (el) { el.textContent = tr(el.getAttribute('data-i18n')); });
-    bEn.setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false'); bZh.setAttribute('aria-pressed', lang === 'zh' ? 'true' : 'false');
     bLift.textContent = tr(cmd.up ? 'b_lower' : 'b_lift'); bPlay.textContent = tr(script ? 'b_stop' : 'b_play');
     bReveal.textContent = tr(revealed ? 'b_hide' : 'b_reveal'); hiddenText();
     if (gSkip) gSkip.textContent = tr(guide.off ? 'g_show' : guide.stage >= 4 ? 'g_restart' : 'g_skip');
     capCur = ''; capQueue = []; capSeen = {}; lastKey = ''; guide.cur = '';     // captions and guide text are written again in the new language
-    if (keep) { try { window.localStorage.setItem('tacinno-toy-lang', lang); } catch (e) { /* storage may be unavailable */ } }
   }
-  bEn.addEventListener('click', function () { setLang('en', true); });
-  bZh.addEventListener('click', function () { setLang('zh', true); });
-  var lang0 = ''; try { lang0 = window.localStorage.getItem('tacinno-toy-lang') || ''; } catch (e) { lang0 = ''; }
-  if (!lang0) lang0 = /^zh/i.test(navigator.language || '') ? 'zh' : 'en';
+  document.addEventListener('tacinno-lang', function () { setLang(pageLang()); });
 
-  readColors(); makeSprites(); setGrip(0); setSpeed(+inSpeed.value); setLang(lang0, false);
+  readColors(); makeSprites(); setGrip(0); setSpeed(+inSpeed.value); setLang(pageLang());
   if (document.fonts && document.fonts.load) document.fonts.load('400 14px "TacInnoCola"').then(makeSprites, function () {});
   if (window.matchMedia) { var mq = window.matchMedia('(prefers-color-scheme: dark)'); if (mq.addEventListener) mq.addEventListener('change', readColors); }
   new MutationObserver(readColors).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'class'] });
