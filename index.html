@@ -1376,5 +1376,65 @@ document.getElementById('copy').addEventListener('click', function () {
   document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (inView) start(); });
 })();
 </script>
+<script>
+/* TacInno live favicon (11-20, user chose the moving version).
+   While the page is open, the bright orange marker in the tab icon is dragged off its rest
+   position, held, and springs back, about once every 3.2 s. The static files
+   (static/img/favicon.svg, favicon.ico) stay in the HTML as the fallback for browsers that do not
+   update tab icons from script (Safari) and for bookmarks. Geometry and colours match
+   assets_src/favicon/make_favicon.py. Respects prefers-reduced-motion. */
+(function () {
+  'use strict';
+  if (!document.createElement('canvas').getContext) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var BLUE = '#2f80ff', ORANGE = '#ff9500';
+  var R_DOT = 2.6, R_HOT = 3.4, RING_W = 1.1, RING_A = 0.45;
+  var GRID = [7, 16, 25], X0 = 16, Y0 = 16, D = 4.6 / Math.SQRT2;
+  var X1 = X0 + D, Y1 = Y0 - D;
+  var PERIOD = 3200, FPS = 12;
+  // keyframes: t (fraction of the loop), x, y. Rest, drag out, hold, spring back with overshoot, rest.
+  var K = [[0, X0, Y0], [0.12, X0, Y0], [0.42, X1, Y1], [0.55, X1, Y1],
+           [0.62, X0 - 0.9, Y0 + 0.9], [0.68, X0 + 0.35, Y0 - 0.35], [0.74, X0, Y0], [1, X0, Y0]];
+  function ease(u) { return u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; }
+  function pos(t) {
+    for (var i = 1; i < K.length; i++) {
+      if (t <= K[i][0]) {
+        var a = K[i - 1], b = K[i], u = ease((t - a[0]) / (b[0] - a[0] || 1));
+        return [a[1] + (b[1] - a[1]) * u, a[2] + (b[2] - a[2]) * u];
+      }
+    }
+    return [X0, Y0];
+  }
+  var S = 64, k = S / 32;
+  var cv = document.createElement('canvas'); cv.width = cv.height = S;
+  var g = cv.getContext('2d');
+  function dot(x, y, r) { g.beginPath(); g.arc(x * k, y * k, r * k, 0, 2 * Math.PI); }
+  function draw(p) {
+    g.clearRect(0, 0, S, S);
+    g.fillStyle = BLUE;
+    for (var i = 0; i < 3; i++) for (var j = 0; j < 3; j++) {
+      if (i === 1 && j === 1) continue;
+      dot(GRID[i], GRID[j], R_DOT); g.fill();
+    }
+    g.globalAlpha = RING_A; g.strokeStyle = BLUE; g.lineWidth = RING_W * k;
+    dot(X0, Y0, R_DOT); g.stroke(); g.globalAlpha = 1;
+    g.fillStyle = ORANGE; dot(p[0], p[1], R_HOT); g.fill();
+  }
+  // replace the static icon links by one live link (the static ones remain the server fallback)
+  var old = document.querySelectorAll('link[rel~="icon"]');
+  for (var n = 0; n < old.length; n++) old[n].parentNode.removeChild(old[n]);
+  var link = document.createElement('link');
+  link.rel = 'icon'; link.type = 'image/png'; link.sizes = '64x64';
+  document.head.appendChild(link);
+  var t0 = Date.now(), last = '';
+  function tick() {
+    draw(pos(((Date.now() - t0) % PERIOD) / PERIOD));
+    var url = cv.toDataURL('image/png');
+    if (url !== last) { link.href = url; last = url; }
+  }
+  tick();
+  setInterval(tick, 1000 / FPS);
+})();
+</script>
 </body>
 </html>
