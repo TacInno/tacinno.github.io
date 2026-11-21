@@ -1444,6 +1444,20 @@ document.getElementById('copy').addEventListener('click', function () {
   document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (inView) start(); });
 })();
 </script>
+<script>
+(function () {
+  var APPS = [[/wxwork/i, 'WeCom'], [/MicroMessenger/i, 'WeChat'], [/xiaohongshu|xhsdiscover|\bdiscover\/\d/i, 'Xiaohongshu'],
+    [/\bQQ\/\d/, 'QQ'], [/weibo/i, 'Weibo'], [/aweme|douyin/i, 'Douyin'], [/NewsArticle/, 'Toutiao'], [/ZhihuHybrid/i, 'Zhihu'],
+    [/BiliApp/i, 'Bilibili'], [/DingTalk/i, 'DingTalk'], [/Lark|Feishu/i, 'Feishu'], [/LinkedInApp/i, 'LinkedIn'],
+    [/FBAN|FBAV/, 'Facebook'], [/Instagram/i, 'Instagram'], [/Twitter/i, 'X']];
+  var ua = navigator.userAgent || '', app = '';
+  for (var i = 0; i < APPS.length; i++) if (APPS[i][0].test(ua)) { app = APPS[i][1]; break; }
+  window.goatcounter = { referrer: function (r) { return r || (app ? app + ' app' : r); } };
+  if (app) window.addEventListener('load', function () {
+    try { window.goatcounter.count({ path: 'app-' + app.toLowerCase(), title: 'Opened in the ' + app + ' app', event: true }); } catch (e) { /* counting is optional */ }
+  });
+})();
+</script>
 <script data-goatcounter="https://lisavilalee.goatcounter.com/count" async src="static/js/goatcounter_count_v2.7.0.js"></script>
 </body>
 </html>
