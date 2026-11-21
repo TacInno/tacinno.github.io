@@ -148,6 +148,9 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
 .toy-headline { display: flex; align-items: baseline; gap: .2rem .7rem; flex-wrap: wrap; min-width: 0; }
 .toy-headline .kicker { margin: 0; }
 .toy-headline h3 { font: 700 1.14rem/1.25 var(--serif); margin: 0; }
+.toy-anchor { font: 600 1.05rem/1 var(--sans); color: var(--muted); text-decoration: none; opacity: .55; padding: 0 .15rem; border-radius: 4px; }
+.toy-anchor:hover, .toy-anchor:focus-visible { color: var(--ink); opacity: 1; }
+.toy-copied { font-size: .76rem; color: var(--muted); }
 .toy-sub { grid-column: 1 / -1; margin: 0; font-size: .84rem; line-height: 1.45; color: var(--muted); text-wrap: pretty; }
 .toy-guide { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .25rem 1rem; align-items: center; background: color-mix(in srgb, var(--guide) 6%, var(--surface)); border: 1.5px dashed color-mix(in srgb, var(--guide) 70%, transparent); border-radius: 12px; padding: .5rem .85rem .55rem; margin-bottom: .7rem; }
 .toy-guide .toy-link { color: var(--guide); }
@@ -251,6 +254,7 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
   <div class="wrap">
     <a class="brand" href="#top">Tac<span>Inno</span></a>
     <a class="l" href="#idea">Idea</a>
+    <a class="l" href="#try-it">Try it</a>
     <a class="l" href="#method">Method</a>
     <a class="l" href="#simulation">Simulation</a>
     <a class="l" href="#tactile-off">Tactile-off test</a>
@@ -303,9 +307,9 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; font-size:
   <div class="prose">
     <p>Feeding tactile observations to the policy leaves it to the action loss to find this residual, and predicting all future tactile signals spends most of the supervision on the predictable part. TacInno isolates the residual, borrowing the notion of innovation from estimation theory, and supervises the policy with it.</p>
   </div>
-  <div class="toy" id="toy" lang="en">
+  <div class="toy" id="try-it" lang="en">
     <div class="toy-top">
-      <div class="toy-headline"><span class="kicker" data-i18n="kicker">Try it</span><h3 data-i18n="title">Stand a lying can upright by letting it turn in the fingertips</h3></div>
+      <div class="toy-headline"><span class="kicker" data-i18n="kicker">Try it</span><h3 data-i18n="title">Stand a lying can upright by letting it turn in the fingertips</h3><a class="toy-anchor" href="#try-it" aria-label="Link to this demo" title="Link to this demo">#</a><span class="toy-copied" id="toy-copied" role="status"></span></div>
       <p class="toy-sub" data-i18n="sub">The can hides its mass and surface friction. Hold it firmly and lift it, then loosen the grip slowly: it turns upright in the fingertips and settles on the table.</p>
     </div>
     <div class="toy-guide" id="toy-guide">
@@ -872,7 +876,7 @@ document.getElementById('copy').addEventListener('click', function () {
 
   // ---------- page ----------
   if (typeof document === 'undefined') return;
-  var root = document.getElementById('toy');
+  var root = document.getElementById('try-it');   // the page links to the toy as #try-it
   if (!root) return;
   function q(id) { return document.getElementById(id); }
   var cvScene = q('toy-scene'), cvGel = [q('toy-gel-m'), q('toy-gel-p'), q('toy-gel-n')], cvChart = q('toy-chart');
@@ -897,7 +901,7 @@ document.getElementById('copy').addEventListener('click', function () {
       b_new: 'New can', b_reset: 'Reset', b_lift: 'Lift', b_lower: 'Lower', b_play: 'Play example', b_stop: 'Stop example', b_reveal: 'Reveal', b_hide: 'Hide',
       p_title: 'Paused after 60 s', c_paused: 'This run reached 60 seconds and is paused. The plot shows the whole run. Press Reset to start again.',
       g_paused: 'This run reached 60 seconds and is paused. Press <b>Reset</b> to start again.',
-      g_skip: 'Skip guide', g_show: 'Show guide', g_restart: 'Restart guide', inset: 'grip', axis_t: 'time (s)',
+      copied: 'Link copied', g_skip: 'Skip guide', g_show: 'Show guide', g_restart: 'Restart guide', inset: 'grip', axis_t: 'time (s)',
       m_light: 'light', m_medium: 'medium', m_heavy: 'heavy', f_dry: 'dry', f_normal: 'normal', f_oily: 'oily',
       note: 'A toy contact model that runs in your browser, not the trained TacInno tokenizer. The predictor receives your actions, sees the gripper, and sees the can once its pose is off by more than 6 degrees or 5 mm. It assumes an average mass and friction.',
       c_nocond: 'Without conditioning, every change counts as new, including the deformation that your own grip causes. The code would have to carry all of it.',
@@ -1376,6 +1380,13 @@ document.getElementById('copy').addEventListener('click', function () {
     guide.ok = false;
   });
   bPausedReset.addEventListener('click', function () { bReset.click(); });
+  // the # next to the title jumps to the toy as a normal link and also copies that link
+  var aLink = root.querySelector('.toy-anchor'), outCopied = q('toy-copied'), copiedTimer = 0;
+  if (aLink) aLink.addEventListener('click', function () {
+    var url = location.href.split('#')[0] + '#try-it';
+    function say(t) { outCopied.textContent = t; clearTimeout(copiedTimer); copiedTimer = setTimeout(function () { outCopied.textContent = ''; }, 1800); }
+    try { navigator.clipboard.writeText(url).then(function () { say(tr('copied')); }, function () {}); } catch (e) { /* the link still jumps */ }
+  });
   bReveal.addEventListener('click', function () { revealed = !revealed; bReveal.setAttribute('aria-pressed', revealed ? 'true' : 'false'); bReveal.textContent = tr(revealed ? 'b_hide' : 'b_reveal'); hiddenText(); });
   inCond.addEventListener('change', function () { sim.cumX = 0; sim.cumN = 0; activeSteps = 0; });
   bPlay.addEventListener('click', function () {
